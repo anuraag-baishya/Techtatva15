@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="spinner_style" >
+    <item name="android:background">@drawable/spinner_back</item>
+    </style>
+    <style name="edittext_style">
+        <item name="android:background">@drawable/edittext_style</item>
+    </style>
+    <style name="buttong">
+        <item name="android:background">@drawable/buttonstyleg</item>
+    </style>
+
+</resources>
