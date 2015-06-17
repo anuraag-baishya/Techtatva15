@@ -1,7 +1,5 @@
 package com.appex.tryproject;
 
-import java.util.ArrayList;
-
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -15,12 +13,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appex.tryproject.Resources.DrawerItem;
 import com.appex.tryproject.Resources.DrawerListAdapter;
 import com.appex.tryproject.Resources.SlidingTabLayout;
 import com.appex.tryproject.Resources.ViewPagerAdapter;
+
+import java.util.ArrayList;
 
 public class EventActivity extends ActionBarActivity {
 
@@ -83,6 +84,11 @@ public class EventActivity extends ActionBarActivity {
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,toolbar, R.string.drawer_opened, R.string.drawer_closed);
+
+
+        TextView un = (TextView)findViewById(R.id.userName);
+        String name = getIntent().getExtras().getString("name");
+        un.setText(name);
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
