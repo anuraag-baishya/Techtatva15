@@ -2,13 +2,12 @@ package com.appex.tryproject.Resources;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.appex.tryproject.R;
 
@@ -18,9 +17,12 @@ public class EventAdapter extends BaseAdapter{
     Context context;
     ViewHolder holder;
     List<RowItem> eventItems;
-    public EventAdapter(Context context, List<RowItem> items) {
+    Typeface tf1,tf2;
+    public EventAdapter(Context context, List<RowItem> items,Typeface typeface1, Typeface typeface2) {
         this.context = context;
         this.eventItems = items;
+        this.tf1 = typeface1;
+        this.tf2 = typeface2;
     }
     private class ViewHolder{
         TextView textName;
@@ -28,6 +30,7 @@ public class EventAdapter extends BaseAdapter{
         TextView textTime;
         TextView textDate;
         TextView textContact;
+
     }
     public View getView(int position, View convertView, ViewGroup parent) {
         //ViewHolder holder = null;
@@ -54,7 +57,12 @@ public class EventAdapter extends BaseAdapter{
         holder.textTime.setText(rowItem.getEventTime());
         holder.textDate.setText(rowItem.getEventDate());
         holder.textContact.setText(rowItem.getEventContact());
-
+        holder.textName.setTypeface(tf1);
+        holder.textContact.setTypeface(tf2);
+        holder.textDate.setTypeface(tf2);
+        holder.textLocation.setTypeface(tf2);
+        holder.textDate.setTypeface(tf2);
+        holder.textTime.setTypeface(tf2);
         return convertView;
     }
     @Override

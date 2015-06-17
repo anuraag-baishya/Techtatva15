@@ -45,8 +45,10 @@ public class EventActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+
         Toolbar toolbar=(Toolbar)findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -72,7 +74,7 @@ public class EventActivity extends ActionBarActivity {
                 return getResources().getColor(R.color.material_blue_grey_950);
             }
         });
-
+        tabs.setSelectedIndicatorColors(R.color.white);
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
@@ -81,11 +83,10 @@ public class EventActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,toolbar, R.string.drawer_opened, R.string.drawer_closed);
-
-
         TextView un = (TextView)findViewById(R.id.userName);
         String name = getIntent().getExtras().getString("name");
         un.setText(name);

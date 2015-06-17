@@ -1,14 +1,13 @@
 package com.appex.tryproject;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.appex.tryproject.Resources.Constants;
 import com.appex.tryproject.Resources.EventAdapter;
@@ -37,17 +36,19 @@ public class Day2 extends Fragment {
             eventItems.add(item);
         }
         eventView = (ListView) rootView.findViewById(R.id.eventListDay2);
-        EventAdapter adapter = new EventAdapter(getActivity(), eventItems);
+        Typeface custom_font1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RB.ttf");
+        Typeface custom_font2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RL.ttf");
+        EventAdapter adapter = new EventAdapter(getActivity(), eventItems,custom_font1,custom_font2);
         eventView.setAdapter(adapter);
         eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                Toast toast = Toast.makeText(getActivity(),
-                        "Item " + (position + 1) + ": " + eventItems.get(position),
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
+                if(view.findViewById(R.id.description).getVisibility() == View.GONE) {
+                    view.findViewById(R.id.description).setVisibility(View.VISIBLE);
+                }else{
+                    view.findViewById(R.id.description).setVisibility(View.GONE);
+                }
             }
         });
         return rootView;
