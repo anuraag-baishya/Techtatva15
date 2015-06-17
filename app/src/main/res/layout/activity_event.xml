@@ -1,7 +1,7 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red_light"
+    android:background="#ffffff"
     android:orientation="vertical"
     android:id="@+id/drawerLayout">
     <ListView
@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/activity_horizontal_margin"
-        android:padding="@dimen/activity_horizontal_margin" />
+         />
     <include
         layout="@layout/drawer_layout"/>
 

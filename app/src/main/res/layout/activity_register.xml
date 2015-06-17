@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.appex.tryproject.RegisterActivity"
-    android:background="@color/red_light">
+    android:background="@color/sorte">
     <EditText
         android:id="@+id/RegName"
         android:layout_width="match_parent"

@@ -42,6 +42,7 @@ public class EventActivity extends ActionBarActivity{
         setContentView(R.layout.toolbar_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_event);
         setSupportActionBar(toolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         mDrawerItems.add(new DrawerItem("Home", "Meetup destination", R.drawable.ic_date));
@@ -59,7 +60,6 @@ public class EventActivity extends ActionBarActivity{
                 Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
             }
         });
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         eventItems = new ArrayList<RowItem>();
         for (int i = 0; i < events.length; i++) {
             RowItem item = new RowItem(events[i], locations[i], time[i], date[i], contact[i]);
@@ -87,7 +87,7 @@ public class EventActivity extends ActionBarActivity{
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        //mDrawerToggle.syncState();
+        mDrawerToggle.syncState();
     }
 
     @Override
