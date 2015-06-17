@@ -32,7 +32,6 @@ public class RegisterActivity extends ActionBarActivity {
         setContentView(R.layout.toolbar_reg);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final String Msg="YOU HAVE SUCCESSFULLY REGISTERED. YOUR T_ID IS 20XX";
         dateView = (TextView) findViewById(R.id.RegDOB);

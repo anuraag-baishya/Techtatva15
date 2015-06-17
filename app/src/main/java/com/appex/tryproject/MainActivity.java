@@ -3,6 +3,7 @@ package com.appex.tryproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.toolbar_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
+        setSupportActionBar(toolbar);
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton)findViewById(R.id.login_button);
         loginButton.setReadPermissions("user_friends");

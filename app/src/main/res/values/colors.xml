@@ -11,5 +11,6 @@
     <color name="purple">#ffaa66cc</color>
     <color name="blue_light">#ff33b5e5</color>
     <color name="sorte">#dddddd</color>
+    <color name="tabScrollColor">#ffffff</color>
 
 </resources>
