@@ -11,6 +11,7 @@
     <string name="option">Please select preferred method of login\nOR</string>
     <string name="name">Name</string>
     <string name="email">Email Address</string>
+    <string name="RegN">Registration Number</string>
     <string name="phno">Phone Number</string>
     <string name="dob">Date of Birth</string>
     <string name="title_activity_register">RegisterActivity</string>

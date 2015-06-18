@@ -87,9 +87,6 @@ public class EventActivity extends ActionBarActivity {
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,toolbar, R.string.drawer_opened, R.string.drawer_closed);
-        TextView un = (TextView)findViewById(R.id.userName);
-        String name = getIntent().getExtras().getString("name");
-        un.setText(name);
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

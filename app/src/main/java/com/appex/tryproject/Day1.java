@@ -3,10 +3,12 @@ package com.appex.tryproject;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 
 import com.appex.tryproject.Resources.Constants;
@@ -14,48 +16,48 @@ import com.appex.tryproject.Resources.EventAdapter;
 import com.appex.tryproject.Resources.RowItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Day1 extends Fragment {
-    String events[]= Constants.events,locations[]=Constants.locations,time[]=Constants.time,date[]=Constants.date,contact[]= Constants.contact;
-    List<RowItem> eventItems;
-    ListView eventView;
+    EventAdapter eventAdapter;
+    String logTAG="";
+    ExpandableListView eventListView;
+    List<String> catItem;
+    HashMap<String, List<RowItem>> eventItem;
+    String categories[]=Constants.categories,locations[]=Constants.locations,time[]=Constants.time,date[]=Constants.date,contact[]= Constants.contact;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.day_1,container,false);
-        eventItems = new ArrayList<RowItem>();
-        for (int i = 0; i < events.length; i++) {
-            RowItem item = new RowItem(events[i], locations[i], time[i], date[i], contact[i]);
-            eventItems.add(item);
+        View rootView = inflater.inflate(R.layout.day_1, container, false);
+        Typeface typeface=Typeface.createFromAsset(getActivity().getAssets(),"fonts/RB.ttf");
+        Typeface typeface2=Typeface.createFromAsset(getActivity().getAssets(), "fonts/RL.ttf");
+        catItem=new ArrayList<String>();
+        eventItem=new HashMap<String, List<RowItem>>();
+        for(int i=0;i<categories.length;i++){
+            catItem.add(categories[i]);
         }
-        eventView = (ListView) rootView.findViewById(R.id.eventListDay1);
-        Typeface custom_font1 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RB.ttf");
-        Typeface custom_font2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RL.ttf");
-        EventAdapter adapter = new EventAdapter(getActivity(), eventItems,custom_font1,custom_font2);
-        eventView.setAdapter(adapter);
-
-        eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                if(view.findViewById(R.id.description).getVisibility() == View.GONE) {
-                    view.findViewById(R.id.description).setVisibility(View.VISIBLE);
-                }else{
-                    view.findViewById(R.id.description).setVisibility(View.GONE);
-                }
-            }
-        });
-
+        RowItem Item1=new RowItem("Event 1",locations[0],time[0],date[0],contact[0]);
+        RowItem Item2=new RowItem("Event 2",locations[1],time[1],date[1],contact[1]);
+        RowItem Item3=new RowItem("Event 3",locations[2],time[2],date[2],contact[2]);
+        List<RowItem> Row1=new ArrayList<RowItem>();
+        Row1.add(Item1);
+        Row1.add(Item2);
+        Row1.add(Item3);
+        for (int i=0;i<categories.length;i++)
+        {
+            eventItem.put(catItem.get(i), Row1);
+        }
+        eventListView=(ExpandableListView)rootView.findViewById(R.id.catListDay1);
+        eventAdapter= new EventAdapter(getActivity(), catItem,eventItem,typeface,typeface2);
+        eventListView.setAdapter(eventAdapter);
         return rootView;
     }
 }
-
 
 

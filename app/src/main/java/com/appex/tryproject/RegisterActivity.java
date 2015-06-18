@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,6 @@ public class RegisterActivity extends ActionBarActivity {
     EditText username;
     private TextView dateView;
     private int year, month, day;
-    public static String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,8 @@ public class RegisterActivity extends ActionBarActivity {
 
         final String Msg="YOU HAVE SUCCESSFULLY REGISTERED. YOUR T_ID IS 20XX";
         dateView = (TextView) findViewById(R.id.RegDOB);
-        dateView.setText("Date of Birth:");
         dateView.setGravity(Gravity.LEFT);
+
         Button RegButton=(Button)findViewById(R.id.RegButton);
         RegButton.setOnClickListener(new View.OnClickListener() {
             @Override
