@@ -1,3 +1,7 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    >
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,8 +12,7 @@
     tools:context="com.appex.tryproject.RegisterActivity"
     android:background="@color/sorte"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
     <com.rey.material.widget.EditText
         android:id="@+id/RegName"
         android:layout_width="match_parent"
@@ -131,9 +134,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/RegButton"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/RegYear"
+        android:layout_marginTop="5dp"
         android:textSize="18.5sp"
         android:text="@string/regbutton"
         />
 </RelativeLayout>
+</ScrollView>
