@@ -8,7 +8,8 @@
     tools:context="com.appex.tryproject.RegisterActivity"
     android:background="@color/sorte"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <EditText
         android:id="@+id/RegName"
         android:layout_width="match_parent"
@@ -130,10 +131,8 @@
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:id="@+id/RegButton"
-        android:layout_below="@+id/RegYear"
-        android:layout_marginTop="5dp"
         style="@style/buttong"
         android:textSize="18.5sp"
         android:text="@string/regbutton"
-        />
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

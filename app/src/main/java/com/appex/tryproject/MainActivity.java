@@ -83,6 +83,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+        Button LoginEmail=(Button)findViewById(R.id.emailLogin);
+        LoginEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),EmailActivity.class);
+                startActivity(intent);
+            }
+        });
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
 
         // Button click listeners
