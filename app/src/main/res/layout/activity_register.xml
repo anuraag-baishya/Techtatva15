@@ -10,19 +10,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <EditText
+    <com.rey.material.widget.EditText
         android:id="@+id/RegName"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:inputType="text"
         android:hint="@string/name"
         android:textSize="18.5sp"
         style="@style/edittext_style"
     />
-    <EditText
+    <com.rey.material.widget.EditText
         android:id="@+id/RegEmail"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:hint="@string/email"
         android:textSize="18.5sp"
@@ -30,9 +30,9 @@
         android:layout_marginTop="5dp"
         android:layout_below="@+id/RegName"
     />
-    <EditText
+    <com.rey.material.widget.EditText
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:id="@+id/RegPhno"
         android:textSize="18.5sp"
         android:hint="@string/phno"
@@ -43,7 +43,7 @@
     />
     <Button
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:id="@+id/RegDOB"
         android:textAllCaps="false"
         style="@style/edittext_style"
@@ -99,10 +99,10 @@
         style="@style/spinner_style"
         >
     </Spinner>
-    <EditText
+    <com.rey.material.widget.EditText
         android:layout_width="match_parent"
         android:inputType="number"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:id="@+id/RegNo"
         style="@style/edittext_style"
         android:hint="@string/RegN"
@@ -127,12 +127,13 @@
         style="@style/spinner_style"
         >
     </Spinner>
-    <Button
+    <com.gc.materialdesign.views.ButtonFlat
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:id="@+id/RegButton"
-        style="@style/buttong"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         android:textSize="18.5sp"
         android:text="@string/regbutton"
-        android:layout_alignParentBottom="true" />
+        />
 </RelativeLayout>

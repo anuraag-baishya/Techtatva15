@@ -7,8 +7,9 @@
     <style name="spinner_style" >
     <item name="android:background">@drawable/spinner_back</item>
     </style>
-    <style name="edittext_style">
-        <item name="android:background">@drawable/edittext_style</item>
+    <style name="edittext_style" parent="Material.Widget.EditText">
+        <item name="et_labelTextColor">@color/techtatva</item>
+        <item name="et_dividerColor">@color/techtatva</item>
     </style>
     <style name="buttong">
         <item name="android:background">@drawable/buttonstyleg</item>

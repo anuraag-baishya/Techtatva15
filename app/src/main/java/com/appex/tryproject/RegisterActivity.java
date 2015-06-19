@@ -3,18 +3,17 @@ package com.appex.tryproject;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gc.materialdesign.views.ButtonFlat;
 
 import java.util.Calendar;
 
@@ -38,7 +37,7 @@ public class RegisterActivity extends ActionBarActivity {
         dateView = (TextView) findViewById(R.id.RegDOB);
         dateView.setGravity(Gravity.LEFT);
 
-        Button RegButton=(Button)findViewById(R.id.RegButton);
+        ButtonFlat RegButton=(ButtonFlat)findViewById(R.id.RegButton);
         RegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

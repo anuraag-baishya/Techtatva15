@@ -7,18 +7,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.CallbackManager;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.gc.materialdesign.views.ButtonFlat;
+import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private static final int RC_SIGN_IN = 0;
     private GoogleApiClient mGoogleApiClient;
     private boolean mSignInClicked;
-
+    ProgressBarCircularIndeterminate p;
     /**
      * A flag indicating that a PendingIntent is in progress and prevents us
      * from starting further intents.
@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         });
         TextView orText=(TextView)findViewById(R.id.optionView);
         orText.setGravity(Gravity.CENTER);
-        Button RegisterButton=(Button)findViewById(R.id.register);
+        ButtonFlat RegisterButton=(ButtonFlat)findViewById(R.id.register);
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        Button LoginEmail=(Button)findViewById(R.id.emailLogin);
+        com.rey.material.widget.Button LoginEmail=(com.rey.material.widget.Button)findViewById(R.id.emailLogin);
         LoginEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +99,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
-
+        p = (ProgressBarCircularIndeterminate)findViewById(R.id.progressBarCircularIndeterminate);
 
     }
 
@@ -122,6 +122,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             } catch (IntentSender.SendIntentException e) {
                 mIntentInProgress = false;
                 mGoogleApiClient.connect();
+                p.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -137,6 +138,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
+                p.setVisibility(View.VISIBLE);
             }
         }
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -144,6 +146,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onConnected(Bundle bundle) {
+        p.setVisibility(View.GONE);
         mSignInClicked = false;
         Intent intent = new Intent(MainActivity.this,EventActivity.class);
         intent.putExtra("name",Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());
