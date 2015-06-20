@@ -24,6 +24,9 @@ repositories {
         dirs 'libs'
     }
     jcenter()
+    maven {
+        url "https://jitpack.io"
+    }
 }
 
 dependencies {
@@ -36,5 +39,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
     compile 'com.github.rey5137:material:1.1.0'
-
+    compile 'com.github.chipset95:Potato-Library:0.1.1'
 }

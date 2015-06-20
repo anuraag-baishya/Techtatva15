@@ -10,10 +10,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gc.materialdesign.views.ButtonFlat;
+import com.gc.materialdesign.views.LayoutRipple;
 
 import java.util.Calendar;
 
@@ -32,12 +33,12 @@ public class RegisterActivity extends ActionBarActivity {
         setContentView(R.layout.toolbar_reg);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Spinner clg = (Spinner)findViewById(R.id.RegCollege);
         final String Msg="YOU HAVE SUCCESSFULLY REGISTERED. YOUR T_ID IS 20XX";
         dateView = (TextView) findViewById(R.id.RegDOB);
         dateView.setGravity(Gravity.LEFT);
 
-        ButtonFlat RegButton=(ButtonFlat)findViewById(R.id.RegButton);
+        LayoutRipple RegButton=(LayoutRipple)findViewById(R.id.RegButton);
         RegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +54,6 @@ public class RegisterActivity extends ActionBarActivity {
     public void setDate(View view) {
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
-
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month+1, day);

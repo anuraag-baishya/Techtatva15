@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:background="@color/white"
     >
 <RelativeLayout
     android:layout_width="match_parent"
@@ -10,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.appex.tryproject.RegisterActivity"
-    android:background="@color/sorte"
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <com.rey.material.widget.EditText
@@ -21,6 +22,7 @@
         android:hint="@string/name"
         android:textSize="18.5sp"
         style="@style/edittext_style"
+        android:layout_marginBottom="20dp"
     />
     <com.rey.material.widget.EditText
         android:id="@+id/RegEmail"
@@ -30,7 +32,7 @@
         android:hint="@string/email"
         android:textSize="18.5sp"
         style="@style/edittext_style"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
         android:layout_below="@+id/RegName"
     />
     <com.rey.material.widget.EditText
@@ -39,7 +41,7 @@
         android:id="@+id/RegPhno"
         android:textSize="18.5sp"
         android:hint="@string/phno"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
         style="@style/edittext_style"
         android:inputType="phone"
         android:layout_below="@+id/RegEmail"
@@ -49,9 +51,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/RegDOB"
         android:textAllCaps="false"
-        style="@style/edittext_style"
         android:layout_below="@+id/RegPhno"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
         android:hint="@string/dob"
         android:textSize="18.5sp"
         android:onClick="setDate"/>
@@ -60,7 +62,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/RegGender"
         android:layout_below="@+id/RegDOB"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
         android:textSize="18.5sp"
         android:entries="@array/GenderArray"
         style="@style/spinner_style"
@@ -73,7 +75,7 @@
         android:text="@string/city"
         android:layout_below="@+id/RegGender"
         android:textSize="18.5sp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginBottom="20dp"/>
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -81,6 +83,7 @@
         android:layout_below="@+id/cityTextView"
         android:textSize="18.5sp"
         android:entries="@array/cityArray"
+        android:layout_marginBottom="20dp"
         style="@style/spinner_style"
         >
     </Spinner>
@@ -91,7 +94,7 @@
         android:text="@string/college"
         android:layout_below="@+id/RegCity"
         android:textSize="18.5sp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginBottom="20dp"/>
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -100,6 +103,7 @@
         android:textSize="18.5sp"
         android:entries="@array/CollegeArray"
         style="@style/spinner_style"
+        android:layout_marginBottom="20dp"
         >
     </Spinner>
     <com.rey.material.widget.EditText
@@ -111,7 +115,7 @@
         android:hint="@string/RegN"
         android:layout_below="@+id/RegCollege"
         android:textSize="18.5sp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginBottom="20dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -119,7 +123,7 @@
         android:text="@string/year"
         android:layout_below="@+id/RegNo"
         android:textSize="18.5sp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginBottom="20dp"/>
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -128,16 +132,24 @@
         android:textSize="18.5sp"
         android:entries="@array/YearArray"
         style="@style/spinner_style"
+        android:layout_marginBottom="20dp"
         >
     </Spinner>
-    <com.gc.materialdesign.views.ButtonFlat
-        android:layout_width="fill_parent"
+    <com.gc.materialdesign.views.LayoutRipple
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/RegButton"
         android:layout_below="@+id/RegYear"
-        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        >
+    <com.gc.materialdesign.views.ButtonFlat
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:textSize="18.5sp"
         android:text="@string/regbutton"
+        android:background="@color/primary_dark"
         />
+    </com.gc.materialdesign.views.LayoutRipple>
 </RelativeLayout>
 </ScrollView>

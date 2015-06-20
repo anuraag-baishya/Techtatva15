@@ -3,8 +3,8 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:id="@+id/container"
-    android:background="@color/sorte">
+    android:background="@color/white"
+    android:id="@+id/container">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +25,7 @@
             android:layout_height="50dp"
             android:layout_margin="20dp"
             android:layout_gravity="center"
+
             />
         <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
             android:id="@+id/progressBarCircularIndeterminate"
@@ -40,6 +41,9 @@
             android:layout_gravity="center"
             android:drawableLeft="@drawable/ic_email"
             android:text="@string/emailButton"
+            android:background="@color/accent"
+            android:textColor="@color/primary_text"
+            android:paddingLeft="10dp"
             android:id="@+id/emailLogin"
             android:textAllCaps="false"
             android:textSize="18.5sp"/>
@@ -50,22 +54,26 @@
         android:layout_marginRight="10dp"
         android:layout_height="wrap_content"
         android:text="@string/option"
-        android:textColor="#000000"
+        android:textColor="@color/secondary_text"
         android:textSize="18.5sp"
         android:gravity="center"
         android:layout_below="@id/linearLayout"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:id="@+id/optionView" />
-
+<com.gc.materialdesign.views.LayoutRipple
+    android:id="@+id/register"
+    android:layout_below="@id/optionView"
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <com.gc.materialdesign.views.ButtonFlat
-        android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18.5sp"
         android:text="@string/reg"
         android:layout_margin="10dp"
-        android:background="#1E88E5"
-        android:layout_below="@id/optionView"
-        android:layout_centerHorizontal="true" />
+        android:background="@color/primary_dark"
+         />
+</com.gc.materialdesign.views.LayoutRipple>
 </RelativeLayout>

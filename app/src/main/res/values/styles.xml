@@ -3,13 +3,17 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FF5722</item>
+        <item name="colorPrimaryDark">#E64A19</item>
+        <item name="colorAccent">#212121</item>
     </style>
     <style name="spinner_style" >
     <item name="android:background">@drawable/spinner_back</item>
     </style>
     <style name="edittext_style" parent="Material.Widget.EditText">
-        <item name="et_labelTextColor">@color/techtatva</item>
-        <item name="et_dividerColor">@color/techtatva</item>
+        <item name="et_labelTextColor">@color/primary_dark</item>
+        <item name="android:textColorHint">@color/primary_light</item>
+        <item name="et_dividerColor">@color/primary</item>
     </style>
     <style name="buttong">
         <item name="android:background">@drawable/buttonstyleg</item>

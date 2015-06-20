@@ -17,7 +17,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.gc.materialdesign.views.ButtonFlat;
+import com.gc.materialdesign.views.LayoutRipple;
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -49,6 +49,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.toolbar_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.primary_text));
         setSupportActionBar(toolbar);
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton)findViewById(R.id.login_button);
@@ -75,7 +76,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         });
         TextView orText=(TextView)findViewById(R.id.optionView);
         orText.setGravity(Gravity.CENTER);
-        ButtonFlat RegisterButton=(ButtonFlat)findViewById(R.id.register);
+        LayoutRipple RegisterButton=(LayoutRipple)findViewById(R.id.register);
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +101,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
         p = (ProgressBarCircularIndeterminate)findViewById(R.id.progressBarCircularIndeterminate);
-
+        p.setBackgroundColor(getResources().getColor(R.color.accent));
     }
 
     protected void onStart() {

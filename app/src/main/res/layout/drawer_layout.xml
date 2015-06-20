@@ -11,13 +11,14 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/profileBox"
         android:choiceMode="singleChoice"
-        android:background="#ffffffff" />
+        android:background="#ffffffff"
+        android:divider="@color/divider"/>
 
     <RelativeLayout
         android:id="@+id/profileBox"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/material_blue_grey_800"
+        android:background="@color/primary"
         android:padding="8dp" >
 
         <ImageView
