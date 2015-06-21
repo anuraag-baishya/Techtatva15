@@ -40,4 +40,5 @@ dependencies {
     compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
     compile 'com.github.rey5137:material:1.1.0'
     compile 'com.github.chipset95:Potato-Library:0.1.1'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 }

@@ -1,12 +1,17 @@
 package com.appex.tryproject;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.gc.materialdesign.views.LayoutRipple;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 
 public class EmailActivity extends ActionBarActivity {
@@ -15,7 +20,15 @@ public class EmailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
-        Button Login=(Button)findViewById(R.id.loginB);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.primary_text));
+        setSupportActionBar(toolbar);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+        }
+        LayoutRipple Login=(LayoutRipple)findViewById(R.id.emaillog);
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -5,75 +5,78 @@
     android:layout_height="fill_parent"
     android:background="@color/white"
     android:id="@+id/container">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="75dp"
-        android:id="@+id/linearLayout">
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            />
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/btn_sign_in"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"
-
-            />
-        <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
-            android:id="@+id/progressBarCircularIndeterminate"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="#1E88E5"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            />
-        <com.rey.material.widget.Button
-            android:layout_width="200dp"
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:layout_centerVertical="true">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                />
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_sign_in"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+
+                />
+            <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+                android:id="@+id/progressBarCircularIndeterminate"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#1E88E5"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                />
+            <com.rey.material.widget.Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_email"
+                android:text="@string/emailButton"
+                style="@style/buttong"
+                android:textColor="@color/primary_text"
+                android:id="@+id/emailLogin"
+                android:textAllCaps="false"
+                android:textSize="18.5sp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:text="@string/option"
+            android:textColor="@color/secondary_text"
+            android:textSize="18.5sp"
+            android:gravity="center"
+            android:layout_below="@id/linearLayout"
+            android:layout_marginTop="50dp"
             android:layout_gravity="center"
-            android:drawableLeft="@drawable/ic_email"
-            android:text="@string/emailButton"
-            android:background="@color/accent"
-            android:textColor="@color/primary_text"
-            android:paddingLeft="10dp"
-            android:id="@+id/emailLogin"
-            android:textAllCaps="false"
-            android:textSize="18.5sp"/>
+            android:id="@+id/optionView" />
+        <com.gc.materialdesign.views.LayoutRipple
+            android:id="@+id/register"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.gc.materialdesign.views.ButtonFlat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18.5sp"
+                android:text="@string/reg"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:background="@color/primary_dark"
+                 />
+        </com.gc.materialdesign.views.LayoutRipple>
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_height="wrap_content"
-        android:text="@string/option"
-        android:textColor="@color/secondary_text"
-        android:textSize="18.5sp"
-        android:gravity="center"
-        android:layout_below="@id/linearLayout"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:id="@+id/optionView" />
-<com.gc.materialdesign.views.LayoutRipple
-    android:id="@+id/register"
-    android:layout_below="@id/optionView"
-    android:layout_centerHorizontal="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <com.gc.materialdesign.views.ButtonFlat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18.5sp"
-        android:text="@string/reg"
-        android:layout_margin="10dp"
-        android:background="@color/primary_dark"
-         />
-</com.gc.materialdesign.views.LayoutRipple>
 </RelativeLayout>

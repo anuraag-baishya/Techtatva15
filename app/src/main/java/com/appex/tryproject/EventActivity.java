@@ -1,6 +1,7 @@
 package com.appex.tryproject;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +21,7 @@ import com.appex.tryproject.Resources.DrawerItem;
 import com.appex.tryproject.Resources.DrawerListAdapter;
 import com.appex.tryproject.Resources.SlidingTabLayout;
 import com.appex.tryproject.Resources.ViewPagerAdapter;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.ArrayList;
 
@@ -45,6 +47,11 @@ public class EventActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            SystemBarTintManager tintManager=new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+        }
 
         Toolbar toolbar=(Toolbar)findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);

@@ -3,6 +3,7 @@ package com.appex.tryproject;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gc.materialdesign.views.LayoutRipple;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.Calendar;
 
@@ -31,6 +33,11 @@ public class RegisterActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         username=(EditText)findViewById(R.id.RegName);
         setContentView(R.layout.toolbar_reg);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            SystemBarTintManager tintManager=new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Spinner clg = (Spinner)findViewById(R.id.RegCollege);

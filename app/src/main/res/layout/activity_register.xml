@@ -141,15 +141,13 @@
         android:id="@+id/RegButton"
         android:layout_below="@+id/RegYear"
         android:background="@color/white"
-        android:layout_marginTop="20dp"
-        >
-    <com.gc.materialdesign.views.ButtonFlat
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18.5sp"
-        android:text="@string/regbutton"
-        android:background="@color/primary_dark"
-        />
+        android:layout_marginTop="20dp">
+        <com.gc.materialdesign.views.ButtonFlat
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18.5sp"
+            android:text="@string/regbutton"
+            android:background="@color/primary_dark" />
     </com.gc.materialdesign.views.LayoutRipple>
 </RelativeLayout>
 </ScrollView>
