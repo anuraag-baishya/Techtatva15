@@ -5,5 +5,15 @@
         <item name="android:colorPrimary">#FF5722</item>
         <item name="android:colorPrimaryDark">#E64A19</item>
         <item name="android:colorAccent">#212121</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
+    <style name="EventTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FF5722</item>
+        <item name="colorPrimaryDark">#E64A19</item>
+        <item name="colorAccent">#212121</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
 </resources>

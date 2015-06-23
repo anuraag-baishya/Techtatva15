@@ -37,6 +37,8 @@ public class RegisterActivity extends ActionBarActivity {
             SystemBarTintManager tintManager=new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary));
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

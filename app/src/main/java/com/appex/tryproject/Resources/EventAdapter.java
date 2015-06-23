@@ -8,25 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import com.appex.tryproject.R;
 
-import java.util.HashMap;
-import java.util.List;
-
 public class EventAdapter extends BaseExpandableListAdapter{
-    Context context;
-    ViewHolder holder;
-    Typeface tf1,tf2;
-    private List<String> CatItem;
-    private HashMap<String,List<RowItem>> EventItem;
-    public EventAdapter(Context context, List<String> CatItem,
-                        HashMap<String, List<RowItem>> EventItem, Typeface tf1,Typeface tf2) {
-        this.context = context;
-        this.CatItem = CatItem;
-        this.EventItem=EventItem;
-        this.tf1=tf1;
-        this.tf2=tf2;
-    }
     private class ViewHolder{
         TextView textName;
         TextView textLocation;
@@ -35,10 +20,25 @@ public class EventAdapter extends BaseExpandableListAdapter{
         TextView textContact;
 
     }
+    private ViewHolder holder;
+    private Context context;
+    private ArrayList<CatItem> CatItem;
+    private ArrayList<CatItem> CategoryItem;
+    Typeface tf,tf2;
+    public EventAdapter(Context context, ArrayList<CatItem> CatItem,Typeface tf,Typeface tf2) {
+        this.context = context;
+        this.CatItem=new ArrayList<CatItem>();
+        this.CatItem.addAll(CatItem);
+        this.CategoryItem=new ArrayList<CatItem>();
+        this.CategoryItem.addAll(CatItem);
+        this.tf=tf;
+        this.tf2=tf2;
+
+    }
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this.EventItem.get(this.CatItem.get(groupPosition))
-                .get(childPosititon);
+        ArrayList<RowItem> EventItem=CatItem.get(groupPosition).getEventItem();
+        return EventItem.get(childPosititon);
     }
 
     @Override
@@ -72,18 +72,19 @@ public class EventAdapter extends BaseExpandableListAdapter{
         holder.textTime.setText(rowItem.getEventTime());
         holder.textDate.setText(rowItem.getEventDate());
         holder.textContact.setText(rowItem.getEventContact());
-        holder.textName.setTypeface(tf1);
+        holder.textName.setTypeface(tf);
         holder.textLocation.setTypeface(tf2);
-        holder.textTime.setTypeface(tf2);
         holder.textDate.setTypeface(tf2);
+        holder.textTime.setTypeface(tf2);
         holder.textContact.setTypeface(tf2);
+
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this.EventItem.get(this.CatItem.get(groupPosition))
-                .size();
+        ArrayList<RowItem> eventList = CatItem.get(groupPosition).getEventItem();
+        return eventList.size();
     }
 
     @Override
@@ -104,7 +105,7 @@ public class EventAdapter extends BaseExpandableListAdapter{
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
+        CatItem catTitle = (CatItem) getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -113,19 +114,44 @@ public class EventAdapter extends BaseExpandableListAdapter{
 
         TextView CatHeader = (TextView) convertView
                 .findViewById(R.id.catName);
-        CatHeader.setText(headerTitle);
-        CatHeader.setTypeface(tf1);
+        CatHeader.setText(catTitle.getCategory());
+        CatHeader.setTypeface(tf);
 
         return convertView;
     }
 
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+    public void filterData(String Query){
+        Query=Query.toLowerCase();
+        CatItem.clear();
+        if(Query.isEmpty()){
+            CatItem.addAll(CategoryItem);
+        }
+        else{
+            for(CatItem catItem:CategoryItem){
+                ArrayList<RowItem> eventList=catItem.getEventItem();
+                ArrayList<RowItem> eventList2=new ArrayList<RowItem>();
+                for(RowItem event:eventList){
+                    if(event.getEventName().toLowerCase().contains(Query)){
+                        eventList2.add(event);
+                    }
+                    if (eventList2.size()>0){
+                        CatItem newCatItem= new CatItem(catItem.getCategory(),eventList2);
+                        CatItem.add(newCatItem);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 }
+

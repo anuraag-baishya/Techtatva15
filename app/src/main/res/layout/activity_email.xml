@@ -48,7 +48,7 @@
             android:layout_height="wrap_content">
             <com.gc.materialdesign.views.ButtonFlat
                 android:id="@+id/loginB"
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="30dp"
                 android:textSize="18.5sp"
                 android:gravity="center"

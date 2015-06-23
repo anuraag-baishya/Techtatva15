@@ -47,12 +47,6 @@ public class EventActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
-            SystemBarTintManager tintManager=new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-        }
-
         Toolbar toolbar=(Toolbar)findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 

@@ -27,6 +27,8 @@ public class EmailActivity extends ActionBarActivity {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary));
         }
         LayoutRipple Login=(LayoutRipple)findViewById(R.id.emaillog);
         Login.setOnClickListener(new View.OnClickListener() {
