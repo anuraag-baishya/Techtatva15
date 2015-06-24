@@ -1,27 +1,22 @@
 package com.appex.tryproject;
 
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appex.tryproject.Resources.DrawerItem;
 import com.appex.tryproject.Resources.DrawerListAdapter;
 import com.appex.tryproject.Resources.SlidingTabLayout;
 import com.appex.tryproject.Resources.ViewPagerAdapter;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.ArrayList;
 
@@ -35,11 +30,11 @@ public class EventActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     ViewPager pager;
     ViewPagerAdapter VPadapter;
-    String msg="clicked";
+    String msg = "clicked";
     android.support.v7.app.ActionBar actionBar;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Day1","Day2","Day3"};
-    int Numboftabs =3;
+    CharSequence Titles[] = {"Day1", "Day2", "Day3"};
+    int Numboftabs = 3;
 
     ArrayList<DrawerItem> mNavItems = new ArrayList<DrawerItem>();
 
@@ -47,13 +42,13 @@ public class EventActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        Toolbar toolbar=(Toolbar)findViewById(R.id.tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        VPadapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        VPadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(VPadapter);
 
@@ -64,7 +59,7 @@ public class EventActivity extends ActionBarActivity {
         // Populate the Navigtion Drawer with options
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
         mDrawerList = (ListView) findViewById(R.id.navList);
-        DrawerListAdapter adapter = new DrawerListAdapter(this,mNavItems);
+        DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter);
 
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
@@ -87,8 +82,9 @@ public class EventActivity extends ActionBarActivity {
 
             }
         });
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,toolbar, R.string.drawer_opened, R.string.drawer_closed);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_opened, R.string.drawer_closed);
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -102,25 +98,25 @@ public class EventActivity extends ActionBarActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+ //   @Override
+ //   public boolean onCreateOptionsMenu(Menu menu) {
+ //       // Inflate the menu; this adds items to the action bar if it is present.
+ //       getMenuInflater().inflate(R.menu.menu_main, menu);
+ //       return true;
+ //   }
+ //
+ //   @Override
+ //   public boolean onOptionsItemSelected(MenuItem item) {
+ //       if (mDrawerToggle.onOptionsItemSelected(item)) {
+ //           return true;
+ //     }
+ //     int id = item.getItemId();
+ //
+ //      //noinspection SimplifiableIfStatement
+ //     if (id == R.id.action_settings) {
+ //         return true;
+ //     }
+ //
+ //      return super.onOptionsItemSelected(item);
+ //  }
 }

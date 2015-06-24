@@ -1,8 +1,6 @@
 package com.appex.tryproject.Resources;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +10,6 @@ import android.widget.TextView;
 
 import com.appex.tryproject.R;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class DrawerListAdapter extends BaseAdapter {
@@ -49,8 +44,7 @@ public class DrawerListAdapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.drawer_item, null);
-        }
-        else {
+        } else {
             view = convertView;
         }
 
@@ -58,8 +52,8 @@ public class DrawerListAdapter extends BaseAdapter {
         TextView subtitleView = (TextView) view.findViewById(R.id.subTitle);
         ImageView iconView = (ImageView) view.findViewById(R.id.icon);
 
-        titleView.setText( mDrawerItems.get(position).mTitle );
-        subtitleView.setText( mDrawerItems.get(position).mSubtitle );
+        titleView.setText(mDrawerItems.get(position).mTitle);
+        subtitleView.setText(mDrawerItems.get(position).mSubtitle);
         iconView.setImageResource(mDrawerItems.get(position).mIcon);
 
         return view;

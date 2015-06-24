@@ -7,10 +7,10 @@ public class CatItem {
     private String Category;
     private ArrayList<RowItem> EventItem;
 
-    public CatItem(String Category,ArrayList<RowItem> EventItem) {
+    public CatItem(String Category, ArrayList<RowItem> EventItem) {
         super();
         this.EventItem = EventItem;
-        this.Category=Category;
+        this.Category = Category;
     }
 
     public String getCategory() {

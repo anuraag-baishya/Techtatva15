@@ -1,6 +1,5 @@
 package com.appex.tryproject;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Build;
@@ -9,11 +8,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,17 +51,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.toolbar_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.primary_text));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
-        if(Build.VERSION.SDK_INT==Build.VERSION_CODES.KITKAT){
-            SystemBarTintManager tintManager=new SystemBarTintManager(this);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
             tintManager.setNavigationBarTintEnabled(true);
             tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary));
         }
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("user_friends");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -89,21 +83,21 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "Login error", Toast.LENGTH_SHORT).show();
             }
         });
-        TextView orText=(TextView)findViewById(R.id.optionView);
+        TextView orText = (TextView) findViewById(R.id.optionView);
         orText.setGravity(Gravity.CENTER);
-        LayoutRipple RegisterButton=(LayoutRipple)findViewById(R.id.register);
+        LayoutRipple RegisterButton = (LayoutRipple) findViewById(R.id.register);
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),RegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });
-        com.rey.material.widget.Button LoginEmail=(com.rey.material.widget.Button)findViewById(R.id.emailLogin);
+        com.rey.material.widget.Button LoginEmail = (com.rey.material.widget.Button) findViewById(R.id.emailLogin);
         LoginEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),EmailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EmailActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,7 +109,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
-        p = (ProgressBarCircularIndeterminate)findViewById(R.id.progressBarCircularIndeterminate);
+        p = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBarCircularIndeterminate);
         p.setBackgroundColor(getResources().getColor(R.color.accent));
     }
 
@@ -130,6 +124,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             mGoogleApiClient.disconnect();
         }
     }
+
     private void resolveSignInError() {
         if (mConnectionResult.hasResolution()) {
             try {
@@ -142,6 +137,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -164,9 +160,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void onConnected(Bundle bundle) {
         p.setVisibility(View.GONE);
         mSignInClicked = false;
-        Intent intent = new Intent(MainActivity.this,EventActivity.class);
-        intent.putExtra("name",Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());
-        intent.putExtra("mode","google");
+        Intent intent = new Intent(MainActivity.this, EventActivity.class);
+        intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());
+        intent.putExtra("mode", "google");
         startActivity(intent);
     }
 
@@ -205,16 +201,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             }
         }
     }
+
     private void signInWithGplus() {
         if (!mGoogleApiClient.isConnecting()) {
             mSignInClicked = true;
             resolveSignInError();
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
-        if(mGoogleApiClient.isConnected()) {
+        if (mGoogleApiClient.isConnected()) {
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
             mGoogleApiClient.disconnect();
             mGoogleApiClient.connect();
@@ -222,11 +220,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
-        if(mGoogleApiClient.isConnected()){
-        Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);}
+        if (mGoogleApiClient.isConnected()) {
+            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+        }
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
     }

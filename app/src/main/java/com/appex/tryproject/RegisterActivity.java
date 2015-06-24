@@ -31,10 +31,10 @@ public class RegisterActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        username=(EditText)findViewById(R.id.RegName);
+        username = (EditText) findViewById(R.id.RegName);
         setContentView(R.layout.toolbar_reg);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
-            SystemBarTintManager tintManager=new SystemBarTintManager(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
             tintManager.setNavigationBarTintEnabled(true);
@@ -42,12 +42,12 @@ public class RegisterActivity extends ActionBarActivity {
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Spinner clg = (Spinner)findViewById(R.id.RegCollege);
-        final String Msg="YOU HAVE SUCCESSFULLY REGISTERED. YOUR T_ID IS 20XX";
+        Spinner clg = (Spinner) findViewById(R.id.RegCollege);
+        final String Msg = "YOU HAVE SUCCESSFULLY REGISTERED. YOUR T_ID IS 20XX";
         dateView = (TextView) findViewById(R.id.RegDOB);
         dateView.setGravity(Gravity.LEFT);
 
-        LayoutRipple RegButton=(LayoutRipple)findViewById(R.id.RegButton);
+        LayoutRipple RegButton = (LayoutRipple) findViewById(R.id.RegButton);
         RegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class RegisterActivity extends ActionBarActivity {
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
-        showDate(year, month+1, day);
+        showDate(year, month + 1, day);
         showDialog(999);
     }
 
@@ -81,7 +81,7 @@ public class RegisterActivity extends ActionBarActivity {
     private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-            showDate(arg1, arg2+1, arg3);
+            showDate(arg1, arg2 + 1, arg3);
         }
     };
 

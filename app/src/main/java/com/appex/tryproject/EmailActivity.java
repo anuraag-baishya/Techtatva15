@@ -23,18 +23,18 @@ public class EmailActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
         toolbar.setTitleTextColor(getResources().getColor(R.color.primary_text));
         setSupportActionBar(toolbar);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
             tintManager.setNavigationBarTintEnabled(true);
             tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary));
         }
-        LayoutRipple Login=(LayoutRipple)findViewById(R.id.emaillog);
+        LayoutRipple Login = (LayoutRipple) findViewById(R.id.emaillog);
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),EventActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EventActivity.class);
                 startActivity(intent);
             }
         });

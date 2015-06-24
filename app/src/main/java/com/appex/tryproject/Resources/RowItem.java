@@ -6,12 +6,13 @@ public class RowItem {
     private String EventTime;
     private String EventDate;
     private String EventContact;
+
     public RowItem(String EventName, String EventLocation, String EventTime, String EventDate, String EventContact) {
-        this.EventName=EventName;
-        this.EventLocation=EventLocation;
-        this.EventTime=EventTime;
-        this.EventDate=EventDate;
-        this.EventContact=EventContact;
+        this.EventName = EventName;
+        this.EventLocation = EventLocation;
+        this.EventTime = EventTime;
+        this.EventDate = EventDate;
+        this.EventContact = EventContact;
     }
 
     public void setEventContact(String eventContact) {

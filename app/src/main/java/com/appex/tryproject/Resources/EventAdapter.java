@@ -12,8 +12,8 @@ import com.appex.tryproject.R;
 
 import java.util.ArrayList;
 
-public class EventAdapter extends BaseExpandableListAdapter{
-    private class ViewHolder{
+public class EventAdapter extends BaseExpandableListAdapter {
+    private class ViewHolder {
         TextView textName;
         TextView textLocation;
         TextView textTime;
@@ -21,24 +21,27 @@ public class EventAdapter extends BaseExpandableListAdapter{
         TextView textContact;
 
     }
+
     private ViewHolder holder;
     private Context context;
     private ArrayList<CatItem> CatItem;
     private ArrayList<CatItem> CategoryItem;
-    Typeface tf,tf2;
-    public EventAdapter(Context context, ArrayList<CatItem> CatItem,Typeface tf,Typeface tf2) {
+    Typeface tf, tf2;
+
+    public EventAdapter(Context context, ArrayList<CatItem> CatItem, Typeface tf, Typeface tf2) {
         this.context = context;
-        this.CatItem=new ArrayList<CatItem>();
+        this.CatItem = new ArrayList<CatItem>();
         this.CatItem.addAll(CatItem);
-        this.CategoryItem=new ArrayList<CatItem>();
+        this.CategoryItem = new ArrayList<CatItem>();
         this.CategoryItem.addAll(CatItem);
-        this.tf=tf;
-        this.tf2=tf2;
+        this.tf = tf;
+        this.tf2 = tf2;
 
     }
+
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        ArrayList<RowItem> EventItem=CatItem.get(groupPosition).getEventItem();
+        ArrayList<RowItem> EventItem = CatItem.get(groupPosition).getEventItem();
         return EventItem.get(childPosititon);
     }
 
@@ -62,8 +65,7 @@ public class EventAdapter extends BaseExpandableListAdapter{
             holder.textDate = (TextView) convertView.findViewById(R.id.eventDate);
             holder.textContact = (TextView) convertView.findViewById(R.id.eventContact);
             convertView.setTag(holder);
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
@@ -131,26 +133,25 @@ public class EventAdapter extends BaseExpandableListAdapter{
         return true;
     }
 
-    public void filterData(String Query){
-        Query=Query.toLowerCase();
+    public void filterData(String Query) {
+        Query = Query.toLowerCase();
         CatItem.clear();
-        if(Query.isEmpty()){
+        if (Query.isEmpty()) {
             CatItem.addAll(CategoryItem);
-        }
-        else{
-            for(CatItem catItem:CategoryItem){
-                ArrayList<RowItem> eventList=catItem.getEventItem();
-                ArrayList<RowItem> eventList2=new ArrayList<RowItem>();
-                for(RowItem event:eventList){
-                    if(event.getEventName().toLowerCase().contains(Query)){
+        } else {
+            for (CatItem catItem : CategoryItem) {
+                ArrayList<RowItem> eventList = catItem.getEventItem();
+                ArrayList<RowItem> eventList2 = new ArrayList<RowItem>();
+                for (RowItem event : eventList) {
+                    if (event.getEventName().toLowerCase().contains(Query)) {
                         eventList2.add(event);
                     }
                 }
-                if (eventList2.size()>0){
-                    CatItem newCatItem= new CatItem(catItem.getCategory(),eventList2);
+                if (eventList2.size() > 0) {
+                    CatItem newCatItem = new CatItem(catItem.getCategory(), eventList2);
                     CatItem.add(newCatItem);
-                }else if (catItem.getCategory().toLowerCase().contains(Query)){
-                 CatItem.add(catItem);
+                } else if (catItem.getCategory().toLowerCase().contains(Query)) {
+                    CatItem.add(catItem);
                 }
             }
         }
