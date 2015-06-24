@@ -5,11 +5,11 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.SearchView;
 
 import com.appex.tryproject.Resources.CatItem;
 import com.appex.tryproject.Resources.Constants;
@@ -25,13 +25,11 @@ public class Day1 extends Fragment implements SearchView.OnQueryTextListener,Sea
     ExpandableListView eventListView;
     ArrayList<CatItem> catList;
     String categories[] = Constants.categories, locations[] = Constants.locations, time[] = Constants.time, date[] = Constants.date, contact[] = Constants.contact;
-
+    String names[][]=Constants.event_names;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,15 +50,16 @@ public class Day1 extends Fragment implements SearchView.OnQueryTextListener,Sea
     }
 
     private void prepareListData() {
-        RowItem Item1 = new RowItem("Event 1", locations[0], time[0], time[0], contact[0]);
-        RowItem Item2 = new RowItem("Event 2", locations[1], time[1], time[1], contact[1]);
-        RowItem Item3 = new RowItem("Event 3", locations[2], time[2], time[2], contact[2]);
-        ArrayList<RowItem> Row1 = new ArrayList<RowItem>();
-        Row1.add(Item1);
-        Row1.add(Item2);
-        Row1.add(Item3);
+
         catList = new ArrayList<CatItem>();
         for (int i = 0; i < categories.length; i++) {
+            RowItem Item1 = new RowItem(names[i][0], locations[0], time[0], time[0], contact[0]);
+            RowItem Item2 = new RowItem(names[i][1], locations[1], time[1], time[1], contact[1]);
+            RowItem Item3 = new RowItem(names[i][2], locations[2], time[2], time[2], contact[2]);
+            ArrayList<RowItem> Row1 = new ArrayList<RowItem>();
+            Row1.add(Item1);
+            Row1.add(Item2);
+            Row1.add(Item3);
             CatItem catItem = new CatItem(categories[i], Row1);
             catList.add(catItem);
         }
@@ -74,20 +73,23 @@ public class Day1 extends Fragment implements SearchView.OnQueryTextListener,Sea
     @Override
     public boolean onClose(){
         eventAdapter.filterData("");
-        expandAll();
         return false;
     }
     @Override
     public boolean onQueryTextChange(String query) {
         eventAdapter.filterData(query);
+        if(!query.isEmpty()){
         expandAll();
+        }
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
         eventAdapter.filterData(query);
-        expandAll();
+        if(!query.isEmpty()){
+            expandAll();
+        }
         return false;
     }
 }

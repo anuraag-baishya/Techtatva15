@@ -25,6 +25,11 @@ public class Constants {
             "Turing",
             "Gaming"
     };
+    public static final String[][] event_names = {{"okay","please","hey"},{"plis","no thanks","nice meme"},{"plis","no thanks","nice meme"}
+            ,{"asds","asda","dgdrg"},{"dfgrfr","drgd","ftgfe"},{"plftfis","nofth thanks","nicefth meme"},{"pliss","no thaefnks","nisdace meme"}
+            ,{"plasdis","no thadanks","niceadgd meme"},{"plgdfgis","nodrgf thanks","nice fgmeme"},{"plirgdfs","no drgdthdfganks","ndgsefice meme"},{"adwd","adasd","aekldn"}
+            ,{"awdla","sekfna","aldnac"},{"awd","awdn","wajdnha"},{"ajsd","awkdj","awd"},{"awjdna","awhd","wkldna"}
+    };
     public static final String[] locations = {
             "AB2",
             "AB2",

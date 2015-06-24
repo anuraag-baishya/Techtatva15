@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import com.appex.tryproject.R;
+
+import java.util.ArrayList;
 
 public class EventAdapter extends BaseExpandableListAdapter{
     private class ViewHolder{
@@ -144,10 +145,12 @@ public class EventAdapter extends BaseExpandableListAdapter{
                     if(event.getEventName().toLowerCase().contains(Query)){
                         eventList2.add(event);
                     }
-                    if (eventList2.size()>0){
-                        CatItem newCatItem= new CatItem(catItem.getCategory(),eventList2);
-                        CatItem.add(newCatItem);
-                    }
+                }
+                if (eventList2.size()>0){
+                    CatItem newCatItem= new CatItem(catItem.getCategory(),eventList2);
+                    CatItem.add(newCatItem);
+                }else if (catItem.getCategory().toLowerCase().contains(Query)){
+                 CatItem.add(catItem);
                 }
             }
         }
