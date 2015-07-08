@@ -14,10 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import com.appex.tryproject.Resources.CatItem;
-import com.appex.tryproject.Resources.Constants;
-import com.appex.tryproject.Resources.EventAdapter;
-import com.appex.tryproject.Resources.RowItem;
+import com.appex.tryproject.resources.CatItem;
+import com.appex.tryproject.resources.Constants;
+import com.appex.tryproject.resources.EventAdapter;
+import com.appex.tryproject.resources.RowItem;
 
 import java.util.ArrayList;
 
@@ -88,9 +88,9 @@ public class Day2 extends Fragment  {
 
         catList = new ArrayList<CatItem>();
         for (int i = 0; i < categories.length; i++) {
-            RowItem Item1 = new RowItem(names[i][0], locations[0], time[0], time[0], contact[0]);
-            RowItem Item2 = new RowItem(names[i][1], locations[1], time[1], time[1], contact[1]);
-            RowItem Item3 = new RowItem(names[i][2], locations[2], time[2], time[2], contact[2]);
+            RowItem Item1 = new RowItem(names[i][0], locations[0], time[0], time[0], contact[0],"999");
+            RowItem Item2 = new RowItem(names[i][1], locations[1], time[1], time[1], contact[1],"999");
+            RowItem Item3 = new RowItem(names[i][2], locations[2], time[2], time[2], contact[2],"999");
             ArrayList<RowItem> Row1 = new ArrayList<RowItem>();
             Row1.add(Item1);
             Row1.add(Item2);

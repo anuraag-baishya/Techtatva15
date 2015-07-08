@@ -1,4 +1,4 @@
-package com.appex.tryproject.Resources;
+package com.appex.tryproject.resources;
 
 
 import android.support.v4.app.Fragment;

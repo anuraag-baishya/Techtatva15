@@ -1,4 +1,4 @@
-package com.appex.tryproject.Resources;
+package com.appex.tryproject.resources;
 
 public class Constants {
     public static String EVENT_CATEGORY = "Category";
@@ -8,6 +8,17 @@ public class Constants {
     public static String EVENT_TIME = "Duration";
     public static String EVENT_DATE = "Date";
     public static String EVENT_CONTACT = "Contact";
+
+    public static String URL_EVENTS = "http://schedule.techtatva.in/";
+    public static String URL_TMC = "http://tmc.techtatva.in/";
+    public static String URL_RESULTS = "http://results.techtatva.in/";
+    public static String URL_BLOG = "http://blog.techtatva.in/";
+    public static String URL_INSTA = "https://api.instagram.com/v1/tags/techtatva14/media/recent?client_id=489944b506ea4e8fab4b3589c6848e2b";
+
+    public static String PREF_JSON = "jsonarray";
+    public static String PREF_CAT = "categoryno";
+    public static String PREF_DAY = "day";
+
     public static final String[] categories = {
             "Acumen",
             "Airborne",

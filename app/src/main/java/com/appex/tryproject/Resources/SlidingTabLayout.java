@@ -1,4 +1,4 @@
-package com.appex.tryproject.Resources;
+package com.appex.tryproject.resources;
 
 /*
  * Copyright 2014 Google Inc. All rights reserved.

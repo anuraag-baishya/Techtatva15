@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             />
 
-        <com.appex.tryproject.Resources.SlidingTabLayout
+        <com.appex.tryproject.resources.SlidingTabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

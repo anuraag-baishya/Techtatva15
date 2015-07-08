@@ -1,4 +1,4 @@
-package com.appex.tryproject.Resources;
+package com.appex.tryproject.resources;
 
 public class RowItem {
     private String EventName;
@@ -6,14 +6,24 @@ public class RowItem {
     private String EventTime;
     private String EventDate;
     private String EventContact;
+    private String EventCall;
 
-    public RowItem(String EventName, String EventLocation, String EventTime, String EventDate, String EventContact) {
+    public RowItem(String EventName, String EventLocation, String EventTime, String EventDate, String EventContact,String EventCall) {
         this.EventName = EventName;
         this.EventLocation = EventLocation;
         this.EventTime = EventTime;
         this.EventDate = EventDate;
         this.EventContact = EventContact;
+        this.EventCall=EventCall;
     }
+    public String getEventCall() {
+        return EventCall;
+    }
+
+    public void setEventCall(String eventCall) {
+        EventCall = eventCall;
+    }
+
 
     public void setEventContact(String eventContact) {
         EventContact = eventContact;

@@ -1,7 +1,11 @@
-package com.appex.tryproject.Resources;
+package com.appex.tryproject.resources;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,7 @@ public class EventAdapter extends BaseExpandableListAdapter {
         TextView textTime;
         TextView textDate;
         TextView textContact;
+        TextView textCall;
 
     }
 
@@ -64,6 +69,7 @@ public class EventAdapter extends BaseExpandableListAdapter {
             holder.textTime = (TextView) convertView.findViewById(R.id.eventTime);
             holder.textDate = (TextView) convertView.findViewById(R.id.eventDate);
             holder.textContact = (TextView) convertView.findViewById(R.id.eventContact);
+            holder.textCall=(TextView)convertView.findViewById(R.id.contactCall);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -80,6 +86,34 @@ public class EventAdapter extends BaseExpandableListAdapter {
         holder.textDate.setTypeface(tf2);
         holder.textTime.setTypeface(tf2);
         holder.textContact.setTypeface(tf2);
+        holder.textContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (holder.textCall.getVisibility() == View.GONE)
+                    holder.textCall.setVisibility(View.VISIBLE);
+                else
+                    holder.textCall.setVisibility(View.GONE);
+            }
+        });
+        holder.textCall.setText(rowItem.getEventCall());
+        holder.textCall.setTypeface(tf2);
+        holder.textCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                final String finalContact = "999";
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        callIntent(context, finalContact);
+                    }
+                });
+                builder.setNegativeButton("NO", null);
+                builder.setMessage("Call " + 999 + " ?");
+                builder.create();
+                builder.show();
+            }
+        });
 
         return convertView;
     }
@@ -156,6 +190,9 @@ public class EventAdapter extends BaseExpandableListAdapter {
             }
         }
         notifyDataSetChanged();
+    }
+    public void callIntent(Context context, String phoneNumber) {
+        context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel: " + phoneNumber)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 }
 

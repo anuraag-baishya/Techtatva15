@@ -57,8 +57,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-            tintManager.setNavigationBarTintEnabled(true);
-            tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary));
         }
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);

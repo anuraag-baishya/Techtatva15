@@ -1,4 +1,4 @@
-package com.appex.tryproject.Resources;
+package com.appex.tryproject.resources;
 
 import android.R;
 import android.content.Context;

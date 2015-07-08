@@ -47,7 +47,7 @@
                 android:drawableLeft="@drawable/ic_email"
                 android:text="@string/emailButton"
                 style="@style/buttong"
-                android:textColor="@color/white"
+                android:textColor="@color/primary"
                 android:layout_margin="20dp"
                 android:id="@+id/emailLogin"
                 android:textAllCaps="false"
@@ -74,6 +74,7 @@
             android:layout_margin="20dp">
             <com.gc.materialdesign.views.ButtonFlat
                 android:layout_width="150dp"
+                style="@style/buttong"
                 android:layout_height="wrap_content"
                 android:textSize="18.5sp"
                 android:text="@string/reg"

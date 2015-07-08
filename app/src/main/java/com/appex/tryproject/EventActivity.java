@@ -1,5 +1,6 @@
 package com.appex.tryproject;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -13,10 +14,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.appex.tryproject.Resources.DrawerItem;
-import com.appex.tryproject.Resources.DrawerListAdapter;
-import com.appex.tryproject.Resources.SlidingTabLayout;
-import com.appex.tryproject.Resources.ViewPagerAdapter;
+import com.appex.tryproject.resources.DrawerItem;
+import com.appex.tryproject.resources.DrawerListAdapter;
+import com.appex.tryproject.resources.SlidingTabLayout;
+import com.appex.tryproject.resources.ViewPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class EventActivity extends ActionBarActivity {
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(VPadapter);
 
-        mNavItems.add(new DrawerItem("Home", "Meetup destination", R.drawable.ic_contact));
+        mNavItems.add(new DrawerItem("Results", "Check Results", R.drawable.ic_contact));
         mNavItems.add(new DrawerItem("Preferences", "Change your preferences", R.drawable.ic_date));
         mNavItems.add(new DrawerItem("About", "Get to know about us", R.drawable.ic_location));
 
@@ -79,6 +80,10 @@ public class EventActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                if (position == 0) {
+                    Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                    startActivity(intent);
+                }
 
             }
         });
@@ -98,25 +103,4 @@ public class EventActivity extends ActionBarActivity {
     }
 
 
- //   @Override
- //   public boolean onCreateOptionsMenu(Menu menu) {
- //       // Inflate the menu; this adds items to the action bar if it is present.
- //       getMenuInflater().inflate(R.menu.menu_main, menu);
- //       return true;
- //   }
- //
- //   @Override
- //   public boolean onOptionsItemSelected(MenuItem item) {
- //       if (mDrawerToggle.onOptionsItemSelected(item)) {
- //           return true;
- //     }
- //     int id = item.getItemId();
- //
- //      //noinspection SimplifiableIfStatement
- //     if (id == R.id.action_settings) {
- //         return true;
- //     }
- //
- //      return super.onOptionsItemSelected(item);
- //  }
 }

@@ -33,12 +33,10 @@ public class RegisterActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         username = (EditText) findViewById(R.id.RegName);
         setContentView(R.layout.toolbar_reg);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-            tintManager.setNavigationBarTintEnabled(true);
-            tintManager.setNavigationBarTintColor(getResources().getColor(R.color.primary));
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
