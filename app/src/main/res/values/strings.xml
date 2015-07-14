@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">TT15 Demo</string>
-
+    <string name="no_connection_one">Oops! Could not fetch content!</string>
     <string name="hello_world">Hello world!</string>
     <string name="open">Open</string>
+    <string name="action_image_save">Save Image</string>
+    <string name="action_image_share">Share</string>
     <string name="close">Close</string>
+    <string name="text_retry">Retry</string>
+    <string name="try_again">Seems like a network issue\nPlease try again in sometime!</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">869298779782547</string>
     <string name="skip_login">Skip Login</string>
@@ -83,4 +87,6 @@
     <string name="title_activity_email">EmailActivity</string>
     <string name="title_activity_event_search">EventSearchActivity</string>
     <string name="title_activity_result">ResultActivity</string>
+    <string name="title_activity_image">ImageActivity</string>
+    <string name="title_activity_insta_feed">#techtatva15</string>
 </resources>

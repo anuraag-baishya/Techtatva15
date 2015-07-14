@@ -59,6 +59,14 @@
             android:name=".ResultActivity"
             android:label="@string/title_activity_result" >
         </activity>
+        <activity
+            android:name=".ImageActivity"
+            android:label="@string/title_activity_image" >
+        </activity>
+        <activity
+            android:name=".InstaFeedActivity"
+            android:label="@string/title_activity_insta_feed" >
+        </activity>
     </application>
 
 </manifest>

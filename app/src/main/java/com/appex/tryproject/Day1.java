@@ -82,6 +82,7 @@ public class Day1 extends Fragment {
         eventListView = (ExpandableListView) rootView.findViewById(R.id.catListDay1);
         eventAdapter = new EventAdapter(getActivity(), catList, typeface, typeface2);
         eventListView.setAdapter(eventAdapter);
+        
         return rootView;
     }
 

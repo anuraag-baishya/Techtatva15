@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class EventAdapter extends BaseExpandableListAdapter {
     private class ViewHolder {
+        RowItem item;
         TextView textName;
         TextView textLocation;
         TextView textTime;
@@ -70,6 +71,32 @@ public class EventAdapter extends BaseExpandableListAdapter {
             holder.textDate = (TextView) convertView.findViewById(R.id.eventDate);
             holder.textContact = (TextView) convertView.findViewById(R.id.eventContact);
             holder.textCall=(TextView)convertView.findViewById(R.id.contactCall);
+            holder.textContact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.textCall.getVisibility() == View.GONE)
+                        holder.textCall.setVisibility(View.VISIBLE);
+                    else
+                        holder.textCall.setVisibility(View.GONE);
+                }
+            });
+            holder.textCall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    final String finalContact = "999";
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            callIntent(context, finalContact);
+                        }
+                    });
+                    builder.setNegativeButton("NO", null);
+                    builder.setMessage("Call " + 999 + " ?");
+                    builder.create();
+                    builder.show();
+                }
+            });
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -86,34 +113,8 @@ public class EventAdapter extends BaseExpandableListAdapter {
         holder.textDate.setTypeface(tf2);
         holder.textTime.setTypeface(tf2);
         holder.textContact.setTypeface(tf2);
-        holder.textContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.textCall.getVisibility() == View.GONE)
-                    holder.textCall.setVisibility(View.VISIBLE);
-                else
-                    holder.textCall.setVisibility(View.GONE);
-            }
-        });
         holder.textCall.setText(rowItem.getEventCall());
         holder.textCall.setTypeface(tf2);
-        holder.textCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                final String finalContact = "999";
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        callIntent(context, finalContact);
-                    }
-                });
-                builder.setNegativeButton("NO", null);
-                builder.setMessage("Call " + 999 + " ?");
-                builder.create();
-                builder.show();
-            }
-        });
 
         return convertView;
     }

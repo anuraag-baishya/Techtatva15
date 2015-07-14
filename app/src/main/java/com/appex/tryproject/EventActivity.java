@@ -54,7 +54,7 @@ public class EventActivity extends ActionBarActivity {
         pager.setAdapter(VPadapter);
 
         mNavItems.add(new DrawerItem("Results", "Check Results", R.drawable.ic_contact));
-        mNavItems.add(new DrawerItem("Preferences", "Change your preferences", R.drawable.ic_date));
+        mNavItems.add(new DrawerItem("Instagram", "InstaFeed #techtatva15", R.drawable.ic_insta));
         mNavItems.add(new DrawerItem("About", "Get to know about us", R.drawable.ic_location));
 
         // Populate the Navigtion Drawer with options
@@ -79,11 +79,13 @@ public class EventActivity extends ActionBarActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                 if (position == 0) {
                     Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                     startActivity(intent);
                 }
+                if (position==1)
+                    startActivity(new Intent(getApplicationContext(),InstaFeedActivity.class));
 
             }
         });

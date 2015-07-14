@@ -37,8 +37,12 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.2.0'
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
-    compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
+    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.github.rey5137:material:1.1.0'
     compile 'com.github.chipset95:Potato-Library:0.1.1'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile 'com.mcxiaoke.photoview:library:1.2.3'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.picasso:picasso:2.5.0'
 }

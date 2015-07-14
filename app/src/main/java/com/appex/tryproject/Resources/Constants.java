@@ -19,6 +19,8 @@ public class Constants {
     public static String PREF_CAT = "categoryno";
     public static String PREF_DAY = "day";
 
+    public static String INSTA_DATA = "instaData";
+
     public static final String[] categories = {
             "Acumen",
             "Airborne",
