@@ -7,9 +7,11 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 import com.appex.tryproject.model.instagram.InstagramDatum;
 import com.appex.tryproject.resources.Constants;
 import com.google.gson.Gson;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -36,7 +39,7 @@ import java.io.OutputStream;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 
-public class ImageActivity extends ActionBarActivity {
+public class ImageActivity extends AppCompatActivity {
     boolean isVisible = true;
     ImageView mImageView;
     static int count = 1;
@@ -46,10 +49,17 @@ public class ImageActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-
         InstagramDatum instagramDatum = new Gson().fromJson(getIntent().getStringExtra(Constants.INSTA_DATA), InstagramDatum.class);
-
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+        }
         mImageView = (ImageView) findViewById(R.id.image_view);
         final LinearLayout imageDataLinearLayout = (LinearLayout) findViewById(R.id.image_data_linear_layout);
         TextView imageUserTextView = (TextView) findViewById(R.id.image_user_text_view);
@@ -101,7 +111,6 @@ public class ImageActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_insta_feed, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_save_image) {
@@ -138,6 +147,9 @@ public class ImageActivity extends ActionBarActivity {
             sendIntent.setType("image/*");
             startActivity(Intent.createChooser(sendIntent, "Share Image"));
         }
+        else if(item.getItemId()==android.R.id.home){
+            startActivity(new Intent(ImageActivity.this,InstaFeedActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -146,7 +158,7 @@ public class ImageActivity extends ActionBarActivity {
         Bitmap bitmap = mImageView.getDrawingCache();
         File filepath = Environment.getExternalStorageDirectory();
         File dir = new File(filepath.getAbsolutePath()
-                + "/Pictures/Revels15/");
+                + "/Pictures/TechTatva15/");
         dir.mkdirs();
         count = getSharedPreferenceInteger(getApplicationContext(), "COUNT");
         File file = new File(dir, "IMG_INSTA_" + String.valueOf(count) + ".png");

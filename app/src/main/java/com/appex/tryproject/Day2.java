@@ -2,6 +2,7 @@ package com.appex.tryproject;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -71,7 +72,13 @@ public class Day2 extends Fragment  {
             }
         });
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_insta){
+            startActivity(new Intent(getActivity(),InstaFeedActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_day2, container, false);

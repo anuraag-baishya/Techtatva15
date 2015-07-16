@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.appex.tryproject.resources.DrawerItem;
 import com.appex.tryproject.resources.DrawerListAdapter;
@@ -54,7 +53,6 @@ public class EventActivity extends ActionBarActivity {
         pager.setAdapter(VPadapter);
 
         mNavItems.add(new DrawerItem("Results", "Check Results", R.drawable.ic_contact));
-        mNavItems.add(new DrawerItem("Instagram", "InstaFeed #techtatva15", R.drawable.ic_insta));
         mNavItems.add(new DrawerItem("About", "Get to know about us", R.drawable.ic_location));
 
         // Populate the Navigtion Drawer with options
@@ -84,9 +82,6 @@ public class EventActivity extends ActionBarActivity {
                     Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                     startActivity(intent);
                 }
-                if (position==1)
-                    startActivity(new Intent(getApplicationContext(),InstaFeedActivity.class));
-
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_opened, R.string.drawer_closed);

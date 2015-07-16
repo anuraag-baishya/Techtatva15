@@ -1,8 +1,10 @@
 package com.appex.tryproject;
 
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import android.widget.ProgressBar;
 import com.appex.tryproject.model.instagram.InstaFeed;
 import com.appex.tryproject.resources.APIClient;
 import com.appex.tryproject.resources.InstaFeedListAdapter;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -31,7 +34,25 @@ public class InstaFeedActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().setElevation(0f);
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
+        }
         loadInstaFeed();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            startActivity(new Intent(InstaFeedActivity.this,EventActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void loadInstaFeed() {

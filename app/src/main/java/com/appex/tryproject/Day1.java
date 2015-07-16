@@ -2,6 +2,7 @@ package com.appex.tryproject;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -70,6 +71,14 @@ public class Day1 extends Fragment {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_insta){
+            startActivity(new Intent(getActivity(),InstaFeedActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
