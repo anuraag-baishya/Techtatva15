@@ -5,22 +5,27 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.appex.tryproject.resources.DrawerItem;
 import com.appex.tryproject.resources.DrawerListAdapter;
 import com.appex.tryproject.resources.SlidingTabLayout;
 import com.appex.tryproject.resources.ViewPagerAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class EventActivity extends ActionBarActivity {
+import chipset.potato.Potato;
+
+public class EventActivity extends AppCompatActivity {
 
     private static String TAG = EventActivity.class.getSimpleName();
 
@@ -44,7 +49,14 @@ public class EventActivity extends ActionBarActivity {
         setContentView(R.layout.activity_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
+        try {
+            String name = Potato.potate().Preferences().getSharedPreferenceString(getApplicationContext(),"name");
+            TextView nametv = (TextView) findViewById(R.id.userName);
+            nametv.setText(name);
+            ImageView im = (ImageView)findViewById(R.id.avatar);
+            Picasso.with(getApplicationContext()).load(Potato.potate().Preferences().getSharedPreferenceString(getApplicationContext(),"pp")).resize(50,50).into(im);
+        }catch (Exception e){
+        }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

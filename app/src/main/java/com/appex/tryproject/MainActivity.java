@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -27,7 +29,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener,
+import chipset.potato.Potato;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private CallbackManager callbackManager;
     LoginButton loginButton;
@@ -65,7 +69,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                Profile profile = Profile.getCurrentProfile();
+                Log.d("login",profile.getProfilePictureUri(30,30).toString());
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);
+                Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"name",profile.getName());
+                Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"mode","facebook");
+                Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"pp",profile.getProfilePictureUri(50,50).toString());
                 startActivity(intent);
             }
 
@@ -159,8 +168,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         p.setVisibility(View.GONE);
         mSignInClicked = false;
         Intent intent = new Intent(MainActivity.this, EventActivity.class);
-        intent.putExtra("name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());
-        intent.putExtra("mode", "google");
+        Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());
+        Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"mode", "google");
+        Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"pp",Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getImage().getUrl());
         startActivity(intent);
     }
 
