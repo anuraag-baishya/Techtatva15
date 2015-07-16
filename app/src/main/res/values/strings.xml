@@ -87,6 +87,6 @@
     <string name="title_activity_email">EmailActivity</string>
     <string name="title_activity_event_search">EventSearchActivity</string>
     <string name="title_activity_result">ResultActivity</string>
-    <string name="title_activity_image">ImageActivity</string>
+    <string name="title_activity_image"></string>
     <string name="title_activity_insta_feed">#techtatva15</string>
 </resources>
