@@ -12,10 +12,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
@@ -28,6 +31,8 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import org.json.JSONObject;
 
 import chipset.potato.Potato;
 
@@ -70,11 +75,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                 Profile profile = Profile.getCurrentProfile();
-                Log.d("login",profile.getProfilePictureUri(30,30).toString());
+                if(profile==null)
+                    Log.d("Profile","null");
+                if(profile !=null) {
+                    Log.d("login", profile.getProfilePictureUri(30, 30).toString());
+                    Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "name", profile.getName());
+                    Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "mode", "facebook");
+                    Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "pp", profile.getProfilePictureUri(50, 50).toString());
+                }
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);
-                Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"name",profile.getName());
-                Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"mode","facebook");
-                Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"pp",profile.getProfilePictureUri(50,50).toString());
                 startActivity(intent);
             }
 

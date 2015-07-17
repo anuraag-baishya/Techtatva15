@@ -9,7 +9,8 @@
     <string name="text_retry">Retry</string>
     <string name="try_again">Seems like a network issue\nPlease try again in sometime!</string>
     <string name="action_settings">Settings</string>
-    <string name="facebook_app_id">1441209929531592</string>
+    <string name="facebook_app_id">869269316452160</string>
+    <!--1441209929531592--><!--869269316452160-->
     <string name="skip_login">Skip Login</string>
     <string name="gbutton">Sign in with Google</string>
     <string name="pass">Password</string>
