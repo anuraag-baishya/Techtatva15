@@ -3,6 +3,7 @@ package com.appex.tryproject;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,11 +15,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appex.tryproject.resources.DrawerItem;
 import com.appex.tryproject.resources.DrawerListAdapter;
 import com.appex.tryproject.resources.SlidingTabLayout;
 import com.appex.tryproject.resources.ViewPagerAdapter;
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,7 +43,7 @@ public class EventActivity extends AppCompatActivity {
     SlidingTabLayout tabs;
     CharSequence Titles[] = {"Day1", "Day2", "Day3"};
     int Numboftabs = 3;
-
+    boolean doubleBackToExitPressedOnce = false;
     ArrayList<DrawerItem> mNavItems = new ArrayList<DrawerItem>();
 
     @Override
@@ -66,6 +69,7 @@ public class EventActivity extends AppCompatActivity {
 
         mNavItems.add(new DrawerItem("Results", "Check Results", R.drawable.ic_contact));
         mNavItems.add(new DrawerItem("About", "Get to know about us", R.drawable.ic_location));
+        mNavItems.add(new DrawerItem("Log Out","Log out of facebook",R.drawable.ic_action_about));
 
         // Populate the Navigtion Drawer with options
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
@@ -94,6 +98,14 @@ public class EventActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                     startActivity(intent);
                 }
+                if(position==2){
+                    LoginManager.getInstance().logOut();
+                    Toast.makeText(getApplicationContext(), "You have logged out", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_opened, R.string.drawer_closed);
@@ -110,6 +122,5 @@ public class EventActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
 
 }

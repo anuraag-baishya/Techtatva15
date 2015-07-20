@@ -34,7 +34,6 @@ public class ResultActivity extends ActionBarActivity {
     JSONArrayParser jArrayParser = new JSONArrayParser();
     ListView resultView;
 
-//    JSONArray results = null;
     ArrayList<HashMap<String, String>> resultList;
 
     @Override

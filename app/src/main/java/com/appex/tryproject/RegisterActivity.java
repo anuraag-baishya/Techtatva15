@@ -51,7 +51,9 @@ public class RegisterActivity extends ActionBarActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), Msg, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
 

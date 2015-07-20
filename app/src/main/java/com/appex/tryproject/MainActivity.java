@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -62,6 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
+        AccessTokenTracker accessTokenTracker=new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken accessToken, AccessToken accessToken1) {
+                updateWithToken(accessToken1);
+            }
+        };
+        updateWithToken(AccessToken.getCurrentAccessToken());
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
@@ -84,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "pp", profile.getProfilePictureUri(50, 50).toString());
                 }
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
 
             @Override
@@ -114,7 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EmailActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
         btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
@@ -179,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(MainActivity.this, EventActivity.class);
         Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());
         Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"mode", "google");
-        Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"pp",Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getImage().getUrl());
+        Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "pp", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getImage().getUrl());
         startActivity(intent);
     }
 
@@ -246,5 +258,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
+    }
+    private void updateWithToken(AccessToken currentAccessToken){
+        if(currentAccessToken!=null)
+            startActivity(new Intent(getApplicationContext(),EventActivity.class));
     }
 }

@@ -16,7 +16,8 @@
             android:minHeight="?attr/actionBarSize"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:background="@color/primary" />
+            android:background="@color/primary"
+            android:elevation="4dp"/>
 
         <ProgressBar
             android:id="@+id/insta_feed_progress_bar"

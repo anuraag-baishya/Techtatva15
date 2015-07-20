@@ -11,7 +11,8 @@
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:background="@color/primary" />
+        android:background="@color/primary"
+        android:elevation="4dp"/>
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"

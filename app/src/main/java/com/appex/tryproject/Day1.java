@@ -13,7 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.appex.tryproject.resources.CatItem;
 import com.appex.tryproject.resources.Constants;
@@ -91,7 +93,6 @@ public class Day1 extends Fragment {
         eventListView = (ExpandableListView) rootView.findViewById(R.id.catListDay1);
         eventAdapter = new EventAdapter(getActivity(), catList, typeface, typeface2);
         eventListView.setAdapter(eventAdapter);
-        
         return rootView;
     }
 

@@ -2,6 +2,7 @@ package com.appex.tryproject.resources;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +26,14 @@ public class InstaFeedListAdapter extends BaseAdapter {
     InstaFeed instaFeed;
     Context context;
     LayoutInflater layoutInflater = null;
+    Typeface typeface;
+    Typeface typeface1;
 
-    public InstaFeedListAdapter(Context context, InstaFeed instaFeed) {
+    public InstaFeedListAdapter(Context context, InstaFeed instaFeed, Typeface typeface, Typeface typeface1) {
         this.instaFeed = instaFeed;
         this.context = context;
+        this.typeface=typeface;
+        this.typeface1=typeface1;
     }
 
 
@@ -63,10 +68,14 @@ public class InstaFeedListAdapter extends BaseAdapter {
         final InstagramDatum instagramDatum = getItem(position);
         try {
             viewHolder.instaFeedUsernameTextView.setText("@" + instagramDatum.getUser().getUsername());
+            viewHolder.instaFeedUsernameTextView.setTypeface(typeface);
             Picasso.with(context).load(instagramDatum.getUser().getProfilePicture()).into(viewHolder.instaFeedUserImageView);
             viewHolder.instaFeedTitleTextView.setText(instagramDatum.getCaption().getText());
+            viewHolder.instaFeedTitleTextView.setTypeface(typeface1);
             viewHolder.instaFeedLikesTextView.setText("Likes: " + instagramDatum.getLikes().getCount());
+            viewHolder.instaFeedLikesTextView.setTypeface(typeface1);
             viewHolder.instaFeedCommentsTextView.setText("Comments: " + instagramDatum.getComments().getCount());
+            viewHolder.instaFeedCommentsTextView.setTypeface(typeface1);
             Picasso.with(context).load(instagramDatum.getImages().getStandardResolution().getUrl()).into(viewHolder.instaFeedImageView, new Callback() {
                 @Override
                 public void onSuccess() {
