@@ -46,8 +46,8 @@
                 android:layout_gravity="center"
                 android:drawableLeft="@drawable/ic_email"
                 android:text="@string/emailButton"
-                style="@style/buttong"
                 android:textColor="@color/primary"
+                style="@style/buttong"
                 android:layout_margin="20dp"
                 android:id="@+id/emailLogin"
                 android:textAllCaps="false"
@@ -55,8 +55,8 @@
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content"
             android:text="@string/option"
             android:textColor="@color/secondary_text"
@@ -74,7 +74,6 @@
             android:layout_margin="20dp">
             <com.gc.materialdesign.views.ButtonFlat
                 android:layout_width="150dp"
-                style="@style/buttong"
                 android:layout_height="wrap_content"
                 android:textSize="18.5sp"
                 android:text="@string/reg"

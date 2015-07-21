@@ -7,8 +7,6 @@
         <item name="colorPrimaryDark">#E64A19</item>
         <item name="colorAccent">#212121</item>
         <item name="android:fitsSystemWindows">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
     <style name="spinner_style" >
     <item name="android:background">@drawable/spinner_back</item>

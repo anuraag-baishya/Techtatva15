@@ -27,6 +27,9 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
+    maven{
+        url 'https://maven.fabric.io/public'
+    }
 }
 
 dependencies {
@@ -44,5 +47,8 @@ dependencies {
     compile 'com.mcxiaoke.photoview:library:1.2.3'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.picasso:picasso:2.5.0'
-    compile 'com.github.ksoichiro:android-observablescrollview:1.5.0'
+    compile 'ch.acra:acra:4.6.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.2.1@aar') {
+        transitive = true;
+    }
 }

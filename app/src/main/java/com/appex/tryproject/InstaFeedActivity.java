@@ -23,9 +23,6 @@ import android.widget.ProgressBar;
 import com.appex.tryproject.model.instagram.InstaFeed;
 import com.appex.tryproject.resources.APIClient;
 import com.appex.tryproject.resources.InstaFeedListAdapter;
-import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import retrofit.Callback;
