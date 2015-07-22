@@ -7,12 +7,7 @@ import retrofit.RestAdapter;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
-/**
- * Developer: appex_corp
- * Package : com.appex.networkmanager.network
- * Project : Network Manager
- * Date : 7/7/15
- */
+
 
 public class APIClient {
     //private static DataInterface dataInterface = null;

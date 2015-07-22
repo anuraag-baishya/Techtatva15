@@ -40,26 +40,18 @@
             android:hint="@string/pass"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp" />
-        <com.gc.materialdesign.views.LayoutRipple
-            android:id="@+id/emaillog"
-            android:layout_centerHorizontal="true"
+        <Button
             android:layout_below="@+id/loginPass"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.gc.materialdesign.views.ButtonFlat
-                android:id="@+id/loginB"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:textSize="18.5sp"
-                android:gravity="center"
-                android:text="@string/login"
-                android:textAllCaps="false"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/primary_dark"/>
-        </com.gc.materialdesign.views.LayoutRipple>
+            android:id="@+id/loginB"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:text="@string/login"
+            android:textColor="@color/primary"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/transparent"/>
     </RelativeLayout>
 
 

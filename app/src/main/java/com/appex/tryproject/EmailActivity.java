@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.gc.materialdesign.views.LayoutRipple;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 
@@ -28,7 +27,7 @@ public class EmailActivity extends ActionBarActivity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
         }
-        LayoutRipple Login = (LayoutRipple) findViewById(R.id.emaillog);
+        Button Login = (Button) findViewById(R.id.loginB);
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

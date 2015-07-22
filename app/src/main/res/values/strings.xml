@@ -12,8 +12,13 @@
     <string name="facebook_app_id">869269316452160</string>
     <!--1441209929531592--><!--869269316452160-->
     <string name="skip_login">Skip Login</string>
+    <string name="logout">Log Out</string>
+    <string name="instafeed">InstaFeed</string>
+    <string name="developers">Developers</string>
+    <string name="contact">Contact Us</string>
     <string name="gbutton">Sign in with Google</string>
     <string name="pass">Password</string>
+    <string name="result">Result</string>
     <string name="login">Login</string>
     <string name="option">Please select preferred method of login\nOR</string>
     <string name="name">Name</string>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/result"
+            android:checked="false"
+            android:icon="@drawable/ic_contact"
+            android:title="@string/result"/>
+        <item
+            android:id="@+id/instafeed"
+            android:checked="false"
+            android:icon="@drawable/ic_insta"
+            android:title="@string/instafeed"/>
+        <item
+            android:id="@+id/contact"
+            android:checked="false"
+            android:icon="@drawable/ic_contact"
+            android:title="@string/contact"/>
+        <item
+            android:id="@+id/developers"
+            android:checked="false"
+            android:icon="@drawable/ic_location"
+            android:title="@string/developers"/>
+        <item
+            android:id="@+id/logout"
+            android:checked="false"
+            android:icon="@drawable/ic_action_about"
+            android:title="@string/logout"/>
+    </group>
+</menu>

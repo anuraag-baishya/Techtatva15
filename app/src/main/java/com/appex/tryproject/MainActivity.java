@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,14 +20,10 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.gc.materialdesign.views.LayoutRipple;
-import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -34,18 +31,16 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import org.json.JSONObject;
-
 import chipset.potato.Potato;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+    String TAG=MainActivity.class.getSimpleName();
     private CallbackManager callbackManager;
     LoginButton loginButton;
     private static final int RC_SIGN_IN = 0;
     private GoogleApiClient mGoogleApiClient;
     private boolean mSignInClicked;
-    ProgressBarCircularIndeterminate p;
     /**
      * A flag indicating that a PendingIntent is in progress and prevents us
      * from starting further intents.
@@ -85,9 +80,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
                 Profile profile = Profile.getCurrentProfile();
                 if(profile==null)
-                    Log.d("Profile","null");
+                    Log.d(TAG,"null");
                 if(profile !=null) {
-                    Log.d("login", profile.getProfilePictureUri(30, 30).toString());
+                    Log.d(TAG, profile.getProfilePictureUri(30, 30).toString());
                     Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "name", profile.getName());
                     Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "mode", "facebook");
                     Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "pp", profile.getProfilePictureUri(50, 50).toString());
@@ -112,7 +107,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         });
         TextView orText = (TextView) findViewById(R.id.optionView);
         orText.setGravity(Gravity.CENTER);
-        LayoutRipple RegisterButton = (LayoutRipple) findViewById(R.id.register);
+        Button RegisterButton = (Button) findViewById(R.id.register);
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,8 +133,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
-        p = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBarCircularIndeterminate);
-        p.setBackgroundColor(getResources().getColor(R.color.accent));
     }
 
     protected void onStart() {
@@ -162,7 +155,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             } catch (IntentSender.SendIntentException e) {
                 mIntentInProgress = false;
                 mGoogleApiClient.connect();
-                p.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -179,7 +171,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
-                p.setVisibility(View.VISIBLE);
             }
         }
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -187,7 +178,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onConnected(Bundle bundle) {
-        p.setVisibility(View.GONE);
         mSignInClicked = false;
         Intent intent = new Intent(MainActivity.this, EventActivity.class);
         Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());

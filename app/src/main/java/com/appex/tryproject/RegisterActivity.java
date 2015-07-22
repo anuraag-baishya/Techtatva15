@@ -15,8 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gc.materialdesign.views.LayoutRipple;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.rey.material.widget.Button;
 
 import java.util.Calendar;
 
@@ -45,7 +45,7 @@ public class RegisterActivity extends ActionBarActivity {
         dateView = (TextView) findViewById(R.id.RegDOB);
         dateView.setGravity(Gravity.LEFT);
 
-        LayoutRipple RegButton = (LayoutRipple) findViewById(R.id.RegButton);
+        Button RegButton = (Button) findViewById(R.id.RegButton);
         RegButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

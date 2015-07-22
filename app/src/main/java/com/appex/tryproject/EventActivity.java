@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -36,6 +38,7 @@ public class EventActivity extends AppCompatActivity {
     RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
     ViewPager pager;
     ViewPagerAdapter VPadapter;
     String msg = "clicked";
@@ -52,31 +55,56 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        navigationView=(NavigationView)findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                if(menuItem.isChecked())
+                    menuItem.setChecked(false);
+                else
+                    menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                switch (menuItem.getItemId()){
+                    case R.id.result:
+                        startActivity(new Intent(getApplicationContext(),ResultActivity.class));
+                        return true;
+                    case R.id.instafeed:
+                        startActivity(new Intent(getApplicationContext(),InstaFeedActivity.class));
+                        return true;
+                    case R.id.logout:
+                        LoginManager.getInstance().logOut();
+                        Toast.makeText(getApplicationContext(), "You have logged out", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                        return true;
+                    case R.id.developers:
+                        Toast.makeText(getApplicationContext(),"Developers",Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.contact:
+                        Toast.makeText(getApplicationContext(),"Contact Us",Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
         try {
             String name = Potato.potate().Preferences().getSharedPreferenceString(getApplicationContext(),"name");
-            TextView nametv = (TextView) findViewById(R.id.userName);
+            TextView nametv = (TextView) findViewById(R.id.username);
             nametv.setText(name);
-            ImageView im = (ImageView)findViewById(R.id.avatar);
+            ImageView im = (ImageView)findViewById(R.id.profile_image);
             Picasso.with(getApplicationContext()).load(Potato.potate().Preferences().getSharedPreferenceString(getApplicationContext(),"pp")).resize(50,50).into(im);
-        }catch (Exception e){
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_opened, R.string.drawer_closed);
         VPadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(VPadapter);
-
-        mNavItems.add(new DrawerItem("Results", "Check Results", R.drawable.ic_contact));
-        mNavItems.add(new DrawerItem("About", "Get to know about us", R.drawable.ic_location));
-        mNavItems.add(new DrawerItem("Log Out","Log out of facebook",R.drawable.ic_action_about));
-
-        // Populate the Navigtion Drawer with options
-        mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
-        mDrawerList = (ListView) findViewById(R.id.navList);
-        DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
-        mDrawerList.setAdapter(adapter);
-
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
@@ -88,27 +116,6 @@ public class EventActivity extends AppCompatActivity {
         tabs.setSelectedIndicatorColors(R.color.white);
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
-        // Drawer Item click listeners
-        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                if (position == 0) {
-                    Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
-                    startActivity(intent);
-                }
-                if(position==2){
-                    LoginManager.getInstance().logOut();
-                    Toast.makeText(getApplicationContext(), "You have logged out", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_opened, R.string.drawer_closed);
     }
 
     @Override
