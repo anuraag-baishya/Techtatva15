@@ -15,7 +15,7 @@
             layout="@layout/toolbar_event"
             android:layout_height="wrap_content"
             android:layout_width="match_parent" />
-        <com.appex.tryproject.resources.SlidingTabLayout
+        <com.appex.tryproject.widgets.SlidingTabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
