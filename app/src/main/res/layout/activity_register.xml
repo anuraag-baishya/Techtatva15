@@ -5,53 +5,71 @@
     >
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.appex.tryproject.activites.RegisterActivity"
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <com.rey.material.widget.EditText
-        android:id="@+id/RegName"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_name_text_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="@string/name"
-        android:textSize="18.5sp"
-        style="@style/edittext_style"
-        android:layout_marginBottom="20dp"
-    />
-    <com.rey.material.widget.EditText
-        android:id="@+id/RegEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp">
+        <EditText
+            android:id="@+id/register_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/name"
+            android:textSize="18.5sp"
+            style="@style/edittext_style"
+        />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_email_text_input_layout"
         android:layout_width="match_parent"
+        android:layout_below="@+id/register_name_text_input_layout"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/email"
-        android:textSize="18.5sp"
-        style="@style/edittext_style"
-        android:layout_marginBottom="20dp"
-        android:layout_below="@+id/RegName"
-    />
-    <com.rey.material.widget.EditText
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp">
+        <EditText
+            android:id="@+id/register_email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email"
+            android:textSize="18.5sp"
+            style="@style/edittext_style"
+        />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_phno_text_input_layout"
         android:layout_width="match_parent"
+        android:layout_below="@+id/register_email_text_input_layout"
         android:layout_height="wrap_content"
-        android:id="@+id/RegPhno"
-        android:textSize="18.5sp"
-        android:hint="@string/phno"
-        android:layout_marginBottom="20dp"
-        style="@style/edittext_style"
-        android:inputType="phone"
-        android:layout_below="@+id/RegEmail"
-    />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_phno_edit_text"
+            android:textSize="18.5sp"
+            android:hint="@string/phno"
+            style="@style/edittext_style"
+            android:inputType="phone"
+            android:layout_below="@+id/RegEmail"
+        />
+    </android.support.design.widget.TextInputLayout>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/RegDOB"
+        android:id="@+id/register_dob_button"
         android:textAllCaps="false"
-        android:layout_below="@+id/RegPhno"
+        android:layout_below="@+id/register_phno_text_input_layout"
         android:layout_marginBottom="20dp"
         android:background="@color/white"
         android:hint="@string/dob"
@@ -60,8 +78,8 @@
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/RegGender"
-        android:layout_below="@+id/RegDOB"
+        android:id="@+id/register_gender_spinner"
+        android:layout_below="@+id/register_dob_button"
         android:layout_marginBottom="20dp"
         android:textSize="18.5sp"
         android:entries="@array/GenderArray"
@@ -71,16 +89,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cityTextView"
+        android:id="@+id/register_city_text_view"
         android:text="@string/city"
-        android:layout_below="@+id/RegGender"
+        android:layout_below="@+id/register_gender_spinner"
         android:textSize="18.5sp"
         android:layout_marginBottom="20dp"/>
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/RegCity"
-        android:layout_below="@+id/cityTextView"
+        android:id="@+id/register_city_spinner"
+        android:layout_below="@+id/register_city_text_view"
         android:textSize="18.5sp"
         android:entries="@array/cityArray"
         android:layout_marginBottom="20dp"
@@ -90,44 +108,51 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/collegeTextView"
+        android:id="@+id/register_college_text_view"
         android:text="@string/college"
-        android:layout_below="@+id/RegCity"
+        android:layout_below="@+id/register_city_spinner"
         android:textSize="18.5sp"
         android:layout_marginBottom="20dp"/>
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/RegCollege"
-        android:layout_below="@+id/collegeTextView"
+        android:id="@+id/register_college_spinner"
+        android:layout_below="@+id/register_college_text_view"
         android:textSize="18.5sp"
         android:entries="@array/CollegeArray"
         style="@style/spinner_style"
         android:layout_marginBottom="20dp"
         >
     </Spinner>
-    <com.rey.material.widget.EditText
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/register_reg_no_text_input_layout"
         android:layout_width="match_parent"
-        android:inputType="number"
+        android:layout_below="@+id/register_college_spinner"
         android:layout_height="wrap_content"
-        android:id="@+id/RegNo"
-        style="@style/edittext_style"
-        android:hint="@string/RegN"
-        android:layout_below="@+id/RegCollege"
-        android:textSize="18.5sp"
-        android:layout_marginBottom="20dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_reg_no_edit_text"
+            style="@style/edittext_style"
+            android:hint="@string/RegN"
+            android:textSize="18.5sp"
+            android:layout_marginBottom="20dp" />
+    </android.support.design.widget.TextInputLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/yearTextView"
         android:text="@string/year"
-        android:layout_below="@+id/RegNo"
+        android:layout_below="@+id/register_reg_no_text_input_layout"
         android:textSize="18.5sp"
         android:layout_marginBottom="20dp"/>
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/RegYear"
+        android:id="@+id/register_year_spinner"
         android:layout_below="@+id/yearTextView"
         android:textSize="18.5sp"
         android:entries="@array/YearArray"
@@ -135,9 +160,9 @@
         android:layout_marginBottom="20dp"
         >
     </Spinner>
-    <com.rey.material.widget.Button
-        android:id="@+id/RegButton"
-        android:layout_below="@+id/RegYear"
+    <Button
+        android:id="@+id/register_button"
+        android:layout_below="@+id/register_year_spinner"
         android:layout_centerHorizontal="true"
         android:layout_margin="15dp"
         android:layout_width="150dp"

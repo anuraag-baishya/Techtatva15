@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +28,6 @@ import com.appex.tryproject.R;
 import com.appex.tryproject.model.instagram.InstagramDatum;
 import com.appex.tryproject.resources.Constants;
 import com.google.gson.Gson;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -56,11 +54,6 @@ public class ImageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
         InstagramDatum instagramDatum = new Gson().fromJson(getIntent().getStringExtra(Constants.INSTA_DATA), InstagramDatum.class);
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-        }
         mImageView = (ImageView) findViewById(R.id.image_view);
         final LinearLayout imageDataLinearLayout = (LinearLayout) findViewById(R.id.image_data_linear_layout);
         TextView imageUserTextView = (TextView) findViewById(R.id.image_user_text_view);

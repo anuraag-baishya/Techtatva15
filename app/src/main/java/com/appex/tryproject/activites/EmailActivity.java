@@ -1,20 +1,19 @@
 package com.appex.tryproject.activites;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.appex.tryproject.R;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 
-public class EmailActivity extends ActionBarActivity {
+public class EmailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +22,12 @@ public class EmailActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-        }
-        Button Login = (Button) findViewById(R.id.loginB);
-        Login.setOnClickListener(new View.OnClickListener() {
+        EditText LoginEmailEditText=(EditText)findViewById(R.id.login_email_edit_text);
+        LoginEmailEditText.setError("Required");
+        EditText LoginPasswordEditText=(EditText)findViewById(R.id.login_password_edit_text);
+        LoginPasswordEditText.setError("Required");
+        Button LoginButton = (Button) findViewById(R.id.login_button);
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);

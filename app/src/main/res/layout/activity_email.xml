@@ -18,31 +18,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true">
-        <com.rey.material.widget.EditText
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/login_email_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/loginEmail"
-            android:inputType="textEmailAddress"
-            style="@style/edittext_style"
-            android:hint="@string/email"
-            android:textSize="18.5sp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp" />
-        <com.rey.material.widget.EditText
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_email_edit_text"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email"
+                android:textSize="18.5sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/login_password_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/loginPass"
-            android:textSize="18.5sp"
-            android:layout_below="@+id/loginEmail"
-            android:layout_marginTop="5dp"
-            android:inputType="textPassword"
-            style="@style/edittext_style"
-            android:hint="@string/pass"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/login_email_text_input_layout"
+            android:layout_margin="10dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_password_edit_text"
+                android:textSize="18.5sp"
+                android:layout_marginTop="5dp"
+                android:inputType="textPassword"
+                android:hint="@string/pass"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
+        </android.support.design.widget.TextInputLayout>
         <Button
-            android:layout_below="@+id/loginPass"
-            android:id="@+id/loginB"
+            android:layout_below="@+id/login_password_text_input_layout"
+            android:id="@+id/login_button"
             android:layout_width="150dp"
             android:layout_height="30dp"
             android:textSize="16sp"
