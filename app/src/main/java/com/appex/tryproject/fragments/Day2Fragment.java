@@ -3,7 +3,6 @@ package com.appex.tryproject.fragments;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -17,21 +16,21 @@ import android.widget.ExpandableListView;
 
 import com.appex.tryproject.R;
 import com.appex.tryproject.activites.InstaFeedActivity;
-import com.appex.tryproject.model.events.CatItem;
-import com.appex.tryproject.resources.Constants;
 import com.appex.tryproject.adapters.EventAdapter;
+import com.appex.tryproject.model.events.CatItem;
 import com.appex.tryproject.model.events.RowItem;
+import com.appex.tryproject.resources.Constants;
 
 import java.util.ArrayList;
 
-public class Day1 extends Fragment {
+
+public class Day2Fragment extends Fragment  {
     EventAdapter eventAdapter;
     String logTAG = "";
     ExpandableListView eventListView;
     ArrayList<CatItem> catList;
     String categories[] = Constants.categories, locations[] = Constants.locations, time[] = Constants.time, date[] = Constants.date, contact[] = Constants.contact;
     String names[][] = Constants.event_names;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +73,6 @@ public class Day1 extends Fragment {
             }
         });
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.action_insta){
@@ -82,16 +80,12 @@ public class Day1 extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.day_1, container, false);
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RB.ttf");
-        Typeface typeface2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RL.ttf");
+        View rootView = inflater.inflate(R.layout.fragment_day2, container, false);
+        eventListView = (ExpandableListView) rootView.findViewById(R.id.catListDay2);
         prepareListData();
-        eventListView = (ExpandableListView) rootView.findViewById(R.id.catListDay1);
-        eventAdapter = new EventAdapter(getActivity(), catList, typeface, typeface2);
+        eventAdapter = new EventAdapter(getActivity(), catList);
         eventListView.setAdapter(eventAdapter);
         return rootView;
     }
@@ -118,6 +112,7 @@ public class Day1 extends Fragment {
             eventListView.expandGroup(i);
         }
     }
+
 }
 
 

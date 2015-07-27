@@ -1,7 +1,6 @@
 package com.appex.tryproject.activites;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,9 +15,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.appex.tryproject.R;
+import com.appex.tryproject.adapters.InstaFeedListAdapter;
 import com.appex.tryproject.model.instagram.InstaFeed;
 import com.appex.tryproject.network.APIClient;
-import com.appex.tryproject.adapters.InstaFeedListAdapter;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import retrofit.Callback;
@@ -29,11 +28,9 @@ import retrofit.client.Response;
 public class InstaFeedActivity extends AppCompatActivity{
 
     private static final String TAG=InstaFeedActivity.class.getSimpleName();
-    ListView instaFeedListView;
-    ProgressBar progressBar;
-    SwipeRefreshLayout mSwipeRefreshLayout;
-    Typeface typeface;
-    Typeface typeface2;
+    private ListView mInstaFeedListView;
+    private ProgressBar mProgressBar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +62,8 @@ public class InstaFeedActivity extends AppCompatActivity{
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        typeface=Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/RB.ttf");
-        typeface2 = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/RL.ttf");
-        instaFeedListView = (ListView) findViewById(R.id.insta_feed_list_view);
-        progressBar = (ProgressBar) findViewById(R.id.insta_feed_progress_bar);
+        mInstaFeedListView = (ListView) findViewById(R.id.insta_feed_list_view);
+        mProgressBar = (ProgressBar) findViewById(R.id.insta_feed_progress_bar);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.insta_feed_swipe_refresh);
 
         mSwipeRefreshLayout.setColorSchemeResources(R.color.primary, R.color.primary_dark);
@@ -76,14 +71,14 @@ public class InstaFeedActivity extends AppCompatActivity{
         APIClient.getInstagram().getFeed(new Callback<InstaFeed>() {
             @Override
             public void success(InstaFeed instaFeed, Response response) {
-                instaFeedListView.setAdapter(new InstaFeedListAdapter(getApplicationContext(), instaFeed, typeface, typeface2));
-                instaFeedListView.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
+                mInstaFeedListView.setAdapter(new InstaFeedListAdapter(getApplicationContext(), instaFeed));
+                mInstaFeedListView.setVisibility(View.VISIBLE);
+                mProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                progressBar.setVisibility(View.GONE);
+                mProgressBar.setVisibility(View.GONE);
                 setContentView(R.layout.no_connection_layout);
                 Button retryButton = (Button) findViewById(R.id.retry_button);
                 retryButton.setOnClickListener(new View.OnClickListener() {
@@ -102,16 +97,16 @@ public class InstaFeedActivity extends AppCompatActivity{
                 APIClient.getInstagram().getFeed(new Callback<InstaFeed>() {
                     @Override
                     public void success(InstaFeed instaFeed, Response response) {
-                        InstaFeedListAdapter adapter = new InstaFeedListAdapter(getApplicationContext(), instaFeed,typeface,typeface2);
+                        InstaFeedListAdapter adapter = new InstaFeedListAdapter(getApplicationContext(), instaFeed);
                         adapter.notifyDataSetChanged();
-                        instaFeedListView.setAdapter(adapter);
-                        instaFeedListView.setVisibility(View.VISIBLE);
+                        mInstaFeedListView.setAdapter(adapter);
+                        mInstaFeedListView.setVisibility(View.VISIBLE);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        progressBar.setVisibility(View.GONE);
+                        mProgressBar.setVisibility(View.GONE);
                         mSwipeRefreshLayout.setRefreshing(false);
                         setContentView(R.layout.no_connection_layout);
                         Button retryButton = (Button) findViewById(R.id.retry_button);
@@ -126,7 +121,7 @@ public class InstaFeedActivity extends AppCompatActivity{
             }
         });
 
-        instaFeedListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+        mInstaFeedListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
 
@@ -134,7 +129,7 @@ public class InstaFeedActivity extends AppCompatActivity{
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (firstVisibleItem == 0 && visibleItemCount > 0 && instaFeedListView.getChildAt(0).getTop() >= 0)
+                if (firstVisibleItem == 0 && visibleItemCount > 0 && mInstaFeedListView.getChildAt(0).getTop() >= 0)
                     mSwipeRefreshLayout.setEnabled(true);
                 else mSwipeRefreshLayout.setEnabled(false);
             }

@@ -2,7 +2,6 @@ package com.appex.tryproject.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.appex.tryproject.R;
+import com.appex.tryproject.activites.ImageActivity;
 import com.appex.tryproject.model.instagram.InstaFeed;
 import com.appex.tryproject.model.instagram.InstagramDatum;
-import com.appex.tryproject.activites.ImageActivity;
 import com.appex.tryproject.resources.Constants;
 import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
@@ -27,14 +26,10 @@ public class InstaFeedListAdapter extends BaseAdapter {
     InstaFeed instaFeed;
     Context context;
     LayoutInflater layoutInflater = null;
-    Typeface typeface;
-    Typeface typeface1;
 
-    public InstaFeedListAdapter(Context context, InstaFeed instaFeed, Typeface typeface, Typeface typeface1) {
+    public InstaFeedListAdapter(Context context, InstaFeed instaFeed) {
         this.instaFeed = instaFeed;
         this.context = context;
-        this.typeface=typeface;
-        this.typeface1=typeface1;
     }
 
 
@@ -69,14 +64,10 @@ public class InstaFeedListAdapter extends BaseAdapter {
         final InstagramDatum instagramDatum = getItem(position);
         try {
             viewHolder.instaFeedUsernameTextView.setText("@" + instagramDatum.getUser().getUsername());
-            viewHolder.instaFeedUsernameTextView.setTypeface(typeface);
             Picasso.with(context).load(instagramDatum.getUser().getProfilePicture()).into(viewHolder.instaFeedUserImageView);
             viewHolder.instaFeedTitleTextView.setText(instagramDatum.getCaption().getText());
-            viewHolder.instaFeedTitleTextView.setTypeface(typeface1);
             viewHolder.instaFeedLikesTextView.setText("Likes: " + instagramDatum.getLikes().getCount());
-            viewHolder.instaFeedLikesTextView.setTypeface(typeface1);
             viewHolder.instaFeedCommentsTextView.setText("Comments: " + instagramDatum.getComments().getCount());
-            viewHolder.instaFeedCommentsTextView.setTypeface(typeface1);
             Picasso.with(context).load(instagramDatum.getImages().getStandardResolution().getUrl()).into(viewHolder.instaFeedImageView, new Callback() {
                 @Override
                 public void onSuccess() {

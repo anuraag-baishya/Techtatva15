@@ -1,10 +1,11 @@
 package com.appex.tryproject.activites;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,14 +34,15 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import chipset.potato.Potato;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener,
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    String TAG=MainActivity.class.getSimpleName();
-    private CallbackManager callbackManager;
-    LoginButton loginButton;
+    private static final String TAG=MainActivity.class.getSimpleName();
+    private CallbackManager mCallbackManager;
+    private LoginButton mLoginButton;
     private static final int RC_SIGN_IN = 0;
     private GoogleApiClient mGoogleApiClient;
     private boolean mSignInClicked;
+    private ProgressDialog progressDialog;
     /**
      * A flag indicating that a PendingIntent is in progress and prevents us
      * from starting further intents.
@@ -49,12 +51,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private ConnectionResult mConnectionResult;
 
-    private SignInButton btnSignIn;
+    private SignInButton mBtnSignIn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Signing in...");
+        progressDialog.setCancelable(false);
         setContentView(R.layout.toolbar_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -71,10 +76,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
         }
-        callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends");
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        mCallbackManager = CallbackManager.Factory.create();
+        mLoginButton = (LoginButton) findViewById(R.id.fb_loginbutton);
+        mLoginButton.setReadPermissions("user_friends");
+        mLoginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
@@ -107,7 +112,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         });
         TextView orText = (TextView) findViewById(R.id.optionView);
         orText.setGravity(Gravity.CENTER);
-        Button RegisterButton = (Button) findViewById(R.id.register);
+        Button RegisterButton = (Button) findViewById(R.id.registerActivity_button);
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +120,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        com.rey.material.widget.Button LoginEmail = (com.rey.material.widget.Button) findViewById(R.id.emailLogin);
+        com.rey.material.widget.Button LoginEmail = (com.rey.material.widget.Button) findViewById(R.id.emailActivity_button);
         LoginEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,10 +130,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 finish();
             }
         });
-        btnSignIn = (SignInButton) findViewById(R.id.btn_sign_in);
+        mBtnSignIn = (SignInButton) findViewById(R.id.google_loginbutton);
 
         // Button click listeners
-        btnSignIn.setOnClickListener(this);
+        mBtnSignIn.setOnClickListener(this);
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
@@ -155,6 +160,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             } catch (IntentSender.SendIntentException e) {
                 mIntentInProgress = false;
                 mGoogleApiClient.connect();
+                progressDialog.show();
             }
         }
     }
@@ -171,18 +177,21 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
+                progressDialog.show();
             }
         }
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
+        progressDialog.dismiss();
         Intent intent = new Intent(MainActivity.this, EventActivity.class);
         Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"name", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getDisplayName());
         Potato.potate().Preferences().putSharedPreference(getApplicationContext(),"mode", "google");
         Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "pp", Plus.PeopleApi.getCurrentPerson(mGoogleApiClient).getImage().getUrl());
+
         startActivity(intent);
     }
 
@@ -194,7 +203,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_sign_in:
+            case R.id.google_loginbutton:
                 // Signin button clicked
                 signInWithGplus();
                 break;

@@ -7,11 +7,6 @@
             android:icon="@drawable/ic_contact"
             android:title="@string/result"/>
         <item
-            android:id="@+id/instafeed"
-            android:checked="false"
-            android:icon="@drawable/ic_insta"
-            android:title="@string/instafeed"/>
-        <item
             android:id="@+id/contact"
             android:checked="false"
             android:icon="@drawable/ic_contact"

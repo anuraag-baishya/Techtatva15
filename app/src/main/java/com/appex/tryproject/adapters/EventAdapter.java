@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.appex.tryproject.R;
-import com.appex.tryproject.model.events.RowItem;
 import com.appex.tryproject.model.events.CatItem;
+import com.appex.tryproject.model.events.RowItem;
 
 import java.util.ArrayList;
 
@@ -34,17 +33,13 @@ public class EventAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<CatItem> CatItem;
     private ArrayList<CatItem> CategoryItem;
-    Typeface tf, tf2;
 
-    public EventAdapter(Context context, ArrayList<CatItem> CatItem, Typeface tf, Typeface tf2) {
+    public EventAdapter(Context context, ArrayList<CatItem> CatItem) {
         this.context = context;
         this.CatItem = new ArrayList<CatItem>();
         this.CatItem.addAll(CatItem);
         this.CategoryItem = new ArrayList<CatItem>();
         this.CategoryItem.addAll(CatItem);
-        this.tf = tf;
-        this.tf2 = tf2;
-
     }
 
     @Override
@@ -110,14 +105,7 @@ public class EventAdapter extends BaseExpandableListAdapter {
         holder.textTime.setText(rowItem.getEventTime());
         holder.textDate.setText(rowItem.getEventDate());
         holder.textContact.setText(rowItem.getEventContact());
-        holder.textName.setTypeface(tf);
-        holder.textLocation.setTypeface(tf2);
-        holder.textDate.setTypeface(tf2);
-        holder.textTime.setTypeface(tf2);
-        holder.textContact.setTypeface(tf2);
         holder.textCall.setText(rowItem.getEventCall());
-        holder.textCall.setTypeface(tf2);
-
         return convertView;
     }
 
@@ -155,7 +143,6 @@ public class EventAdapter extends BaseExpandableListAdapter {
         TextView CatHeader = (TextView) convertView
                 .findViewById(R.id.catName);
         CatHeader.setText(catTitle.getCategory());
-        CatHeader.setTypeface(tf);
 
         return convertView;
     }

@@ -26,8 +26,8 @@ public class EmailActivity extends AppCompatActivity {
         LoginEmailEditText.setError("Required");
         EditText LoginPasswordEditText=(EditText)findViewById(R.id.login_password_edit_text);
         LoginPasswordEditText.setError("Required");
-        Button LoginButton = (Button) findViewById(R.id.login_button);
-        LoginButton.setOnClickListener(new View.OnClickListener() {
+        Button LoginButtonEmail = (Button) findViewById(R.id.login_button_email);
+        LoginButtonEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EventActivity.class);

@@ -16,5 +16,5 @@
         android:background="@color/primary"
         android:elevation="4dp"/>
     <include
-        layout="@layout/main"/>
+        layout="@layout/activity_main"/>
 </LinearLayout>

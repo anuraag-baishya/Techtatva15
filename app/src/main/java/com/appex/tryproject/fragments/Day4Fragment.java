@@ -3,7 +3,6 @@ package com.appex.tryproject.fragments;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -17,14 +16,14 @@ import android.widget.ExpandableListView;
 
 import com.appex.tryproject.R;
 import com.appex.tryproject.activites.InstaFeedActivity;
+import com.appex.tryproject.adapters.EventAdapter;
 import com.appex.tryproject.model.events.CatItem;
 import com.appex.tryproject.model.events.RowItem;
 import com.appex.tryproject.resources.Constants;
-import com.appex.tryproject.adapters.EventAdapter;
 
 import java.util.ArrayList;
 
-public class Day4 extends Fragment {
+public class Day4Fragment extends Fragment {
     EventAdapter eventAdapter;
     String logTAG = "";
     ExpandableListView eventListView;
@@ -85,10 +84,8 @@ public class Day4 extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_day4, container, false);
         eventListView = (ExpandableListView) rootView.findViewById(R.id.catListDay4);
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RB.ttf");
-        Typeface typeface2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/RL.ttf");
         prepareListData();
-        eventAdapter = new EventAdapter(getActivity(), catList, typeface, typeface2);
+        eventAdapter = new EventAdapter(getActivity(), catList);
         eventListView.setAdapter(eventAdapter);
         return rootView;
     }

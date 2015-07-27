@@ -11,40 +11,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appex.tryproject.R;
-import com.appex.tryproject.model.events.DrawerItem;
-import com.appex.tryproject.widgets.SlidingTabLayout;
 import com.appex.tryproject.adapters.ViewPagerAdapter;
+import com.appex.tryproject.widgets.SlidingTabLayout;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 import chipset.potato.Potato;
 
 public class EventActivity extends AppCompatActivity {
 
-    private static String TAG = EventActivity.class.getSimpleName();
+    private static String sTAG = EventActivity.class.getSimpleName();
 
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
-    ViewPager pager;
-    ViewPagerAdapter VPadapter;
-    String msg = "clicked";
-    android.support.v7.app.ActionBar actionBar;
-    SlidingTabLayout tabs;
-    CharSequence Titles[] = {"Day1", "Day2", "Day3", "Day 4"};
-    int Numboftabs = 4;
-    boolean doubleBackToExitPressedOnce = false;
-    ArrayList<DrawerItem> mNavItems = new ArrayList<>();
+    private NavigationView mNavigationView;
+    private ViewPager mViewPager;
+    private ViewPagerAdapter mViewPagerAdapter;
+    private android.support.v7.app.ActionBar mActionBar;
+    private SlidingTabLayout mSlidingTabLayout;
+    public CharSequence Titles[] = {"Day1", "Day2", "Day3", "Day 4"};
+    public int Numboftabs = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +43,8 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        navigationView=(NavigationView)findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        mNavigationView=(NavigationView)findViewById(R.id.navigation_view);
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 if(menuItem.isChecked())
@@ -64,9 +55,6 @@ public class EventActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.result:
                         startActivity(new Intent(getApplicationContext(),ResultActivity.class));
-                        return true;
-                    case R.id.instafeed:
-                        startActivity(new Intent(getApplicationContext(),InstaFeedActivity.class));
                         return true;
                     case R.id.logout:
                         LoginManager.getInstance().logOut();
@@ -96,23 +84,23 @@ public class EventActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar = getSupportActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_opened, R.string.drawer_closed);
-        VPadapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(VPadapter);
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true);
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), Titles, Numboftabs);
+        mViewPager = (ViewPager) findViewById(R.id.ViewPager);
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.SlidingTabs);
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.material_blue_grey_950);
+                return getResources().getColor(R.color.white);
             }
         });
-        tabs.setSelectedIndicatorColors(R.color.white);
+        mSlidingTabLayout.setSelectedIndicatorColors(R.color.white);
         // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
+        mSlidingTabLayout.setViewPager(mViewPager);
     }
 
     @Override

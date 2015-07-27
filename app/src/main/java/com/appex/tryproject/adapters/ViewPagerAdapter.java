@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.appex.tryproject.fragments.Day1;
-import com.appex.tryproject.fragments.Day2;
-import com.appex.tryproject.fragments.Day3;
-import com.appex.tryproject.fragments.Day4;
+import com.appex.tryproject.fragments.Day1Fragment;
+import com.appex.tryproject.fragments.Day2Fragment;
+import com.appex.tryproject.fragments.Day3Fragment;
+import com.appex.tryproject.fragments.Day4Fragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -31,16 +31,16 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         if (position == 0) // if the position is 0 we are returning the First tab
         {
-            Day1 day1 = new Day1();
+            Day1Fragment day1 = new Day1Fragment();
             return day1;
         } else if (position == 1) {
-            Day2 day2 = new Day2();
+            Day2Fragment day2 = new Day2Fragment();
             return day2;
         } else if (position == 2) {
-            Day3 day3 = new Day3();
+            Day3Fragment day3 = new Day3Fragment();
             return day3;
         } else {
-            Day4 day4 = new Day4();
+            Day4Fragment day4 = new Day4Fragment();
             return day4;
         }
     }

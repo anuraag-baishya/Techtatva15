@@ -14,7 +14,7 @@
         android:background="@color/primary"
         android:elevation="4dp"/>
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/Result_ListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:divider="@android:color/transparent"/>

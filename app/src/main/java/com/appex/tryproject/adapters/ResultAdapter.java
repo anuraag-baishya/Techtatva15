@@ -1,12 +1,8 @@
 package com.appex.tryproject.adapters;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.appex.tryproject.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @SuppressLint("InflateParams")
 public class ResultAdapter extends BaseAdapter {
@@ -64,14 +63,9 @@ public class ResultAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) arg1.getTag();
         }
-        Typeface typeface = Typeface.createFromAsset(Cont.getAssets(), "fonts/RB.ttf");
-        Typeface tf2 = Typeface.createFromAsset(Cont.getAssets(), "fonts/RL.ttf");
         holder.name.setText((String) map.get("Event"));
-        holder.name.setTypeface(typeface);
         holder.category.setText((String) map.get("Category"));
-        holder.category.setTypeface(typeface);
         holder.res.setText((String) map.get("Result"));
-        holder.res.setTypeface(tf2);
         return arg1;
 
     }
