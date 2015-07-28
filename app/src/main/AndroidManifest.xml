@@ -9,11 +9,11 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name=".applications.InitApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name=".applications.InitApplication">
+        android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />

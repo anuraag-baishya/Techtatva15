@@ -1,7 +1,6 @@
 package com.appex.tryproject.activites;
 
 import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,7 +18,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.appex.tryproject.R;
 import com.appex.tryproject.adapters.ResultAdapter;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,11 +47,6 @@ public class ResultActivity extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(ResultActivity.this);
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-        }
         resultList = new ArrayList<HashMap<String, String>>();
         loadResults();
         mResultView=(ListView)findViewById(R.id.Result_ListView);

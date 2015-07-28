@@ -29,22 +29,22 @@ public class EventAdapter extends BaseExpandableListAdapter {
 
     }
 
-    private ViewHolder holder;
-    private Context context;
-    private ArrayList<CatItem> CatItem;
-    private ArrayList<CatItem> CategoryItem;
+    private ViewHolder mViewHolder;
+    private Context mContext;
+    private ArrayList<CatItem> mCatItem;
+    private ArrayList<CatItem> mCategoryItem;
 
     public EventAdapter(Context context, ArrayList<CatItem> CatItem) {
-        this.context = context;
-        this.CatItem = new ArrayList<CatItem>();
-        this.CatItem.addAll(CatItem);
-        this.CategoryItem = new ArrayList<CatItem>();
-        this.CategoryItem.addAll(CatItem);
+        mContext = context;
+        mCatItem = new ArrayList<CatItem>();
+        mCatItem.addAll(CatItem);
+        mCategoryItem = new ArrayList<CatItem>();
+        mCategoryItem.addAll(CatItem);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        ArrayList<RowItem> EventItem = CatItem.get(groupPosition).getEventItem();
+        ArrayList<RowItem> EventItem = mCatItem.get(groupPosition).getEventItem();
         return EventItem.get(childPosititon);
     }
 
@@ -58,34 +58,34 @@ public class EventAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) this.context
+            LayoutInflater inflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.event_item, null);
-            holder = new ViewHolder();
-            holder.textName = (TextView) convertView.findViewById(R.id.eventName);
-            holder.textLocation = (TextView) convertView.findViewById(R.id.eventLocation);
-            holder.textTime = (TextView) convertView.findViewById(R.id.eventTime);
-            holder.textDate = (TextView) convertView.findViewById(R.id.eventDate);
-            holder.textContact = (TextView) convertView.findViewById(R.id.eventContact);
-            holder.textCall=(TextView)convertView.findViewById(R.id.contactCall);
-            holder.textContact.setOnClickListener(new View.OnClickListener() {
+            mViewHolder = new ViewHolder();
+            mViewHolder.textName = (TextView) convertView.findViewById(R.id.eventName);
+            mViewHolder.textLocation = (TextView) convertView.findViewById(R.id.eventLocation);
+            mViewHolder.textTime = (TextView) convertView.findViewById(R.id.eventTime);
+            mViewHolder.textDate = (TextView) convertView.findViewById(R.id.eventDate);
+            mViewHolder.textContact = (TextView) convertView.findViewById(R.id.eventContact);
+            mViewHolder.textCall=(TextView)convertView.findViewById(R.id.contactCall);
+            mViewHolder.textContact.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (holder.textCall.getVisibility() == View.GONE)
-                        holder.textCall.setVisibility(View.VISIBLE);
+                    if (mViewHolder.textCall.getVisibility() == View.GONE)
+                        mViewHolder.textCall.setVisibility(View.VISIBLE);
                     else
-                        holder.textCall.setVisibility(View.GONE);
+                        mViewHolder.textCall.setVisibility(View.GONE);
                 }
             });
-            holder.textCall.setOnClickListener(new View.OnClickListener() {
+            mViewHolder.textCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                     final String finalContact = "999";
                     builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            callIntent(context, finalContact);
+                            callIntent(mContext, finalContact);
                         }
                     });
                     builder.setNegativeButton("NO", null);
@@ -94,35 +94,35 @@ public class EventAdapter extends BaseExpandableListAdapter {
                     builder.show();
                 }
             });
-            convertView.setTag(holder);
+            convertView.setTag(mViewHolder);
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            mViewHolder = (ViewHolder) convertView.getTag();
         }
 
         RowItem rowItem = (RowItem) getChild(groupPosition, childPosition);
-        holder.textName.setText(rowItem.getEventName());
-        holder.textLocation.setText(rowItem.getEventLocation());
-        holder.textTime.setText(rowItem.getEventTime());
-        holder.textDate.setText(rowItem.getEventDate());
-        holder.textContact.setText(rowItem.getEventContact());
-        holder.textCall.setText(rowItem.getEventCall());
+        mViewHolder.textName.setText(rowItem.getEventName());
+        mViewHolder.textLocation.setText(rowItem.getEventLocation());
+        mViewHolder.textTime.setText(rowItem.getEventTime());
+        mViewHolder.textDate.setText(rowItem.getEventDate());
+        mViewHolder.textContact.setText(rowItem.getEventContact());
+        mViewHolder.textCall.setText(rowItem.getEventCall());
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        ArrayList<RowItem> eventList = CatItem.get(groupPosition).getEventItem();
+        ArrayList<RowItem> eventList = mCatItem.get(groupPosition).getEventItem();
         return eventList.size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this.CatItem.get(groupPosition);
+        return this.mCatItem.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return this.CatItem.size();
+        return this.mCatItem.size();
     }
 
     @Override
@@ -135,7 +135,7 @@ public class EventAdapter extends BaseExpandableListAdapter {
                              View convertView, ViewGroup parent) {
         CatItem catTitle = (CatItem) getGroup(groupPosition);
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this.context
+            LayoutInflater infalInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.cat_item, null);
         }
@@ -159,11 +159,11 @@ public class EventAdapter extends BaseExpandableListAdapter {
 
     public void filterData(String Query) {
         Query = Query.toLowerCase();
-        CatItem.clear();
+        mCatItem.clear();
         if (Query.isEmpty()) {
-            CatItem.addAll(CategoryItem);
+            mCatItem.addAll(mCategoryItem);
         } else {
-            for (CatItem catItem : CategoryItem) {
+            for (CatItem catItem : mCategoryItem) {
                 ArrayList<RowItem> eventList = catItem.getEventItem();
                 ArrayList<RowItem> eventList2 = new ArrayList<RowItem>();
                 for (RowItem event : eventList) {
@@ -173,9 +173,9 @@ public class EventAdapter extends BaseExpandableListAdapter {
                 }
                 if (eventList2.size() > 0) {
                     CatItem newCatItem = new CatItem(catItem.getCategory(), eventList2);
-                    CatItem.add(newCatItem);
+                    mCatItem.add(newCatItem);
                 } else if (catItem.getCategory().toLowerCase().contains(Query)) {
-                    CatItem.add(catItem);
+                    mCatItem.add(catItem);
                 }
             }
         }

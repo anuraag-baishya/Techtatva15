@@ -18,7 +18,6 @@ import com.appex.tryproject.R;
 import com.appex.tryproject.adapters.InstaFeedListAdapter;
 import com.appex.tryproject.model.instagram.InstaFeed;
 import com.appex.tryproject.network.APIClient;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -35,11 +34,6 @@ public class InstaFeedActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().setElevation(0f);
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-        }
         loadInstaFeed();
     }
 

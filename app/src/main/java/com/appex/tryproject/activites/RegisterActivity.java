@@ -21,7 +21,6 @@ import java.util.Calendar;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private DatePicker mDatePicker;
     private Calendar mCalendar;
     private TextView mDateView;
     private int mYear, mMonth, mDay;

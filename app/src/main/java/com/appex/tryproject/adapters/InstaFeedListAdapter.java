@@ -23,24 +23,24 @@ import com.squareup.picasso.Picasso;
  * Created by MAHE on 14-Jul-15.
  */
 public class InstaFeedListAdapter extends BaseAdapter {
-    InstaFeed instaFeed;
-    Context context;
-    LayoutInflater layoutInflater = null;
+    InstaFeed mInstaFeed;
+    Context mContext;
+    LayoutInflater mLayoutInflater = null;
 
     public InstaFeedListAdapter(Context context, InstaFeed instaFeed) {
-        this.instaFeed = instaFeed;
-        this.context = context;
+        mInstaFeed = instaFeed;
+        mContext = context;
     }
 
 
     @Override
     public int getCount() {
-        return instaFeed.getData().size();
+        return mInstaFeed.getData().size();
     }
 
     @Override
     public InstagramDatum getItem(int position) {
-        return instaFeed.getData().get(position);
+        return mInstaFeed.getData().get(position);
     }
 
     @Override
@@ -52,10 +52,10 @@ public class InstaFeedListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, final ViewGroup parent) {
 
         if (convertView == null) {
-            if (layoutInflater == null) {
-                layoutInflater = LayoutInflater.from(context);
+            if (mLayoutInflater == null) {
+                mLayoutInflater = LayoutInflater.from(mContext);
             }
-            convertView = layoutInflater.inflate(R.layout.insta_feed_layout, parent, false);
+            convertView = mLayoutInflater.inflate(R.layout.insta_feed_layout, parent, false);
             ViewHolder viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
@@ -64,11 +64,11 @@ public class InstaFeedListAdapter extends BaseAdapter {
         final InstagramDatum instagramDatum = getItem(position);
         try {
             viewHolder.instaFeedUsernameTextView.setText("@" + instagramDatum.getUser().getUsername());
-            Picasso.with(context).load(instagramDatum.getUser().getProfilePicture()).into(viewHolder.instaFeedUserImageView);
+            Picasso.with(mContext).load(instagramDatum.getUser().getProfilePicture()).into(viewHolder.instaFeedUserImageView);
             viewHolder.instaFeedTitleTextView.setText(instagramDatum.getCaption().getText());
             viewHolder.instaFeedLikesTextView.setText("Likes: " + instagramDatum.getLikes().getCount());
             viewHolder.instaFeedCommentsTextView.setText("Comments: " + instagramDatum.getComments().getCount());
-            Picasso.with(context).load(instagramDatum.getImages().getStandardResolution().getUrl()).into(viewHolder.instaFeedImageView, new Callback() {
+            Picasso.with(mContext).load(instagramDatum.getImages().getStandardResolution().getUrl()).into(viewHolder.instaFeedImageView, new Callback() {
                 @Override
                 public void onSuccess() {
                     viewHolder.instaFeedProgressBar.setVisibility(View.GONE);
@@ -84,7 +84,7 @@ public class InstaFeedListAdapter extends BaseAdapter {
             viewHolder.instaFeedImageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(context, ImageActivity.class)
+                    mContext.startActivity(new Intent(mContext, ImageActivity.class)
                             .putExtra(Constants.INSTA_DATA, new Gson().toJson(instagramDatum)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
             });

@@ -23,26 +23,19 @@ import com.appex.tryproject.resources.Constants;
 
 import java.util.ArrayList;
 
-public class Day3Fragment extends Fragment {
-    EventAdapter eventAdapter;
-    String logTAG = "";
-    ExpandableListView eventListView;
-    ArrayList<CatItem> catList;
-    String categories[] = Constants.categories, locations[] = Constants.locations, time[] = Constants.time, date[] = Constants.date, contact[] = Constants.contact;
-    String names[][] = Constants.event_names;
+public class DayFragment extends Fragment {
+    EventAdapter mEventAdapter;
+    ExpandableListView mEventListView;
+    ArrayList<CatItem> mCatList;
+    String mCategories[] = Constants.categories, locations[] = Constants.locations, time[] = Constants.time, date[] = Constants.date, contact[] = Constants.contact;
+    String mEventNames[][] = Constants.event_names;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()== R.id.action_insta){
-            startActivity(new Intent(getActivity(),InstaFeedActivity.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.day1, menu);
@@ -55,7 +48,7 @@ public class Day3Fragment extends Fragment {
         search.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                eventAdapter.filterData(query);
+                mEventAdapter.filterData(query);
                 if (!query.isEmpty()) {
                     expandAll();
                 }
@@ -64,7 +57,7 @@ public class Day3Fragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String query) {
-                eventAdapter.filterData(query);
+                mEventAdapter.filterData(query);
                 if (!query.isEmpty()) {
                     expandAll();
                 }
@@ -74,43 +67,54 @@ public class Day3Fragment extends Fragment {
         search.setOnCloseListener(new android.support.v7.widget.SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                eventAdapter.filterData("");
+                mEventAdapter.filterData("");
                 return false;
             }
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_insta){
+            startActivity(new Intent(getActivity(),InstaFeedActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_day3, container, false);
-        eventListView = (ExpandableListView) rootView.findViewById(R.id.catListDay3);
+        View rootView = inflater.inflate(R.layout.fragment_day, container, false);
         prepareListData();
-        eventAdapter = new EventAdapter(getActivity(), catList);
-        eventListView.setAdapter(eventAdapter);
+        mEventListView = (ExpandableListView) rootView.findViewById(R.id.category_expandable_list_view);
+        mEventAdapter = new EventAdapter(getActivity(), mCatList);
+        mEventListView.setAdapter(mEventAdapter);
         return rootView;
     }
 
     private void prepareListData() {
 
-        catList = new ArrayList<CatItem>();
-        for (int i = 0; i < categories.length; i++) {
-            RowItem Item1 = new RowItem(names[i][0], locations[0], time[0], time[0], contact[0],"999");
-            RowItem Item2 = new RowItem(names[i][1], locations[1], time[1], time[1], contact[1],"999");
-            RowItem Item3 = new RowItem(names[i][2], locations[2], time[2], time[2], contact[2],"999");
+        mCatList = new ArrayList<CatItem>();
+        for (int i = 0; i < mCategories.length; i++) {
+            RowItem Item1 = new RowItem(mEventNames[i][0], locations[0], time[0], time[0], contact[0],"999");
+            RowItem Item2 = new RowItem(mEventNames[i][1], locations[1], time[1], time[1], contact[1],"999");
+            RowItem Item3 = new RowItem(mEventNames[i][2], locations[2], time[2], time[2], contact[2],"999");
             ArrayList<RowItem> Row1 = new ArrayList<RowItem>();
             Row1.add(Item1);
             Row1.add(Item2);
             Row1.add(Item3);
-            CatItem catItem = new CatItem(categories[i], Row1);
-            catList.add(catItem);
+            CatItem catItem = new CatItem(mCategories[i], Row1);
+            mCatList.add(catItem);
         }
     }
 
     private void expandAll() {
-        int count = eventAdapter.getGroupCount();
+        int count = mEventAdapter.getGroupCount();
         for (int i = 0; i < count; i++) {
-            eventListView.expandGroup(i);
+            mEventListView.expandGroup(i);
         }
     }
-
 }
+
+
+

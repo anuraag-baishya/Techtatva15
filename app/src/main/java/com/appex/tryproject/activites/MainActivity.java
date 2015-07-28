@@ -30,7 +30,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import chipset.potato.Potato;
 
@@ -71,11 +70,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
         updateWithToken(AccessToken.getCurrentAccessToken());
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(getResources().getColor(R.color.primary_dark));
-        }
         mCallbackManager = CallbackManager.Factory.create();
         mLoginButton = (LoginButton) findViewById(R.id.fb_loginbutton);
         mLoginButton.setReadPermissions("user_friends");
@@ -120,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-        com.rey.material.widget.Button LoginEmail = (com.rey.material.widget.Button) findViewById(R.id.emailActivity_button);
+        Button LoginEmail = (Button) findViewById(R.id.emailActivity_button);
         LoginEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

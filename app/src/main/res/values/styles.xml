@@ -11,11 +11,6 @@
     <style name="spinner_style" >
     <item name="android:background">@drawable/spinner_back</item>
     </style>
-    <style name="edittext_style" parent="Material.Widget.EditText">
-        <item name="et_labelTextColor">@color/primary_dark</item>
-        <item name="android:textColorHint">@color/primary_light</item>
-        <item name="et_dividerColor">@color/primary</item>
-    </style>
     <style name="buttong">
         <item name="android:background">@drawable/buttonstyleg</item>
     </style>

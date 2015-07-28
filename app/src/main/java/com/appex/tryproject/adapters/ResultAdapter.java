@@ -22,24 +22,24 @@ public class ResultAdapter extends BaseAdapter {
         TextView res;
     }
 
-    private ViewHolder holder;
-    ArrayList<HashMap<String, String>> Data = new ArrayList<HashMap<String, String>>();
-    Context Cont;
+    private ViewHolder mViewHolder;
+    ArrayList<HashMap<String, String>> mResultList = new ArrayList<HashMap<String, String>>();
+    Context mContext;
 
     public ResultAdapter(Context context,
-                         ArrayList<HashMap<String, String>> data) {
-        Cont = context;
-        Data = data;
+                         ArrayList<HashMap<String, String>> resultList) {
+        mContext = context;
+        mResultList = resultList;
     }
 
     @Override
     public int getCount() {
-        return Data.size();
+        return mResultList.size();
     }
 
     @Override
     public Object getItem(int arg0) {
-        return Data.get(arg0);
+        return mResultList.get(arg0);
     }
 
     @Override
@@ -51,21 +51,21 @@ public class ResultAdapter extends BaseAdapter {
     public View getView(int arg0, View arg1, ViewGroup arg2) {
         HashMap<String, String> map = new HashMap<String, String>();
         final LayoutInflater mInflater = (LayoutInflater)
-                Cont.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        map = Data.get(arg0);
+                mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        map = mResultList.get(arg0);
         if (arg1 == null) {
             arg1 = mInflater.inflate(R.layout.res_item, null);
-            holder = new ViewHolder();
-            holder.name = (TextView) arg1.findViewById(R.id.resultName);
-            holder.category = (TextView) arg1.findViewById(R.id.resultCategory);
-            holder.res = (TextView) arg1.findViewById(R.id.resultRes);
-            arg1.setTag(holder);
+            mViewHolder = new ViewHolder();
+            mViewHolder.name = (TextView) arg1.findViewById(R.id.resultName);
+            mViewHolder.category = (TextView) arg1.findViewById(R.id.resultCategory);
+            mViewHolder.res = (TextView) arg1.findViewById(R.id.resultRes);
+            arg1.setTag(mViewHolder);
         } else {
-            holder = (ViewHolder) arg1.getTag();
+            mViewHolder = (ViewHolder) arg1.getTag();
         }
-        holder.name.setText((String) map.get("Event"));
-        holder.category.setText((String) map.get("Category"));
-        holder.res.setText((String) map.get("Result"));
+        mViewHolder.name.setText((String) map.get("Event"));
+        mViewHolder.category.setText((String) map.get("Category"));
+        mViewHolder.res.setText((String) map.get("Result"));
         return arg1;
 
     }

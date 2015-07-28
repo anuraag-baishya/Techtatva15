@@ -3,60 +3,32 @@ package com.appex.tryproject.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
-import com.appex.tryproject.fragments.Day1Fragment;
-import com.appex.tryproject.fragments.Day2Fragment;
-import com.appex.tryproject.fragments.Day3Fragment;
-import com.appex.tryproject.fragments.Day4Fragment;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-
-    CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
-    int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
-
-
-    // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(FragmentManager fm, CharSequence mTitles[], int mNumbOfTabsumb) {
-        super(fm);
-
-        this.Titles = mTitles;
-        this.NumbOfTabs = mNumbOfTabsumb;
-
+public class ViewPagerAdapter extends FragmentPagerAdapter {
+    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+    public ViewPagerAdapter(FragmentManager fragmentManager){
+        super(fragmentManager);
     }
-
-    //This method return the fragment for the every position in the View Pager
     @Override
-    public Fragment getItem(int position) {
-
-        if (position == 0) // if the position is 0 we are returning the First tab
-        {
-            Day1Fragment day1 = new Day1Fragment();
-            return day1;
-        } else if (position == 1) {
-            Day2Fragment day2 = new Day2Fragment();
-            return day2;
-        } else if (position == 2) {
-            Day3Fragment day3 = new Day3Fragment();
-            return day3;
-        } else {
-            Day4Fragment day4 = new Day4Fragment();
-            return day4;
-        }
+    public Fragment getItem(int position){
+        return mFragmentList.get(position);
     }
-
-    // This method return the titles for the Tabs in the Tab Strip
-
     @Override
-    public CharSequence getPageTitle(int position) {
-        return Titles[position];
+    public int getCount(){
+        return mFragmentList.size();
     }
-
-    // This method return the Number of tabs for the tabs Strip
-
+    public void addFragment(Fragment fragment,String title){
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
+    }
     @Override
-    public int getCount() {
-        return NumbOfTabs;
+    public CharSequence getPageTitle(int position){
+        return mFragmentTitleList.get(position);
     }
 }
 
