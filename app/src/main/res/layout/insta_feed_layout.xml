@@ -1,98 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="5dp"
-    android:alpha="0.8"
-    app:cardUseCompatPadding="true"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:alpha="0.8"
+    app:cardElevation="5dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/insta_feed_user_image_view"
-                android:src="@drawable/ic_launcher"
-                android:padding="10dp"
-                android:gravity="center"
-                android:layout_gravity="center"
                 android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
                 android:layout_weight="0.3"
-                android:layout_height="80dp" />
+                android:gravity="center"
+                android:padding="10dp"
+                android:src="@drawable/ic_launcher" />
 
             <TextView
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textSize="20sp"
-                android:gravity="left"
-                android:textColor="@color/black"
                 android:id="@+id/insta_feed_username_text_view"
-                android:padding="10dp"
-                tools:text="TEST TEXT"
-                android:layout_weight="0.7"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.7"
+                android:gravity="left"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="TEST TEXT" />
         </LinearLayout>
 
         <ProgressBar
             android:id="@+id/insta_feed_progress_bar"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center" />
 
         <ImageView
             android:id="@+id/insta_feed_image_view"
-            android:src="@drawable/ic_launcher"
-            android:padding="16dp"
-            android:gravity="center"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="16dp"
+            android:src="@drawable/ic_launcher"
             android:visibility="gone" />
 
         <TextView
-            android:textStyle="italic"
-            android:layout_gravity="center"
-            android:textSize="17sp"
-            android:gravity="start|left|center_vertical"
-            android:textColor="@color/black"
             android:id="@+id/insta_feed_title_text_view"
-            android:padding="10dp"
-            tools:text="TEST TEXT"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="start|left|center_vertical"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="italic"
+            tools:text="TEST TEXT" />
 
         <TextView
-            android:gravity="start|left|center_vertical"
+            android:id="@+id/insta_feed_likes_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_likes"
             android:drawableStart="@drawable/ic_likes"
-            android:textSize="15sp"
-            android:textColor="#7f8c8d"
-            android:id="@+id/insta_feed_likes_text_view"
+            android:gravity="start|left|center_vertical"
             android:padding="6dp"
-            tools:text="TEST TEXT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textColor="#7f8c8d"
+            android:textSize="15sp"
+            tools:text="TEST TEXT" />
 
         <TextView
-            android:gravity="start|left|center_vertical"
+            android:id="@+id/insta_feed_comments_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_comments"
             android:drawableStart="@drawable/ic_comments"
-            android:textSize="15sp"
-            android:textColor="#7f8c8d"
-            android:id="@+id/insta_feed_comments_text_view"
+            android:gravity="start|left|center_vertical"
             android:padding="6dp"
-            tools:text="TEST TEXT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textColor="#7f8c8d"
+            android:textSize="15sp"
+            tools:text="TEST TEXT" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

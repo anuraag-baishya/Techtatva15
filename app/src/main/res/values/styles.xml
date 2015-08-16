@@ -1,25 +1,15 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FF5722</item>
-        <item name="colorPrimaryDark">#E64A19</item>
-        <item name="colorAccent">#212121</item>
-        <item name="android:fitsSystemWindows">true</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
-    <style name="spinner_style" >
-    <item name="android:background">@drawable/spinner_back</item>
-    </style>
-    <style name="buttong">
-        <item name="android:background">@drawable/buttonstyleg</item>
-    </style>
-    <style name="EventTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FF5722</item>
-        <item name="colorPrimaryDark">#E64A19</item>
-        <item name="colorAccent">#212121</item>
-        <item name="android:fitsSystemWindows">true</item>
+
+    <style name="BlackTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/black</item>
     </style>
 
 </resources>

@@ -4,19 +4,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_r"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:background="@color/primary"
-        android:elevation="4dp"/>
+        app:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
     <ListView
         android:id="@+id/Result_ListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@android:color/transparent"/>
+        android:divider="@android:color/transparent" />
 
 </LinearLayout>
