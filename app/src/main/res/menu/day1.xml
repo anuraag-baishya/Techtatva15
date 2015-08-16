@@ -10,4 +10,10 @@
         android:icon="@drawable/ic_insta"
         android:title="instafeed"
         yourapp:showAsAction="always"/>
+    <item android:id="@+id/action_results" android:title="@string/result"
+        android:orderInCategory="100" yourapp:showAsAction="never" />
+    <item android:id="@+id/action_developers" android:title="@string/developers"
+        android:orderInCategory="100" yourapp:showAsAction="never" />
+    <item android:id="@+id/action_contact" android:title="@string/contact"
+        android:orderInCategory="100" yourapp:showAsAction="never" />
 </menu>

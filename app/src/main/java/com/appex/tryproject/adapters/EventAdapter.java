@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appex.tryproject.R;
@@ -26,7 +27,8 @@ public class EventAdapter extends BaseExpandableListAdapter {
         TextView textDate;
         TextView textContact;
         TextView textCall;
-
+        TextView textFav;
+        ImageView imageFav;
     }
 
     private ViewHolder mViewHolder;
@@ -68,6 +70,8 @@ public class EventAdapter extends BaseExpandableListAdapter {
             mViewHolder.textDate = (TextView) convertView.findViewById(R.id.eventDate);
             mViewHolder.textContact = (TextView) convertView.findViewById(R.id.eventContact);
             mViewHolder.textCall=(TextView)convertView.findViewById(R.id.contactCall);
+            mViewHolder.textFav=(TextView)convertView.findViewById(R.id.favorite);
+            mViewHolder.imageFav=(ImageView)convertView.findViewById(R.id.favoriteImageView);
             mViewHolder.textContact.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -94,6 +98,12 @@ public class EventAdapter extends BaseExpandableListAdapter {
                     builder.show();
                 }
             });
+            mViewHolder.textFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mViewHolder.imageFav.setImageResource(R.drawable.ic_likes);
+                }
+            });
             convertView.setTag(mViewHolder);
         } else {
             mViewHolder = (ViewHolder) convertView.getTag();
@@ -106,6 +116,8 @@ public class EventAdapter extends BaseExpandableListAdapter {
         mViewHolder.textDate.setText(rowItem.getEventDate());
         mViewHolder.textContact.setText(rowItem.getEventContact());
         mViewHolder.textCall.setText(rowItem.getEventCall());
+        mViewHolder.textFav.setText("Add to favorites");
+        mViewHolder.imageFav.setImageResource(R.drawable.ic_like_white);
         return convertView;
     }
 

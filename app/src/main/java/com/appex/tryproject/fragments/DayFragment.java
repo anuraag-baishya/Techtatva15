@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 
 import com.appex.tryproject.R;
@@ -71,6 +72,7 @@ public class DayFragment extends Fragment {
                 return false;
             }
         });
+        search.setSubmitButtonEnabled(false);
     }
 
     @Override
@@ -89,6 +91,16 @@ public class DayFragment extends Fragment {
         mEventListView = (ExpandableListView) rootView.findViewById(R.id.category_expandable_list_view);
         mEventAdapter = new EventAdapter(getActivity(), mCatList);
         mEventListView.setAdapter(mEventAdapter);
+        mEventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                int count = mEventAdapter.getGroupCount();
+                for (int c = 0; c < count; c++) {
+                    mEventListView.collapseGroup(c);
+                }
+                mEventListView.expandGroup(i);
+            }
+        });
         return rootView;
     }
 
@@ -107,7 +119,12 @@ public class DayFragment extends Fragment {
             mCatList.add(catItem);
         }
     }
-
+    public void collapseAll(){
+        int count = 4;
+        for (int i = 0; i < count; i++) {
+            mEventListView.collapseGroup(i);
+        }
+    }
     private void expandAll() {
         int count = mEventAdapter.getGroupCount();
         for (int i = 0; i < count; i++) {
