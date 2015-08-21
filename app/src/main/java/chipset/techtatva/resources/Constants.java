@@ -9,7 +9,8 @@ public class Constants {
     public static String EVENT_DATE = "Date";
     public static String EVENT_CONTACT = "Contact";
 
-    public static String URL_EVENTS = "http://schedule.techtatva.in/";
+    public static String URL_CATEGORIES="http://api.techtatva.in/categories";
+    public static String URL_EVENTS = "http://api.techtatva.in/events";
     public static String URL_TMC = "http://tmc.techtatva.in/";
     public static String URL_RESULTS = "http://results.techtatva.in/";
     public static String URL_BLOG = "http://blog.techtatva.in/";
@@ -20,6 +21,7 @@ public class Constants {
     public static String PREF_DAY = "day";
 
     public static String INSTA_DATA = "instaData";
+
 
     public static final String[] categories = {
             "Acumen",

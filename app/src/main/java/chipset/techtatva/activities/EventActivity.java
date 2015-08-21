@@ -48,6 +48,9 @@ public class EventActivity extends AppCompatActivity {
             case R.id.action_contact:
                 Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.action_allcats:
+                startActivity(new Intent(getApplicationContext(),AllEvents.class));
+                break;
         }
         return super.onOptionsItemSelected(menuItem);
     }

@@ -20,7 +20,6 @@ import chipset.techtatva.model.events.RowItem;
 
 public class EventAdapter extends BaseExpandableListAdapter {
     private class ViewHolder {
-        RowItem item;
         TextView textName;
         TextView textLocation;
         TextView textTime;
