@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:alpha="0.8"
-    app:cardElevation="5dp"
+    app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
 
     <TextView

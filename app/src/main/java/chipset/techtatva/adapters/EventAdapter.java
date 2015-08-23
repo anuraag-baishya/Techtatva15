@@ -29,7 +29,6 @@ public class EventAdapter extends BaseExpandableListAdapter {
         TextView textFav;
         ImageView imageFav;
     }
-
     private ViewHolder mViewHolder;
     private Context mContext;
     private ArrayList<CatItem> mCatItem;
@@ -151,10 +150,8 @@ public class EventAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.cat_item, null);
         }
 
-        TextView CatHeader = (TextView) convertView
-                .findViewById(R.id.catName);
+        final TextView CatHeader = (TextView) convertView.findViewById(R.id.catName);
         CatHeader.setText(catTitle.getCategory());
-
         return convertView;
     }
 
