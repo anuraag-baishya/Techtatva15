@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -94,10 +95,6 @@ public class DayFragment extends Fragment {
         mEventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                int count = mEventAdapter.getGroupCount();
-                for (int c = 0; c < count; c++) {
-                    mEventListView.collapseGroup(c);
-                }
                 mEventListView.expandGroup(i);
             }
         });
@@ -117,12 +114,6 @@ public class DayFragment extends Fragment {
             Row1.add(Item3);
             CatItem catItem = new CatItem(mCategories[i], Row1);
             mCatList.add(catItem);
-        }
-    }
-    public void collapseAll(){
-        int count = 4;
-        for (int i = 0; i < count; i++) {
-            mEventListView.collapseGroup(i);
         }
     }
     private void expandAll() {

@@ -8,7 +8,7 @@ public class Event {
     public  String Event_name;
     public  String Description;
     public  int CatId;
-    public  String EventMaxTeamNumber;
+    public  int EventMaxTeamNumber;
 
 
     public  void setDescription(String description) {
@@ -27,7 +27,7 @@ public class Event {
         Event_name = event_name;
     }
 
-    public void setEventMaxTeamNumber(String eventMaxTeamNumber) {
+    public void setEventMaxTeamNumber(int eventMaxTeamNumber) {
         EventMaxTeamNumber = eventMaxTeamNumber;
     }
 
@@ -47,7 +47,7 @@ public class Event {
         return Event_name;
     }
 
-    public String getEventMaxTeamNumber() {
+    public int getEventMaxTeamNumber() {
         return EventMaxTeamNumber;
     }
 }

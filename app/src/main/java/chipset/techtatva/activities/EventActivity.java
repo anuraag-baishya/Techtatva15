@@ -97,9 +97,6 @@ public class EventActivity extends AppCompatActivity {
             case R.id.action_contact:
                 Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.action_allcats:
-                startActivity(new Intent(getApplicationContext(),AllEvents.class));
-                break;
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -122,6 +119,7 @@ public class EventActivity extends AppCompatActivity {
         mDayViewPagerAdapter.addFragment(day2, "DAY 2");
         mDayViewPagerAdapter.addFragment(day3, "DAY 3");
         mDayViewPagerAdapter.addFragment(day4, "DAY 4");
+        mDayViewPagerAdapter.addFragment(new chipset.techtatva.fragments.AllEvents(),"All events");
         viewPager.setAdapter(mDayViewPagerAdapter);
     }
 }
