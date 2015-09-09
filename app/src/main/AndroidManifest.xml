@@ -41,6 +41,15 @@
             android:name=".activities.InstaFeedActivity"
             android:label="@string/title_activity_insta_feed"
             android:parentActivityName=".activities.EventActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="647d32f2b260516e8c12a0de2e018969f0be79f4" />
+
+        <activity
+            android:name=".activities.AllEventsActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/drawer_header"
+        android:contentDescription="@string/app_name"
         />
     </LinearLayout>
 </android.support.v7.widget.CardView>

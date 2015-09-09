@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -136,6 +137,7 @@ public class AllEvents extends android.support.v4.app.Fragment {
                 events.clear();
                 Log.d("Events",response.toString());
                 try {
+                    Log.d("JSON","loading");
                     JSONArray data = response.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++) {
                         Event event = new Event();

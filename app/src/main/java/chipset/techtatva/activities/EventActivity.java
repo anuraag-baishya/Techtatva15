@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,8 +26,10 @@ import java.util.ArrayList;
 import chipset.techtatva.R;
 import chipset.techtatva.adapters.DayViewPagerAdapter;
 import chipset.techtatva.adapters.DrawerAdapter;
+import chipset.techtatva.fragments.AllEvents;
 import chipset.techtatva.fragments.DayFragment;
 import chipset.techtatva.model.events.DrawerItem;
+import chipset.techtatva.model.instagram.InstaFeed;
 
 
 public class EventActivity extends AppCompatActivity {
@@ -56,26 +59,35 @@ public class EventActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         animate(toolbar, tabLayout);
         final String[] category = getResources().getStringArray(R.array.category);
-        drawerList.add(new DrawerItem(category[0], R.drawable.featured));
-        drawerList.add(new DrawerItem(category[1], R.drawable.acumen));
-        drawerList.add(new DrawerItem(category[2], R.drawable.airborne));
-        drawerList.add(new DrawerItem(category[3], R.drawable.alacrity));
-        drawerList.add(new DrawerItem(category[4], R.drawable.bizzmaestro));
-        drawerList.add(new DrawerItem(category[5], R.drawable.cheminova));
-        drawerList.add(new DrawerItem(category[6], R.drawable.constructure));
-        drawerList.add(new DrawerItem(category[7], R.drawable.cryptoss));
-        drawerList.add(new DrawerItem(category[8], R.drawable.electrific));
-        drawerList.add(new DrawerItem(category[9], R.drawable.energia));
-        drawerList.add(new DrawerItem(category[10], R.drawable.epsilon));
-        drawerList.add(new DrawerItem(category[11], R.drawable.kraftwagen));
-        drawerList.add(new DrawerItem(category[12], R.drawable.mechatron));
+        drawerList.add(new DrawerItem(category[0],R.drawable.featured));
+        drawerList.add(new DrawerItem(category[1], R.drawable.featured));
+        drawerList.add(new DrawerItem(category[2], R.drawable.acumen));
+        drawerList.add(new DrawerItem(category[3], R.drawable.airborne));
+        drawerList.add(new DrawerItem(category[4], R.drawable.alacrity));
+        drawerList.add(new DrawerItem(category[5], R.drawable.bizzmaestro));
+        drawerList.add(new DrawerItem(category[6], R.drawable.cheminova));
+        drawerList.add(new DrawerItem(category[7], R.drawable.constructure));
+        drawerList.add(new DrawerItem(category[8], R.drawable.cryptoss));
+        drawerList.add(new DrawerItem(category[9], R.drawable.electrific));
+        drawerList.add(new DrawerItem(category[10], R.drawable.energia));
+        drawerList.add(new DrawerItem(category[11], R.drawable.epsilon));
+        drawerList.add(new DrawerItem(category[12], R.drawable.kraftwagen));
         drawerList.add(new DrawerItem(category[13], R.drawable.mechatron));
-        drawerList.add(new DrawerItem(category[14], R.drawable.robotrek));
-        drawerList.add(new DrawerItem(category[15], R.drawable.turing));
-        drawerList.add(new DrawerItem(category[16], R.drawable.featured));
+        drawerList.add(new DrawerItem(category[14], R.drawable.mechatron));
+        drawerList.add(new DrawerItem(category[15], R.drawable.robotrek));
+        drawerList.add(new DrawerItem(category[16], R.drawable.turing));
+        drawerList.add(new DrawerItem(category[17], R.drawable.featured));
 
         drawerListView.setAdapter(new DrawerAdapter(EventActivity.this, drawerList));
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+        drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0){
+                    startActivity(new Intent(getApplicationContext(),AllEventsActivity.class));
+                }
+            }
+        });
     }
 
     protected void animate(View toolbar, View slidingTabLayout){
@@ -119,7 +131,6 @@ public class EventActivity extends AppCompatActivity {
         mDayViewPagerAdapter.addFragment(day2, "DAY 2");
         mDayViewPagerAdapter.addFragment(day3, "DAY 3");
         mDayViewPagerAdapter.addFragment(day4, "DAY 4");
-        mDayViewPagerAdapter.addFragment(new chipset.techtatva.fragments.AllEvents(),"All events");
         viewPager.setAdapter(mDayViewPagerAdapter);
     }
 }
