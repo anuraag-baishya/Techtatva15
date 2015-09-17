@@ -28,6 +28,7 @@ import chipset.techtatva.adapters.DayViewPagerAdapter;
 import chipset.techtatva.adapters.DrawerAdapter;
 import chipset.techtatva.fragments.AllEvents;
 import chipset.techtatva.fragments.DayFragment;
+import chipset.techtatva.fragments.FavoriteEvents;
 import chipset.techtatva.model.events.DrawerItem;
 import chipset.techtatva.model.instagram.InstaFeed;
 
@@ -80,14 +81,6 @@ public class EventActivity extends AppCompatActivity {
 
         drawerListView.setAdapter(new DrawerAdapter(EventActivity.this, drawerList));
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-        drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position==0){
-                    startActivity(new Intent(getApplicationContext(),AllEventsActivity.class));
-                }
-            }
-        });
     }
 
     protected void animate(View toolbar, View slidingTabLayout){
@@ -131,6 +124,8 @@ public class EventActivity extends AppCompatActivity {
         mDayViewPagerAdapter.addFragment(day2, "DAY 2");
         mDayViewPagerAdapter.addFragment(day3, "DAY 3");
         mDayViewPagerAdapter.addFragment(day4, "DAY 4");
+        mDayViewPagerAdapter.addFragment(new AllEvents(),"All events");
+        mDayViewPagerAdapter.addFragment(new FavoriteEvents(),"Favourite events");
         viewPager.setAdapter(mDayViewPagerAdapter);
     }
 }

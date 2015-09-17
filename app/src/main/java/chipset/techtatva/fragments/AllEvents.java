@@ -3,9 +3,12 @@ package chipset.techtatva.fragments;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -33,6 +37,7 @@ import java.util.ArrayList;
 
 import chipset.potato.Potato;
 import chipset.techtatva.R;
+import chipset.techtatva.activities.InstaFeedActivity;
 import chipset.techtatva.adapters.EventAdapterNew;
 import chipset.techtatva.database.DBHelper;
 import chipset.techtatva.model.events.Category;
@@ -48,6 +53,7 @@ public class AllEvents extends android.support.v4.app.Fragment {
     ArrayList<Event> events;
     EventAdapterNew mEventAdapter;
     ExpandableListView mEventListView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     DBHelper dbHelper;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +68,14 @@ public class AllEvents extends android.support.v4.app.Fragment {
         mEventListView = (ExpandableListView) rootView[0].findViewById(R.id.category_expandable_list_view);
         mEventListView.setVisibility(View.GONE);
         Log.d("JSON", "Activity started");
+        mSwipeRefreshLayout = (SwipeRefreshLayout)rootView[0].findViewById(R.id.all_events_swipe_refresh);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                prepareData();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
@@ -71,9 +85,12 @@ public class AllEvents extends android.support.v4.app.Fragment {
         events.addAll(dbHelper.getAllEvents());
         addEventsToCategories();
         Display();
+        Log.d("events",String.valueOf(dbHelper.getAllCategories().isEmpty()));
         if (Potato.potate().Utils().isInternetConnected(getActivity())) {
             Log.d("Internet", "connected");
-            prepareData();
+            if(categories.isEmpty()) {
+                prepareData();
+            }
         } else {
             if(categories.isEmpty()){
                 rootView[0] = inflater.inflate(R.layout.no_connection_layout,container,false);
@@ -128,6 +145,14 @@ public class AllEvents extends android.support.v4.app.Fragment {
             }
         });
         search.setSubmitButtonEnabled(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_insta){
+            startActivity(new Intent(getActivity(),InstaFeedActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
     private void prepareData() {
         mProgressDialog.show();
@@ -210,10 +235,34 @@ public class AllEvents extends android.support.v4.app.Fragment {
         }
         mEventAdapter = new EventAdapterNew(getActivity(),categories);
         mEventListView.setAdapter(mEventAdapter);
-        mEventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mEventListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(),String.valueOf(i),Toast.LENGTH_SHORT).show();
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                String name = ((TextView)v.findViewById(R.id.eventName)).getText().toString();
+
+                for(final Event e:events){
+                    if(e.getEvent_name().toLowerCase().equals(name.toLowerCase())){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle(name);
+                        builder.setMessage(e.getDescription());
+                        builder.setPositiveButton("Add to favs", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbHelper.addToFavorites(e);
+
+                            }
+                        });
+                        builder.setNeutralButton("Call the cat head", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Potato.potate().Intents().callIntent(getActivity(),"666");
+                            }
+                        });
+                        builder.setCancelable(true);
+                        builder.show();
+                    }
+                }
+                return false;
             }
         });
         mProgressDialog.dismiss();

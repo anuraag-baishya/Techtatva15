@@ -2,6 +2,7 @@ package chipset.techtatva.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +98,13 @@ public class EventAdapterNew extends BaseExpandableListAdapter {
         }
         Event event = mCategories.get(groupPosition).getEvents().get(childPosition);
         mViewHolder.textName.setText(event.getEvent_name());
-        mViewHolder.textMaxNo.setText("Max Number of Players : " + event.getEventMaxTeamNumber());
+        mViewHolder.textMaxNo.setText("Max Number of Participants per team : " + event.getEventMaxTeamNumber());
+        mViewHolder.textName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("adapter",mViewHolder.textName.getText().toString());
+            }
+        });
         return convertView;
     }
 
