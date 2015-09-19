@@ -2,8 +2,10 @@ package chipset.techtatva.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;

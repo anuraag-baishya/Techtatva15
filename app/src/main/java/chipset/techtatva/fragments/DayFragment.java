@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 
 import chipset.potato.Potato;
 import chipset.techtatva.R;
+import chipset.techtatva.activities.FavouritesActivity;
 import chipset.techtatva.activities.InstaFeedActivity;
 import chipset.techtatva.adapters.EventCardListAdapter;
 import chipset.techtatva.database.DBHelper;
@@ -108,6 +110,13 @@ public class DayFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        FloatingActionButton favoriteFloatingActionButton=(FloatingActionButton)rootView[0].findViewById(R.id.favorite_floating_action_button);
+        favoriteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FavouritesActivity.class));
+            }
+        });
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
         DataChange();
