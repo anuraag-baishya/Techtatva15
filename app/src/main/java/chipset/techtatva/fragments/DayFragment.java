@@ -123,7 +123,7 @@ public class DayFragment extends Fragment {
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView[0].findViewById(R.id.events_swipe_refresh);
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(true);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

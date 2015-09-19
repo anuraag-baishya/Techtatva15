@@ -55,12 +55,9 @@ public class EventActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private DBHelper dbHelper;
-    ProgressDialog mProgressDialog;
     ArrayList<DrawerItem> drawerList=new ArrayList<>();
-    String[] categoryName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mProgressDialog=new ProgressDialog(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
         ListView drawerListView=(ListView)findViewById(R.id.drawer_list_view);
@@ -72,8 +69,6 @@ public class EventActivity extends AppCompatActivity {
         day2 = new DayFragment();
         day3 = new DayFragment();
         day4 = new DayFragment();
-        mProgressDialog.setMessage("Setting up Drawer");
-        mProgressDialog.setCancelable(true);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -120,31 +115,10 @@ public class EventActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
     private void setupDrawer(){
-        Log.d("This was called", "Null");
-        mProgressDialog.show();
-        JsonObjectRequest catRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_CATEGORIES, (String) null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("Categories/Drawer", response.toString());
-                try {
-                    JSONArray data = response.getJSONArray("data");
-                    for (int i = 0; i < data.length(); i++) {
-                        categoryName=new String[data.length()];
-                        categoryName[i]=data.getJSONObject(i).getString("categoryName");
-                        prepareDrawer(categoryName[i]);
-                    }
-                    mProgressDialog.dismiss();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        Volley.newRequestQueue(getApplicationContext()).add(catRequest);
+       ArrayList<Category> categories = dbHelper.getAllCategories();
+        drawerList.add(new DrawerItem("All events",R.drawable.featured));
+        for (Category category: categories)
+            prepareDrawer(category.getCatName());
     }
     private void prepareDrawer(String categoryName){
         switch (categoryName){

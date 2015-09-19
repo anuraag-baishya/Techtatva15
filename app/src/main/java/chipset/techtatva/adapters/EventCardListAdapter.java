@@ -64,11 +64,11 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
         mHolder.eventInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name =mHolder.textName.getText().toString();
+                String name = mHolder.textName.getText().toString();
                 for (final Event e : mEventList) {
                     if (e.getEvent_name().toLowerCase().equals(name.toLowerCase())) {
                         TextView message = new TextView(mContext);
-                        message.setPadding(15,15,15,15);
+                        message.setPadding(30, 30, 30, 30);
                         message.setMovementMethod(LinkMovementMethod.getInstance());
                         message.setText(Html.fromHtml(e.getDescription()));
                         message.setMovementMethod(LinkMovementMethod.getInstance());
@@ -92,6 +92,17 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
             @Override
             public void onClick(View v) {
                 Potato.potate().Intents().callIntent(mContext, "999");
+            }
+        });
+        mHolder.eventCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mHolder.descriptionLayout.getVisibility()==View.VISIBLE) {
+                    mHolder.descriptionLayout.setVisibility(View.GONE);
+                }
+                else {
+                    mHolder.descriptionLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

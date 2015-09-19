@@ -6,11 +6,11 @@ import java.util.ArrayList;
  * Created by saketh on 19/8/15.
  */
 public class Category {
-    public  String CatName;
-    public  int CatId;
-    public  String CatType;
-    public  String Description;
-    ArrayList<Event> Events = new ArrayList<Event>();
+    private  String CatName;
+    private  int CatId;
+    private   String CatType;
+    private   String Description;
+    private ArrayList<Event> Events = new ArrayList<Event>();
 
 
     public void setCatId(int catId) {

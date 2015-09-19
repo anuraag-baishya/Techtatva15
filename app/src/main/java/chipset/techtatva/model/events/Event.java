@@ -4,11 +4,11 @@ package chipset.techtatva.model.events;
  * Created by saketh on 19/8/15.
  */
 public class Event {
-    public  int Event_id;
-    public  String Event_name;
-    public  String Description;
-    public  int CatId;
-    public  int EventMaxTeamNumber;
+    private   int Event_id;
+    private   String Event_name;
+    private   String Description;
+    private   int CatId;
+    private   int EventMaxTeamNumber;
 
 
     public  void setDescription(String description) {

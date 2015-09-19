@@ -37,15 +37,5 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         textFav = (TextView)itemView.findViewById(R.id.favorite);
         eventInfoImageView = (ImageView)itemView.findViewById(R.id.eventInfo);
         descriptionLayout = (RelativeLayout)itemView.findViewById(R.id.description);
-        eventCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(descriptionLayout.getVisibility()==View.VISIBLE)
-                    descriptionLayout.setVisibility(View.GONE);
-                else {
-                    descriptionLayout.setVisibility(View.VISIBLE);
-                }
-            }
-        });
     }
 }
