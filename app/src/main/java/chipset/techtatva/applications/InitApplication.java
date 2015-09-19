@@ -3,7 +3,6 @@ package chipset.techtatva.applications;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
-import com.squareup.leakcanary.LeakCanary;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -20,6 +19,5 @@ public class InitApplication extends Application {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
         ACRA.init(this);
-        LeakCanary.install(this);
     }
 }

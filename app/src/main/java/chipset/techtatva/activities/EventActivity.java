@@ -1,5 +1,6 @@
 package chipset.techtatva.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -19,8 +21,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -32,6 +43,7 @@ import chipset.techtatva.database.DBHelper;
 import chipset.techtatva.fragments.DayFragment;
 import chipset.techtatva.model.events.Category;
 import chipset.techtatva.model.events.DrawerItem;
+import chipset.techtatva.resources.Constants;
 
 
 public class EventActivity extends AppCompatActivity {
@@ -41,9 +53,12 @@ public class EventActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private DBHelper dbHelper;
+    ProgressDialog mProgressDialog;
+    ArrayList<DrawerItem> drawerList=new ArrayList<>();
+    String[] categoryName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ArrayList<DrawerItem> drawerList=new ArrayList<>();
+        mProgressDialog=new ProgressDialog(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
         ListView drawerListView=(ListView)findViewById(R.id.drawer_list_view);
@@ -55,6 +70,8 @@ public class EventActivity extends AppCompatActivity {
         day2 = new DayFragment();
         day3 = new DayFragment();
         day4 = new DayFragment();
+        mProgressDialog.setMessage("Setting up Drawer");
+        mProgressDialog.setCancelable(true);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -63,24 +80,7 @@ public class EventActivity extends AppCompatActivity {
         animate(toolbar, tabLayout);
         final String[] category = getResources().getStringArray(R.array.category);
         Potato.potate().Preferences().putSharedPreference(EventActivity.this,"cat",category[0]);
-        drawerList.add(new DrawerItem(category[0],R.drawable.featured));
-        drawerList.add(new DrawerItem(category[1], R.drawable.featured));
-        drawerList.add(new DrawerItem(category[2], R.drawable.acumen));
-        drawerList.add(new DrawerItem(category[3], R.drawable.airborne));
-        drawerList.add(new DrawerItem(category[4], R.drawable.alacrity));
-        drawerList.add(new DrawerItem(category[5], R.drawable.bizzmaestro));
-        drawerList.add(new DrawerItem(category[6], R.drawable.cheminova));
-        drawerList.add(new DrawerItem(category[7], R.drawable.constructure));
-        drawerList.add(new DrawerItem(category[8], R.drawable.cryptoss));
-        drawerList.add(new DrawerItem(category[9], R.drawable.electrific));
-        drawerList.add(new DrawerItem(category[10], R.drawable.energia));
-        drawerList.add(new DrawerItem(category[11], R.drawable.epsilon));
-        drawerList.add(new DrawerItem(category[12], R.drawable.kraftwagen));
-        drawerList.add(new DrawerItem(category[13], R.drawable.mechatron));
-        drawerList.add(new DrawerItem(category[14], R.drawable.mechatron));
-        drawerList.add(new DrawerItem(category[15], R.drawable.robotrek));
-        drawerList.add(new DrawerItem(category[16], R.drawable.turing));
-        drawerList.add(new DrawerItem(category[17], R.drawable.featured));
+        setupDrawer();
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,6 +116,85 @@ public class EventActivity extends AppCompatActivity {
         });
         drawerListView.setAdapter(new DrawerAdapter(EventActivity.this, drawerList));
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+    private void setupDrawer(){
+        Log.d("This was called", "Null");
+        mProgressDialog.show();
+        JsonObjectRequest catRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_CATEGORIES, (String) null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("Categories/Drawer", response.toString());
+                try {
+                    JSONArray data = response.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++) {
+                        categoryName=new String[data.length()];
+                        categoryName[i]=data.getJSONObject(i).getString("categoryName");
+                        prepareDrawer(categoryName[i]);
+                    }
+                    mProgressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        Volley.newRequestQueue(getApplicationContext()).add(catRequest);
+    }
+    private void prepareDrawer(String categoryName){
+        switch (categoryName){
+            case "Acumen":
+                drawerList.add(new DrawerItem(categoryName,R.drawable.acumen));
+                break;
+            case "Airborne":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.airborne));
+                break;
+            case "Alacrity":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.alacrity));
+                break;
+            case "Bizzmaestro":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.bizzmaestro));
+                break;
+            case "Cheminova":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.cheminova));
+                break;
+            case "Constructure":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.constructure));
+                break;
+            case "Cryptoss":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.cryptoss));
+                break;
+            case "Electrific":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.electrific));
+                break;
+            case "Energia":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.energia));
+                break;
+            case "Epsilon":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.epsilon));
+                break;
+            case "Kraftwagen":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.kraftwagen));
+                break;
+            case "Mechatron":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.mechatron));
+                break;
+            case "Mechanize":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.mechatron));
+                break;
+            case "Robotrek":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.robotrek));
+                break;
+            case "Turing":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.turing));
+                break;
+            default:
+                drawerList.add(new DrawerItem(categoryName, R.drawable.featured));
+                break;
+        }
     }
 
     protected void animate(View toolbar, View slidingTabLayout){

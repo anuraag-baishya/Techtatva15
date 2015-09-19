@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import chipset.potato.Potato;
 import chipset.techtatva.R;
 import chipset.techtatva.activities.InstaFeedActivity;
-import chipset.techtatva.adapters.EventAdapterNew;
+//import chipset.techtatva.adapters.EventAdapterNew;
 import chipset.techtatva.database.DBHelper;
 import chipset.techtatva.model.events.Category;
 import chipset.techtatva.model.events.Event;
@@ -49,7 +49,7 @@ public class AllEvents extends android.support.v4.app.Fragment {
     private ProgressDialog mProgressDialog;
     ArrayList<Category> categories;
     ArrayList<Event> events;
-    EventAdapterNew mEventAdapter;
+    //EventAdapterNew mEventAdapter;
     ExpandableListView mEventListView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     DBHelper dbHelper;
@@ -119,7 +119,7 @@ public class AllEvents extends android.support.v4.app.Fragment {
         search.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mEventAdapter.filterData(query);
+           //     mEventAdapter.filterData(query);
                 if (!query.isEmpty()) {
                     expandAll();
                 }
@@ -128,7 +128,7 @@ public class AllEvents extends android.support.v4.app.Fragment {
 
             @Override
             public boolean onQueryTextChange(String query) {
-                mEventAdapter.filterData(query);
+            ///    mEventAdapter.filterData(query);
                 if (!query.isEmpty()) {
                     expandAll();
                 }
@@ -138,7 +138,7 @@ public class AllEvents extends android.support.v4.app.Fragment {
         search.setOnCloseListener(new android.support.v7.widget.SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                mEventAdapter.filterData("");
+             //   mEventAdapter.filterData("");
                 return false;
             }
         });
@@ -231,8 +231,8 @@ public class AllEvents extends android.support.v4.app.Fragment {
                 Log.d("events","Event name : "+event.getEvent_name());
             }
         }
-        mEventAdapter = new EventAdapterNew(getActivity(),categories);
-        mEventListView.setAdapter(mEventAdapter);
+     //   mEventAdapter = new EventAdapterNew(getActivity(),categories);
+     //   mEventListView.setAdapter(mEventAdapter);
         mEventListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -267,9 +267,9 @@ public class AllEvents extends android.support.v4.app.Fragment {
         mEventListView.setVisibility(View.VISIBLE);
     }
     private void expandAll() {
-        int count = mEventAdapter.getGroupCount();
-        for (int i = 0; i < count; i++) {
-            mEventListView.expandGroup(i);
+        //int count = mEventAdapter.getGroupCount();
+    //    for (int i = 0; i < count; i++) {
+       //     mEventListView.expandGroup(i);
         }
     }
-}
+

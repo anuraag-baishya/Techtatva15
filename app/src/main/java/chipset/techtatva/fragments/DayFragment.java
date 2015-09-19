@@ -105,6 +105,9 @@ public class DayFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View[] rootView = {inflater.inflate(R.layout.fragment_day, container, false)};
         mRecyclerView = (RecyclerView) rootView[0].findViewById(R.id.event_list_view);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
         DataChange();
