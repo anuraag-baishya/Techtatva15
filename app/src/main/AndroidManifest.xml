@@ -46,6 +46,14 @@
             android:name="io.fabric.ApiKey"
             android:value="647d32f2b260516e8c12a0de2e018969f0be79f4" />
 
+        <activity
+            android:name=".activities.FavouritesActivity"
+            android:label="@string/title_activity_favourites" >
+        </activity>
+        <activity
+            android:name=".activities.AboutUsActivity"
+            android:label="@string/title_activity_about_us" >
+        </activity>
     </application>
 
 </manifest>

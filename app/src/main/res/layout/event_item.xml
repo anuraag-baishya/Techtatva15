@@ -12,7 +12,7 @@
         android:layout_width="match_parent">
     <TextView
         android:id="@+id/eventName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:textColor="@color/black"
         android:layout_margin="5dp"
@@ -20,11 +20,20 @@
         android:gravity="start|center_vertical"
         android:textAllCaps="true"
         android:textSize="17sp" />
-        <RelativeLayout
-            android:id="@+id/description"
+        <ImageView
+            android:id="@+id/eventInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/eventName">
+            android:src="@drawable/ic_action_about"
+            android:layout_marginTop="4dp"
+            android:layout_alignParentRight="true"/>
+        <RelativeLayout
+            android:id="@+id/description"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eventName"
+            >
             <TextView
                 android:id="@+id/eventLocation"
                 android:layout_width="match_parent"
@@ -62,12 +71,22 @@
                 android:textColor="@color/black"
                 android:drawableLeft="@drawable/ic_date"
                 android:gravity="start|center_vertical" />
+            <TextView
+                android:id="@+id/maxSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventDate"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/eventContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/eventDate"
+                android:layout_below="@+id/maxSize"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -83,6 +102,7 @@
                 android:layout_margin="5dp"
                 android:textColor="@color/black"
                 android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
