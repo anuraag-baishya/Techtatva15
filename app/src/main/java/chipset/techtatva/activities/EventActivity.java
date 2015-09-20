@@ -1,11 +1,11 @@
 package chipset.techtatva.activities;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
-import android.content.Loader;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -22,25 +21,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import chipset.potato.Potato;
 import chipset.techtatva.R;
 import chipset.techtatva.adapters.DayViewPagerAdapter;
 import chipset.techtatva.adapters.DrawerAdapter;
+import chipset.techtatva.chromeTabs.CustomTabActivityHelper;
+import chipset.techtatva.chromeTabs.WebviewFallback;
 import chipset.techtatva.database.DBHelper;
 import chipset.techtatva.fragments.DayFragment;
 import chipset.techtatva.model.events.Category;
@@ -49,7 +38,6 @@ import chipset.techtatva.resources.Constants;
 
 
 public class EventActivity extends AppCompatActivity {
-
     ViewPager viewPager;
     DayFragment day1, day2, day3, day4;
     private DrawerLayout mDrawerLayout;
@@ -65,10 +53,10 @@ public class EventActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         dbHelper= new DBHelper(this);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        day1 = new DayFragment();
-        day2 = new DayFragment();
-        day3 = new DayFragment();
-        day4 = new DayFragment();
+        day1 = new DayFragment();day1.day=1;
+        day2 = new DayFragment();day2.day=2;
+        day3 = new DayFragment();day3.day=3;
+        day4 = new DayFragment();day4.day=4;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -76,8 +64,8 @@ public class EventActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         animate(toolbar, tabLayout);
         final String[] category = getResources().getStringArray(R.array.category);
-        Potato.potate().Preferences().putSharedPreference(EventActivity.this,"cat",category[0]);
-        setupDrawer();
+        Potato.potate().Preferences().putSharedPreference(EventActivity.this, "cat", category[0]);
+
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -193,11 +181,34 @@ public class EventActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_favourites:
-                startActivity(new Intent(getApplicationContext(),FavouritesActivity.class));
+                startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
                 break;
             case R.id.action_about:
                 startActivity(new Intent(getApplicationContext(),AboutUsActivity.class));
                 break;
+            case R.id.action_registration:
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(getResources().getColor(R.color.primary));
+                // Application exit animation, Chrome enter animation.
+                builder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
+                // vice versa
+                builder.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
+                CustomTabsIntent customTabsIntent =builder.build();
+                CustomTabActivityHelper.openCustomTab(
+                        this, customTabsIntent, Uri.parse(Constants.URL_REGISTRATION), new WebviewFallback());
+                break;
+            case R.id.action_online_events:
+                CustomTabsIntent.Builder builder1 = new CustomTabsIntent.Builder();
+                builder1.setToolbarColor(getResources().getColor(R.color.primary));
+                // Application exit animation, Chrome enter animation.
+                builder1.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
+                // vice versa
+                builder1.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
+                CustomTabsIntent customTabsIntent1 = builder1.build();
+                CustomTabActivityHelper.openCustomTab(
+                        this, customTabsIntent1, Uri.parse(Constants.URL_ONLINE_EVENTS), new WebviewFallback());
+                break;
+
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -206,6 +217,7 @@ public class EventActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
+        setupDrawer();
     }
 
     @Override
@@ -214,7 +226,7 @@ public class EventActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-    private void setupViewPager(final ViewPager viewPager) {
+        private void setupViewPager(final ViewPager viewPager) {
         final DayViewPagerAdapter mDayViewPagerAdapter = new DayViewPagerAdapter(getSupportFragmentManager());
         mDayViewPagerAdapter.addFragment(day1, "DAY 1");
         mDayViewPagerAdapter.addFragment(day2, "DAY 2");

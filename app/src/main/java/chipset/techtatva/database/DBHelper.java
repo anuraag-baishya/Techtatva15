@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import chipset.techtatva.model.events.Category;
 import chipset.techtatva.model.events.Event;
+import chipset.techtatva.resources.Constants;
 
 public class DBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "TTEvents.db";
@@ -36,12 +37,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF  NOT EXISTS "+CATEGORIES_TABLE_NAME+" ("+COLUMN_ID+" INTEGER PRIMARY KEY,"+CATEGORY_ID
         +" INTEGER,"+NAME+" TEXT,"+DESCRIPTION+" TEXT);");
         db.execSQL("CREATE TABLE IF  NOT EXISTS " + EVENTS_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + EVENT_ID
-                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER);");
+                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER,"+ Constants.EVENT_LOCATION+" TEXT,"+
+        Constants.EVENT_DATE+" TEXT,"+Constants.EVENT_START_TIME+" TEXT,"+Constants.EVENT_END_TIME+" TEXT,"+Constants.EVENT_CONTACT_NAME+" TEXT,"+Constants.EVENT_CONTACT_NUMBER+" TEXT,"+
+        Constants.EVENT_DAY+" INTEGER);");
     }
     public void createFavTable(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("CREATE TABLE IF  NOT EXISTS " + FAV_EVENTS_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + EVENT_ID
-                + " INTEGER," +CATEGORY_ID+" INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER);");
+                + " INTEGER," +CATEGORY_ID+" INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER,"+ Constants.EVENT_LOCATION+" TEXT,"+
+                Constants.EVENT_DATE+" TEXT,"+Constants.EVENT_START_TIME+" TEXT,"+Constants.EVENT_END_TIME+" TEXT,"+Constants.EVENT_CONTACT_NAME+" TEXT,"+Constants.EVENT_CONTACT_NUMBER+" TEXT,"+
+                Constants.EVENT_DAY+" INTEGER);");
         Log.d("db", "created");
     }
     @Override
@@ -66,6 +71,13 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(NAME, event.getEvent_name());
         contentValues.put(DESCRIPTION, event.getDescription());
         contentValues.put(EVENT_MAX_NO, event.getEventMaxTeamNumber());
+        contentValues.put(Constants.EVENT_LOCATION,event.getLocation());
+        contentValues.put(Constants.EVENT_CONTACT_NAME,event.getContactName());
+        contentValues.put(Constants.EVENT_CONTACT_NUMBER,event.getContactNumber());
+        contentValues.put(Constants.EVENT_DATE,event.getDate());
+        contentValues.put(Constants.EVENT_DAY,event.getDay());
+        contentValues.put(Constants.EVENT_START_TIME,event.getStartTime());
+        contentValues.put(Constants.EVENT_END_TIME,event.getEndTime());
         db.insert(EVENTS_TABLE_NAME, null, contentValues);
     }
     public void dropTables(){
@@ -75,7 +87,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF  NOT EXISTS " + CATEGORIES_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + CATEGORY_ID
                 + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT);");
         db.execSQL("CREATE TABLE IF  NOT EXISTS " + EVENTS_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + EVENT_ID
-                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER);");
+                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER,"+ Constants.EVENT_LOCATION+" TEXT,"+
+                Constants.EVENT_DATE+" TEXT,"+Constants.EVENT_START_TIME+" TEXT,"+Constants.EVENT_END_TIME+" TEXT,"+Constants.EVENT_CONTACT_NAME+" TEXT,"+Constants.EVENT_CONTACT_NUMBER+" TEXT,"+
+                Constants.EVENT_DAY+" INTEGER);");
 
     }
     public void deleteAllFavorites(){
@@ -99,6 +113,13 @@ public class DBHelper extends SQLiteOpenHelper {
           contentValues.put(NAME, event.getEvent_name());
           contentValues.put(DESCRIPTION, event.getDescription());
           contentValues.put(EVENT_MAX_NO, event.getEventMaxTeamNumber());
+          contentValues.put(Constants.EVENT_LOCATION,event.getLocation());
+          contentValues.put(Constants.EVENT_CONTACT_NAME,event.getContactName());
+          contentValues.put(Constants.EVENT_CONTACT_NUMBER,event.getContactNumber());
+          contentValues.put(Constants.EVENT_DATE,event.getDate());
+          contentValues.put(Constants.EVENT_DAY,event.getDay());
+          contentValues.put(Constants.EVENT_START_TIME,event.getStartTime());
+          contentValues.put(Constants.EVENT_END_TIME,event.getEndTime());
           db.insert(FAV_EVENTS_TABLE_NAME, null, contentValues);
           Toast.makeText(mContext, "Added!", Toast.LENGTH_SHORT).show();
       }
@@ -116,6 +137,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 event.setEvent_name(rows.getString(3));
                 event.setDescription(rows.getString(4));
                 event.setEventMaxTeamNumber(rows.getInt(5));
+                event.setLocation(rows.getString(6));
+                event.setDate(rows.getString(7));
+                event.setStartTime(rows.getString(8));
+                event.setEndTime(rows.getString(9));
+                event.setContactName(rows.getString(10));
+                event.setContactNumber(rows.getString(11));
+                event.setDay(rows.getInt(12));
                 events.add(event);
             }
         }
@@ -150,6 +178,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 event.setEvent_name(rows.getString(3));
                 event.setDescription(rows.getString(4));
                 event.setEventMaxTeamNumber(rows.getInt(5));
+                event.setLocation(rows.getString(6));
+                event.setDate(rows.getString(7));
+                event.setStartTime(rows.getString(8));
+                event.setEndTime(rows.getString(9));
+                event.setContactName(rows.getString(10));
+                event.setContactNumber(rows.getString(11));
+                event.setDay(rows.getInt(12));
                 events.add(event);
             }
         }

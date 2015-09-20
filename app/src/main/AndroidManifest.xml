@@ -54,6 +54,8 @@
             android:name=".activities.AboutUsActivity"
             android:label="@string/title_activity_about_us" >
         </activity>
+        <activity android:name=".activities.WebviewActivity"
+            android:label=""/>
     </application>
 
 </manifest>

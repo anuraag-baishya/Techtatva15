@@ -34,7 +34,7 @@ public class FavouritesActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         mEventList = new ArrayList<>();
         mEventList.addAll(dbHelper.getFavEvents());
-        mEventAdapter = new EventCardListAdapter(this,mEventList);
+        mEventAdapter = new EventCardListAdapter(this,mEventList,0);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
@@ -72,7 +72,7 @@ public class FavouritesActivity extends AppCompatActivity {
                 mProgressDialog.show();
                 mEventList.clear();
                 mEventList.addAll(dbHelper.getFavEvents());
-                mEventAdapter = new EventCardListAdapter(getApplicationContext(),mEventList);
+                mEventAdapter = new EventCardListAdapter(getApplicationContext(),mEventList,0);
                 mRecyclerView.setAdapter(mEventAdapter);
                 mProgressDialog.dismiss();
                 break;

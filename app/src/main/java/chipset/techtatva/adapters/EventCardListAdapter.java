@@ -26,10 +26,18 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
     private ArrayList<Event> mEventList;
     private Context mContext;
     private DBHelper dbHelper;
-    public EventCardListAdapter(Context c, ArrayList<Event> events){
+    private int day;
+    public EventCardListAdapter(Context c, ArrayList<Event> events,int day){
         this.mContext = c;
         this.mEventList = new ArrayList<Event>();
-        this.mEventList.addAll(events);
+        if(day==0)
+            this.mEventList.addAll(events);
+        else {
+            for (Event event : events) {
+                if (event.getDay() == day)
+                    mEventList.add(event);
+            }
+        }
         for (Event event:mEventList){
             Log.d("eventsc", "Event name : " + event.getEvent_name());
         }
@@ -48,11 +56,11 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
     public void onBindViewHolder(final EventViewHolder mHolder, int i) {
         final Event event = mEventList.get(i);
         mHolder.textName.setText(event.getEvent_name());
-        mHolder.textDate.setText("1/1/1");
-        mHolder.textLocation.setText("mit");
-        mHolder.textTime.setText("00:00");
+        mHolder.textDate.setText(event.getDate());
+        mHolder.textLocation.setText(event.getLocation());
+        mHolder.textTime.setText(event.getStartTime()+" to "+event.getEndTime());
         mHolder.textMaxSize.setText("max no per team : "+ event.getEventMaxTeamNumber());
-        mHolder.textContact.setText("Contact the cat head");
+        mHolder.textContact.setText("Contact the category head"+"("+event.getContactName()+")");
         mHolder.textFav.setText("Add to favs");
         mHolder.textFav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +68,7 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
                 dbHelper.addToFavorites(event);
             }
         });
-        mHolder.textCall.setText("Click here to call 999");
+        mHolder.textCall.setText("Click here to call "+event.getContactNumber());
         mHolder.eventInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +99,7 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
         mHolder.textCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Potato.potate().Intents().callIntent(mContext, "999");
+                Potato.potate().Intents().callIntent(mContext, event.getContactNumber());
             }
         });
         mHolder.eventCard.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +121,7 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
     }
     public void filterData(String query){
         ArrayList<Event> allEvents = new ArrayList<Event>();
-        allEvents.addAll(dbHelper.getAllEvents());
+        allEvents.addAll(mEventList);
         mEventList.clear();
         for(Event event : allEvents){
             if(event.getEvent_name().toLowerCase().contains(query.toLowerCase()))

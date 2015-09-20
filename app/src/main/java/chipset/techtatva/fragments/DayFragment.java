@@ -46,6 +46,7 @@ public class DayFragment extends Fragment {
     private ProgressDialog mProgressDialog;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private EventCardListAdapter mEventAdapter;
+    public int day;
     DBHelper dbHelper;
     ArrayList<Event> mEventList;
     ArrayList<Category> mCategoryList;
@@ -155,7 +156,7 @@ public class DayFragment extends Fragment {
 
     private void prepareData() {
         mProgressDialog.show();
-        JsonObjectRequest eventRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_EVENTS, (String) null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest eventRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_SCHEDULE, (String) null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 mEventList.clear();
@@ -165,11 +166,18 @@ public class DayFragment extends Fragment {
                     JSONArray data = response.getJSONArray("data");
                     for (int i = 0; i < data.length(); i++) {
                         Event event = new Event();
-                        event.setCatId(Integer.parseInt(data.getJSONObject(i).getString("categoryID")));
-                        event.setDescription(data.getJSONObject(i).getString("description"));
-                        event.setEvent_id(Integer.parseInt(data.getJSONObject(i).getString("eventID")));
-                        event.setEvent_name(data.getJSONObject(i).getString("eventName"));
-                        event.setEventMaxTeamNumber(Integer.parseInt(data.getJSONObject(i).getString("maxTeamSize")));
+                        event.setCatId(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_CATEGORY_ID)));
+                        event.setDescription(data.getJSONObject(i).getString(Constants.EVENT_DETAIL));
+                        event.setEvent_id(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_ID)));
+                        event.setEvent_name(data.getJSONObject(i).getString(Constants.EVENT_NAME));
+                        event.setEventMaxTeamNumber(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_MAX_TEAM_SIZE)));
+                        event.setDay(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_DAY)));
+                        event.setContactName(data.getJSONObject(i).getString(Constants.EVENT_CONTACT_NAME));
+                        event.setContactNumber(data.getJSONObject(i).getString(Constants.EVENT_CONTACT_NUMBER));
+                        event.setDate(data.getJSONObject(i).getString(Constants.EVENT_DATE));
+                        event.setStartTime(data.getJSONObject(i).getString(Constants.EVENT_START_TIME));
+                        event.setEndTime(data.getJSONObject(i).getString(Constants.EVENT_END_TIME));
+                        event.setLocation(data.getJSONObject(i).getString(Constants.EVENT_LOCATION));
                         dbHelper.insertEvent(event);
                         mEventList.add(event);
                     }
@@ -224,7 +232,7 @@ public class DayFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mEventAdapter = new EventCardListAdapter(getActivity(), mEventList);
+        mEventAdapter = new EventCardListAdapter(getActivity(), mEventList,day);
         mRecyclerView.setAdapter(mEventAdapter);
     }
 
