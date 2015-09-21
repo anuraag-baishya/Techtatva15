@@ -1,6 +1,7 @@
 package chipset.techtatva.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -45,14 +47,16 @@ public class EventActivity extends AppCompatActivity {
     DayFragment day1, day2, day3, day4;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private DBHelper dbHelper;
-    ArrayList<DrawerItem> drawerList = new ArrayList<>();
-
+    private static DBHelper dbHelper;
+    public static ArrayList<DrawerItem> drawerList;
+    private static ListView drawerListView;
+    private static Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        ListView drawerListView = (ListView) findViewById(R.id.drawer_list_view);
+        mContext =this;
+        drawerListView= (ListView) findViewById(R.id.drawer_list_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         dbHelper = new DBHelper(this);
@@ -73,7 +77,8 @@ public class EventActivity extends AppCompatActivity {
         animate(toolbar, tabLayout);
         final String[] category = getResources().getStringArray(R.array.category);
         Potato.potate().Preferences().putSharedPreference(EventActivity.this, "cat", category[0]);
-
+        drawerList = new ArrayList<>();
+        Log.d("drawer",drawerList.size()+"");
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -111,14 +116,18 @@ public class EventActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
-    private void setupDrawer() {
+    public static void setupDrawer() {
+        Log.d("drawer","adding");
         ArrayList<Category> categories = dbHelper.getAllCategories();
         drawerList.add(new DrawerItem("All events", R.mipmap.ic_launcher));
-        for (Category category : categories)
+        for (Category category : categories) {
             prepareDrawer(category.getCatName());
+            Log.d("drawer","added "+category.getCatName());
+        }
+        drawerListView.setAdapter(new DrawerAdapter(mContext, drawerList));
     }
 
-    private void prepareDrawer(String categoryName) {
+    private static void prepareDrawer(String categoryName) {
         switch (categoryName) {
             case "Acumen":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.acumen));
@@ -174,6 +183,7 @@ public class EventActivity extends AppCompatActivity {
             case "Open":
             case "Open Events":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.open));
+                break;
             default:
                 drawerList.add(new DrawerItem(categoryName, R.mipmap.ic_launcher));
                 break;
@@ -195,12 +205,6 @@ public class EventActivity extends AppCompatActivity {
                 break;
             case R.id.action_developers:
                 Toast.makeText(getApplicationContext(), "Developers", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_contact:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_favourites:
-                startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
                 break;
             case R.id.action_about:
                 startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
@@ -236,7 +240,6 @@ public class EventActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mDrawerToggle.syncState();
-        setupDrawer();
     }
 
     @Override

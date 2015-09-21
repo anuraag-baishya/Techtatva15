@@ -86,6 +86,7 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
                         builder.setView(message);
                         builder.setIcon(R.drawable.ic_action_about);
                         builder.show();
+                        break;
                     }
                 }
             }

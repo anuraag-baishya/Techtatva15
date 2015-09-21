@@ -34,6 +34,7 @@ import java.util.ArrayList;
 
 import chipset.potato.Potato;
 import chipset.techtatva.R;
+import chipset.techtatva.activities.EventActivity;
 import chipset.techtatva.activities.FavouritesActivity;
 import chipset.techtatva.activities.InstaFeedActivity;
 import chipset.techtatva.adapters.EventCardListAdapter;
@@ -44,7 +45,6 @@ import chipset.techtatva.resources.Constants;
 
 public class DayFragment extends Fragment {
     private ProgressDialog mProgressDialog;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private EventCardListAdapter mEventAdapter;
     public int day;
     DBHelper dbHelper;
@@ -120,36 +120,27 @@ public class DayFragment extends Fragment {
         });
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
-        DataChange();
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView[0].findViewById(R.id.events_swipe_refresh);
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(true);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                prepareData();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        if (mEventList.isEmpty()) {
-            if (Potato.potate().Utils().isInternetConnected(getActivity())) {
-                prepareData();
-            } else {
-                rootView[0] = inflater.inflate(R.layout.no_connection_layout, container, false);
-                Button retryButton = (Button) rootView[0].findViewById(R.id.retry_button);
-                retryButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (Potato.potate().Utils().isInternetConnected(getActivity())) {
-                            rootView[0] = inflater.inflate(R.layout.fragment_day, container, false);
-                            prepareData();
-                        }
+        if(Potato.potate().Utils().isInternetConnected(getActivity())){
+            prepareData();
+        }else if(dbHelper.getAllCategories().size()!=0 && dbHelper.getAllEvents().size()!=0){
+            DataChange();
+            if (EventActivity.drawerList.size()==0)
+                EventActivity.setupDrawer();
+        }else {
+            rootView[0] = inflater.inflate(R.layout.no_connection_layout, container, false);
+            Button retryButton = (Button) rootView[0].findViewById(R.id.retry_button);
+            retryButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Potato.potate().Utils().isInternetConnected(getActivity())) {
+                        rootView[0] = inflater.inflate(R.layout.fragment_day, container, false);
+                        prepareData();
                     }
-                });
-            }
-        } else {
-            Display();
+                }
+            });
         }
         return rootView[0];
     }
@@ -209,7 +200,8 @@ public class DayFragment extends Fragment {
                         dbHelper.insertCategory(category);
                         mCategoryList.add(category);
                     }
-
+                    if (EventActivity.drawerList.size()==0)
+                        EventActivity.setupDrawer();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -238,13 +230,15 @@ public class DayFragment extends Fragment {
 
     public void DataChange(){
         String catName = Potato.potate().Preferences().getSharedPreferenceString(getActivity(), "cat");
-        Log.d("change",catName) ;
+        Log.d("change", catName) ;
         mEventList.clear();
         if(!catName.toLowerCase().equals("all events")){
         int catId = 0;
         for(Category category : mCategoryList)
-            if(category.getCatName().toLowerCase().equals(catName.toLowerCase()))
-                catId=category.getCatId();
+            if(category.getCatName().toLowerCase().equals(catName.toLowerCase())) {
+                catId = category.getCatId();
+                break;
+            }
             for (Event event:dbHelper.getAllEvents())
                 if(event.getCatId()==catId)
                     mEventList.add(event);

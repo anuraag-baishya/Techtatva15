@@ -29,24 +29,24 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context)
     {
-        super(context, DATABASE_NAME , null, 1);
+        super(context, DATABASE_NAME, null, 1);
         mContext = context;
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF  NOT EXISTS "+CATEGORIES_TABLE_NAME+" ("+COLUMN_ID+" INTEGER PRIMARY KEY,"+CATEGORY_ID
-        +" INTEGER,"+NAME+" TEXT,"+DESCRIPTION+" TEXT);");
+        db.execSQL("CREATE TABLE IF  NOT EXISTS " + CATEGORIES_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + CATEGORY_ID
+                + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT);");
         db.execSQL("CREATE TABLE IF  NOT EXISTS " + EVENTS_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + EVENT_ID
-                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER,"+ Constants.EVENT_LOCATION+" TEXT,"+
-        Constants.EVENT_DATE+" TEXT,"+Constants.EVENT_START_TIME+" TEXT,"+Constants.EVENT_END_TIME+" TEXT,"+Constants.EVENT_CONTACT_NAME+" TEXT,"+Constants.EVENT_CONTACT_NUMBER+" TEXT,"+
-        Constants.EVENT_DAY+" INTEGER);");
+                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER," + Constants.EVENT_LOCATION + " TEXT," +
+                Constants.EVENT_DATE + " TEXT," + Constants.EVENT_START_TIME + " TEXT," + Constants.EVENT_END_TIME + " TEXT," + Constants.EVENT_CONTACT_NAME + " TEXT," + Constants.EVENT_CONTACT_NUMBER + " TEXT," +
+                Constants.EVENT_DAY + " INTEGER);");
     }
     public void createFavTable(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("CREATE TABLE IF  NOT EXISTS " + FAV_EVENTS_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + EVENT_ID
-                + " INTEGER," +CATEGORY_ID+" INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER,"+ Constants.EVENT_LOCATION+" TEXT,"+
-                Constants.EVENT_DATE+" TEXT,"+Constants.EVENT_START_TIME+" TEXT,"+Constants.EVENT_END_TIME+" TEXT,"+Constants.EVENT_CONTACT_NAME+" TEXT,"+Constants.EVENT_CONTACT_NUMBER+" TEXT,"+
-                Constants.EVENT_DAY+" INTEGER);");
+                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER," + Constants.EVENT_LOCATION + " TEXT," +
+                Constants.EVENT_DATE + " TEXT," + Constants.EVENT_START_TIME + " TEXT," + Constants.EVENT_END_TIME + " TEXT," + Constants.EVENT_CONTACT_NAME + " TEXT," + Constants.EVENT_CONTACT_NUMBER + " TEXT," +
+                Constants.EVENT_DAY + " INTEGER);");
         Log.d("db", "created");
     }
     @Override
@@ -58,10 +58,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertCategory(Category category){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(CATEGORY_ID,category.getCatId());
-        contentValues.put(NAME, category.getCatName());
-        contentValues.put(DESCRIPTION, category.getDescription());
-        db.insert(CATEGORIES_TABLE_NAME, null, contentValues);
+        boolean CatExists = false;
+        for(Category category1:getAllCategories()){
+            if(category1.getCatId()==category.getCatId()){
+                CatExists=true;
+                break;
+            }
+        }
+        if(!CatExists) {
+            contentValues.put(CATEGORY_ID, category.getCatId());
+            contentValues.put(NAME, category.getCatName());
+            contentValues.put(DESCRIPTION, category.getDescription());
+            db.insert(CATEGORIES_TABLE_NAME, null, contentValues);
+        }
     }
     public void insertEvent(Event event){
         SQLiteDatabase db= this.getWritableDatabase();

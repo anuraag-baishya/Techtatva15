@@ -2,6 +2,7 @@ package chipset.techtatva.activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 
 import chipset.techtatva.R;
 import chipset.techtatva.adapters.ResultAdapter;
+import chipset.techtatva.resources.SwipeDownRefreshLayout;
 
 
 public class ResultActivity extends AppCompatActivity {
@@ -37,7 +39,7 @@ public class ResultActivity extends AppCompatActivity {
     private static final String TAG_RES = "Result";
     private ListView mResultView;
     ArrayList<HashMap<String, String>> resultList;
-
+    private SwipeDownRefreshLayout mSwipedownRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,14 @@ public class ResultActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mSwipedownRefreshLayout  =(SwipeDownRefreshLayout)findViewById(R.id.result_swipe_refresh);
+        mSwipedownRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadResults();
+
+            }
+        });
         mProgressDialog = new ProgressDialog(ResultActivity.this);
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
@@ -102,6 +112,7 @@ public class ResultActivity extends AppCompatActivity {
                     ResultAdapter adapter = new ResultAdapter(
                             getApplicationContext(), resultList);
                     mResultView.setAdapter(adapter);
+                    mSwipedownRefreshLayout.setRefreshing(false);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(ResultActivity.this, "Error Connecting to Server", Toast.LENGTH_SHORT).show();
