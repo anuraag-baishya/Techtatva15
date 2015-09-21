@@ -104,7 +104,7 @@ public class EventActivity extends AppCompatActivity {
     }
     private void setupDrawer(){
        ArrayList<Category> categories = dbHelper.getAllCategories();
-        drawerList.add(new DrawerItem("All events",R.drawable.featured));
+        drawerList.add(new DrawerItem("All events",R.drawable.default_ic));
         for (Category category: categories)
             prepareDrawer(category.getCatName());
     }
@@ -120,7 +120,7 @@ public class EventActivity extends AppCompatActivity {
                 drawerList.add(new DrawerItem(categoryName, R.drawable.alacrity));
                 break;
             case "Bizzmaestro":
-                drawerList.add(new DrawerItem(categoryName, R.drawable.bizzmaestro));
+                drawerList.add(new DrawerItem(categoryName, R.drawable.bizzmeastro));
                 break;
             case "Cheminova":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.cheminova));
@@ -140,6 +140,12 @@ public class EventActivity extends AppCompatActivity {
             case "Epsilon":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.epsilon));
                 break;
+            case "Gaming":
+                drawerList.add(new DrawerItem(categoryName,R.drawable.gaming));
+                break;
+            case "Featured Events":
+                drawerList.add(new DrawerItem(categoryName,R.drawable.featured));
+                break;
             case "Kraftwagen":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.kraftwagen));
                 break;
@@ -147,7 +153,7 @@ public class EventActivity extends AppCompatActivity {
                 drawerList.add(new DrawerItem(categoryName, R.drawable.mechatron));
                 break;
             case "Mechanize":
-                drawerList.add(new DrawerItem(categoryName, R.drawable.mechatron));
+                drawerList.add(new DrawerItem(categoryName, R.drawable.mechanize));
                 break;
             case "Robotrek":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.robotrek));
@@ -155,8 +161,10 @@ public class EventActivity extends AppCompatActivity {
             case "Turing":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.turing));
                 break;
+            case "Open":
+                drawerList.add(new DrawerItem(categoryName,R.drawable.open));
             default:
-                drawerList.add(new DrawerItem(categoryName, R.drawable.featured));
+                drawerList.add(new DrawerItem(categoryName, R.drawable.default_ic));
                 break;
         }
     }
