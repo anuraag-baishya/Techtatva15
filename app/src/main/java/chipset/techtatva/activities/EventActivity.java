@@ -21,15 +21,18 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
+
 import java.util.ArrayList;
+
 import chipset.potato.Potato;
 import chipset.techtatva.R;
 import chipset.techtatva.adapters.DayViewPagerAdapter;
 import chipset.techtatva.adapters.DrawerAdapter;
-import chipset.techtatva.chromeTabs.CustomTabActivityHelper;
-import chipset.techtatva.chromeTabs.WebviewFallback;
+import chipset.techtatva.chromecustomtabs.CustomTabActivityHelper;
+import chipset.techtatva.chromecustomtabs.WebviewFallback;
 import chipset.techtatva.database.DBHelper;
 import chipset.techtatva.fragments.DayFragment;
 import chipset.techtatva.model.events.Category;
@@ -43,20 +46,25 @@ public class EventActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private DBHelper dbHelper;
-    ArrayList<DrawerItem> drawerList=new ArrayList<>();
+    ArrayList<DrawerItem> drawerList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        ListView drawerListView=(ListView)findViewById(R.id.drawer_list_view);
+        ListView drawerListView = (ListView) findViewById(R.id.drawer_list_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        dbHelper= new DBHelper(this);
+        dbHelper = new DBHelper(this);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
-        day1 = new DayFragment();day1.day=1;
-        day2 = new DayFragment();day2.day=2;
-        day3 = new DayFragment();day3.day=3;
-        day4 = new DayFragment();day4.day=4;
+        day1 = new DayFragment();
+        day1.day = 1;
+        day2 = new DayFragment();
+        day2.day = 2;
+        day3 = new DayFragment();
+        day3.day = 3;
+        day4 = new DayFragment();
+        day4.day = 4;
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -69,14 +77,14 @@ public class EventActivity extends AppCompatActivity {
         drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String name= ((TextView)view.findViewById(R.id.category_name_text_view)).getText().toString();
-                Potato.potate().Preferences().putSharedPreference(EventActivity.this,"cat",name);
+                String name = ((TextView) view.findViewById(R.id.category_name_text_view)).getText().toString();
+                Potato.potate().Preferences().putSharedPreference(EventActivity.this, "cat", name);
                 try {
                     day1.DataChange();
                     day2.DataChange();
                     day3.DataChange();
                     day4.DataChange();
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -85,9 +93,9 @@ public class EventActivity extends AppCompatActivity {
         drawerListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                String name= ((TextView)view.findViewById(R.id.category_name_text_view)).getText().toString();
-                for(Category cat : dbHelper.getAllCategories() ){
-                    if(cat.getCatName().toLowerCase().equals(name.toLowerCase())){
+                String name = ((TextView) view.findViewById(R.id.category_name_text_view)).getText().toString();
+                for (Category cat : dbHelper.getAllCategories()) {
+                    if (cat.getCatName().toLowerCase().equals(name.toLowerCase())) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(EventActivity.this);
                         builder.setTitle(name);
                         builder.setCancelable(true);
@@ -102,16 +110,18 @@ public class EventActivity extends AppCompatActivity {
         drawerListView.setAdapter(new DrawerAdapter(EventActivity.this, drawerList));
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
-    private void setupDrawer(){
-       ArrayList<Category> categories = dbHelper.getAllCategories();
-        drawerList.add(new DrawerItem("All events",R.drawable.default_ic));
-        for (Category category: categories)
+
+    private void setupDrawer() {
+        ArrayList<Category> categories = dbHelper.getAllCategories();
+        drawerList.add(new DrawerItem("All events", R.mipmap.ic_launcher));
+        for (Category category : categories)
             prepareDrawer(category.getCatName());
     }
-    private void prepareDrawer(String categoryName){
-        switch (categoryName){
+
+    private void prepareDrawer(String categoryName) {
+        switch (categoryName) {
             case "Acumen":
-                drawerList.add(new DrawerItem(categoryName,R.drawable.acumen));
+                drawerList.add(new DrawerItem(categoryName, R.drawable.acumen));
                 break;
             case "Airborne":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.airborne));
@@ -141,10 +151,10 @@ public class EventActivity extends AppCompatActivity {
                 drawerList.add(new DrawerItem(categoryName, R.drawable.epsilon));
                 break;
             case "Gaming":
-                drawerList.add(new DrawerItem(categoryName,R.drawable.gaming));
+                drawerList.add(new DrawerItem(categoryName, R.drawable.gaming));
                 break;
             case "Featured Events":
-                drawerList.add(new DrawerItem(categoryName,R.drawable.featured));
+                drawerList.add(new DrawerItem(categoryName, R.drawable.featured));
                 break;
             case "Kraftwagen":
                 drawerList.add(new DrawerItem(categoryName, R.drawable.kraftwagen));
@@ -162,14 +172,15 @@ public class EventActivity extends AppCompatActivity {
                 drawerList.add(new DrawerItem(categoryName, R.drawable.turing));
                 break;
             case "Open":
-                drawerList.add(new DrawerItem(categoryName,R.drawable.open));
+            case "Open Events":
+                drawerList.add(new DrawerItem(categoryName, R.drawable.open));
             default:
-                drawerList.add(new DrawerItem(categoryName, R.drawable.default_ic));
+                drawerList.add(new DrawerItem(categoryName, R.mipmap.ic_launcher));
                 break;
         }
     }
 
-    protected void animate(View toolbar, View slidingTabLayout){
+    protected void animate(View toolbar, View slidingTabLayout) {
         final PropertyAction headerAction = PropertyAction.newPropertyAction(toolbar).interpolator(new DecelerateInterpolator()).translationY(-200).duration(250).alpha(0.4f).build();
         final PropertyAction tabAction = PropertyAction.newPropertyAction(slidingTabLayout).translationY(200).duration(250).alpha(0f).build();
         final PropertyAction bottomAction = PropertyAction.newPropertyAction(viewPager).translationY(500).duration(250).alpha(0f).build();
@@ -192,7 +203,7 @@ public class EventActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
                 break;
             case R.id.action_about:
-                startActivity(new Intent(getApplicationContext(),AboutUsActivity.class));
+                startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
                 break;
             case R.id.action_registration:
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
@@ -201,7 +212,7 @@ public class EventActivity extends AppCompatActivity {
                 builder.setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left);
                 // vice versa
                 builder.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
-                CustomTabsIntent customTabsIntent =builder.build();
+                CustomTabsIntent customTabsIntent = builder.build();
                 CustomTabActivityHelper.openCustomTab(
                         this, customTabsIntent, Uri.parse(Constants.URL_REGISTRATION), new WebviewFallback());
                 break;
@@ -234,7 +245,7 @@ public class EventActivity extends AppCompatActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
-        private void setupViewPager(final ViewPager viewPager) {
+    private void setupViewPager(final ViewPager viewPager) {
         final DayViewPagerAdapter mDayViewPagerAdapter = new DayViewPagerAdapter(getSupportFragmentManager());
         mDayViewPagerAdapter.addFragment(day1, "DAY 1");
         mDayViewPagerAdapter.addFragment(day2, "DAY 2");

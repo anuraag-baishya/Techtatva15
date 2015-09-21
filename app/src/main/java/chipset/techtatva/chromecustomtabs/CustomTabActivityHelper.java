@@ -1,4 +1,4 @@
-package chipset.techtatva.chromeTabs;
+package chipset.techtatva.chromecustomtabs;
 
 /**
  * Created by saketh on 20/9/15.
@@ -22,8 +22,7 @@ import android.net.Uri;
 
         import android.app.Activity;
         import android.content.ComponentName;
-        import android.net.Uri;
-        import android.os.Bundle;
+import android.os.Bundle;
         import android.support.customtabs.CustomTabsClient;
         import android.support.customtabs.CustomTabsIntent;
         import android.support.customtabs.CustomTabsServiceConnection;

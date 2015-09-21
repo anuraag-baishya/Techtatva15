@@ -1,4 +1,4 @@
-package chipset.techtatva.chromeTabs;
+package chipset.techtatva.chromecustomtabs;
 
 /**
  * Created by saketh on 20/9/15.
