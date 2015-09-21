@@ -26,7 +26,7 @@
                 android:layout_weight="0.3"
                 android:gravity="center"
                 android:padding="10dp"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/default_ic" />
 
             <TextView
                 android:id="@+id/insta_feed_username_text_view"
@@ -56,7 +56,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="16dp"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/default_ic"
             android:visibility="gone" />
 
         <TextView
