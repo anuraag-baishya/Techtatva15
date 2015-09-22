@@ -1,6 +1,7 @@
 package chipset.techtatva.activities;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -51,13 +52,16 @@ public class EventActivity extends AppCompatActivity {
     public static ArrayList<DrawerItem> drawerList;
     private static ListView drawerListView;
     private static Context mContext;
-
+    public static ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
         mContext = this;
         drawerListView = (ListView) findViewById(R.id.drawer_list_view);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         dbHelper = new DBHelper(this);

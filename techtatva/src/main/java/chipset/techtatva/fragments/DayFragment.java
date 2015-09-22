@@ -41,7 +41,6 @@ import chipset.techtatva.model.events.Event;
 import chipset.techtatva.resources.Constants;
 
 public class DayFragment extends Fragment {
-    private ProgressDialog mProgressDialog;
     private EventCardListAdapter mEventAdapter;
     public int day;
     DBHelper dbHelper;
@@ -111,9 +110,6 @@ public class DayFragment extends Fragment {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
-        mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(false);
         if (Potato.potate().Utils().isInternetConnected(getActivity())) {
             prepareData();
         } else if (dbHelper.getAllCategories().size() != 0 && dbHelper.getAllEvents().size() != 0) {
@@ -137,7 +133,10 @@ public class DayFragment extends Fragment {
     }
 
     private void prepareData() {
-        mProgressDialog.show();
+        if(!EventActivity.mProgressDialog.isShowing()) {
+            Log.d("progress","showing");
+            EventActivity.mProgressDialog.show();
+        }
         JsonObjectRequest eventRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_SCHEDULE, (String) null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -209,7 +208,7 @@ public class DayFragment extends Fragment {
 
     private void Display() {
         try {
-            mProgressDialog.dismiss();
+            EventActivity.mProgressDialog.dismiss();
         } catch (Exception e) {
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

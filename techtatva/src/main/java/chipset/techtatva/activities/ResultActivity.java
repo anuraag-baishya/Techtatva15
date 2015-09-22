@@ -59,7 +59,7 @@ public class ResultActivity extends AppCompatActivity {
         });
         mProgressDialog = new ProgressDialog(ResultActivity.this);
         mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(true);
         resultList = new ArrayList<>();
         loadResults();
         mResultView = (ListView) findViewById(R.id.Result_ListView);

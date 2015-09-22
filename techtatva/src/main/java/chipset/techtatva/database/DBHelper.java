@@ -111,7 +111,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + FAV_EVENTS_TABLE_NAME);
         db.execSQL("CREATE TABLE IF  NOT EXISTS " + FAV_EVENTS_TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY," + EVENT_ID
-                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER);");
+                + " INTEGER," + CATEGORY_ID + " INTEGER," + NAME + " TEXT," + DESCRIPTION + " TEXT," + EVENT_MAX_NO + " INTEGER," + Constants.EVENT_LOCATION + " TEXT," +
+                Constants.EVENT_DATE + " TEXT," + Constants.EVENT_START_TIME + " TEXT," + Constants.EVENT_END_TIME + " TEXT," + Constants.EVENT_CONTACT_NAME + " TEXT," + Constants.EVENT_CONTACT_NUMBER + " TEXT," +
+                Constants.EVENT_DAY + " INTEGER);");
     }
 
     public void addToFavorites(Event event) {
