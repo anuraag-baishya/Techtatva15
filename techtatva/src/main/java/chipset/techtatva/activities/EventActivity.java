@@ -57,11 +57,12 @@ public class EventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
+        Potato.potate().Preferences().putSharedPreference(this,"access","internet");
         mContext = this;
         drawerListView = (ListView) findViewById(R.id.drawer_list_view);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(true);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         dbHelper = new DBHelper(this);
@@ -272,5 +273,10 @@ public class EventActivity extends AppCompatActivity {
         mDayViewPagerAdapter.addFragment(day3, "DAY 3");
         mDayViewPagerAdapter.addFragment(day4, "DAY 4");
         viewPager.setAdapter(mDayViewPagerAdapter);
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Potato.potate().Preferences().putSharedPreference(this,"access","internet");
     }
 }

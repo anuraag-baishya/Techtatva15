@@ -110,7 +110,7 @@ public class DayFragment extends Fragment {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
-        if (Potato.potate().Utils().isInternetConnected(getActivity())) {
+        if (Potato.potate().Utils().isInternetConnected(getActivity()) && Potato.potate().Preferences().getSharedPreferenceString(getActivity(),"access").equals("internet")) {
             prepareData();
         } else if (dbHelper.getAllCategories().size() != 0 && dbHelper.getAllEvents().size() != 0) {
             DataChange();
@@ -166,6 +166,7 @@ public class DayFragment extends Fragment {
                     e.printStackTrace();
                 }
                 DataChange();
+                Potato.potate().Preferences().putSharedPreference(getActivity(),"access","database");
             }
         }, new Response.ErrorListener() {
             @Override
@@ -207,15 +208,15 @@ public class DayFragment extends Fragment {
     }
 
     private void Display() {
-        try {
-            EventActivity.mProgressDialog.dismiss();
-        } catch (Exception e) {
-        }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mEventAdapter = new EventCardListAdapter(getActivity(), mEventList, day);
         mRecyclerView.setAdapter(mEventAdapter);
+        try {
+            EventActivity.mProgressDialog.dismiss();
+        } catch (Exception e) {
+        }
     }
 
     public void DataChange() {

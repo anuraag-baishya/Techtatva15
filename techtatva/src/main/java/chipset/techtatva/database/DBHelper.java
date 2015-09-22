@@ -63,7 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         boolean CatExists = false;
         for (Category category1 : getAllCategories()) {
-            if (category1.getCatId() == category.getCatId()) {
+            if (category1.getCatId() == category.getCatId() &&category1.getCatName().equals(category.getCatName()) &&category.getDescription().equals(category1.getDescription())) {
                 CatExists = true;
                 break;
             }
@@ -79,19 +79,27 @@ public class DBHelper extends SQLiteOpenHelper {
     public void insertEvent(Event event) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(EVENT_ID, event.getEvent_id());
-        contentValues.put(CATEGORY_ID, event.getCatId());
-        contentValues.put(NAME, event.getEvent_name());
-        contentValues.put(DESCRIPTION, event.getDescription());
-        contentValues.put(EVENT_MAX_NO, event.getEventMaxTeamNumber());
-        contentValues.put(Constants.EVENT_LOCATION, event.getLocation());
-        contentValues.put(Constants.EVENT_CONTACT_NAME, event.getContactName());
-        contentValues.put(Constants.EVENT_CONTACT_NUMBER, event.getContactNumber());
-        contentValues.put(Constants.EVENT_DATE, event.getDate());
-        contentValues.put(Constants.EVENT_DAY, event.getDay());
-        contentValues.put(Constants.EVENT_START_TIME, event.getStartTime());
-        contentValues.put(Constants.EVENT_END_TIME, event.getEndTime());
-        db.insert(EVENTS_TABLE_NAME, null, contentValues);
+        boolean eventExists = false;
+        for(Event event1 : getAllEvents()){
+            if(event.getEvent_name().equals(event1.getEvent_name()) && event.getCatId()==event1.getCatId() && event.getStartTime().equals(event1.getStartTime()) && event.getDay()==event1.getDay()){
+                eventExists = true;
+            }
+        }
+        if (!eventExists) {
+            contentValues.put(EVENT_ID, event.getEvent_id());
+            contentValues.put(CATEGORY_ID, event.getCatId());
+            contentValues.put(NAME, event.getEvent_name());
+            contentValues.put(DESCRIPTION, event.getDescription());
+            contentValues.put(EVENT_MAX_NO, event.getEventMaxTeamNumber());
+            contentValues.put(Constants.EVENT_LOCATION, event.getLocation());
+            contentValues.put(Constants.EVENT_CONTACT_NAME, event.getContactName());
+            contentValues.put(Constants.EVENT_CONTACT_NUMBER, event.getContactNumber());
+            contentValues.put(Constants.EVENT_DATE, event.getDate());
+            contentValues.put(Constants.EVENT_DAY, event.getDay());
+            contentValues.put(Constants.EVENT_START_TIME, event.getStartTime());
+            contentValues.put(Constants.EVENT_END_TIME, event.getEndTime());
+            db.insert(EVENTS_TABLE_NAME, null, contentValues);
+        }
     }
 
     public void dropTables() {
