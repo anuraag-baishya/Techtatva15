@@ -111,14 +111,6 @@ public class DayFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        FloatingActionButton favoriteFloatingActionButton=(FloatingActionButton)rootView[0].findViewById(R.id.favorite_floating_action_button);
-        favoriteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), FavouritesActivity.class));
-                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            }
-        });
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
         mProgressDialog = new ProgressDialog(getActivity());

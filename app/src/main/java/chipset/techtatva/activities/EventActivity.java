@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -74,7 +75,15 @@ public class EventActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
-        animate(toolbar, tabLayout);
+        //animate(toolbar, tabLayout);
+        FloatingActionButton favoriteFloatingActionButton=(FloatingActionButton)findViewById(R.id.favorite_floating_action_button);
+        favoriteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            }
+        });
         final String[] category = getResources().getStringArray(R.array.category);
         Potato.potate().Preferences().putSharedPreference(EventActivity.this, "cat", category[0]);
         drawerList = new ArrayList<>();
@@ -91,7 +100,7 @@ public class EventActivity extends AppCompatActivity {
                     day3.DataChange();
                     day4.DataChange();
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
                 mDrawerLayout.closeDrawer(GravityCompat.START);
             }
@@ -206,7 +215,8 @@ public class EventActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.action_developers:
-                Toast.makeText(getApplicationContext(), "Developers", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), DeveloperActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.action_about:
                 startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));

@@ -59,16 +59,16 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
         mHolder.textDate.setText(event.getDate());
         mHolder.textLocation.setText(event.getLocation());
         mHolder.textTime.setText(event.getStartTime()+" to "+event.getEndTime());
-        mHolder.textMaxSize.setText("max no per team : "+ event.getEventMaxTeamNumber());
-        mHolder.textContact.setText("Contact the category head"+"("+event.getContactName()+")");
-        mHolder.textFav.setText("Add to favs");
+        mHolder.textMaxSize.setText("Max Participants per Team: "+ event.getEventMaxTeamNumber());
+        mHolder.textContact.setText("Contact: "+event.getContactName());
+        mHolder.textFav.setText("Add to favourites");
         mHolder.textFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dbHelper.addToFavorites(event);
             }
         });
-        mHolder.textCall.setText("Click here to call "+event.getContactNumber());
+        mHolder.textCall.setText("Call: "+event.getContactNumber());
         mHolder.eventInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

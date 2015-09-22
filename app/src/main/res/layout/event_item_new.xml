@@ -9,6 +9,7 @@
     android:id="@+id/eventCards"
     android:layout_height="wrap_content">
     <RelativeLayout
+        style="@style/Widget.CardContent"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
     <TextView
