@@ -24,6 +24,7 @@ import chipset.techtatva.model.events.Event;
  */
 public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> {
     private ArrayList<Event> mEventList;
+    private ArrayList<Event> allEvents;
     private Context mContext;
     private DBHelper dbHelper;
     private int day;
@@ -37,6 +38,8 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
                 if (event.getDay() == day)
                     mEventList.add(event);
             }
+            allEvents = new ArrayList<>();
+            allEvents.addAll(mEventList);
         }
         for (Event event:mEventList){
             Log.d("eventsc", "Event name : " + event.getEvent_name());
@@ -121,8 +124,8 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
         return mEventList.size();
     }
     public void filterData(String query){
-        ArrayList<Event> allEvents = new ArrayList<Event>();
-        allEvents.addAll(mEventList);
+        ArrayList<Event> allevents = new ArrayList<Event>();
+        allevents.addAll(allEvents);
         mEventList.clear();
         for(Event event : allEvents){
             if(event.getEvent_name().toLowerCase().contains(query.toLowerCase()))
