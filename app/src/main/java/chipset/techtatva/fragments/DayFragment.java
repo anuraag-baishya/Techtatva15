@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -99,6 +98,7 @@ public class DayFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_insta) {
             startActivity(new Intent(getActivity(), InstaFeedActivity.class));
+            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -116,13 +116,14 @@ public class DayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), FavouritesActivity.class));
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(true);
+        mProgressDialog.setCancelable(false);
         if(Potato.potate().Utils().isInternetConnected(getActivity())){
             prepareData();
         }else if(dbHelper.getAllCategories().size()!=0 && dbHelper.getAllEvents().size()!=0){
@@ -175,7 +176,7 @@ public class DayFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Display();
+                DataChange();
             }
         }, new Response.ErrorListener() {
             @Override

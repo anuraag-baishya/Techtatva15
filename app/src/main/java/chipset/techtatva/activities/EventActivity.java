@@ -84,6 +84,7 @@ public class EventActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name = ((TextView) view.findViewById(R.id.category_name_text_view)).getText().toString();
                 Potato.potate().Preferences().putSharedPreference(EventActivity.this, "cat", name);
+                getSupportActionBar().setTitle(name);
                 try {
                     day1.DataChange();
                     day2.DataChange();
@@ -202,12 +203,14 @@ public class EventActivity extends AppCompatActivity {
         switch (menuItem.getItemId()) {
             case R.id.action_results:
                 startActivity(new Intent(getApplicationContext(), ResultActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.action_developers:
                 Toast.makeText(getApplicationContext(), "Developers", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_about:
                 startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.action_registration:
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();

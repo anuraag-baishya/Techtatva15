@@ -30,15 +30,20 @@ public class InstaFeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getSupportActionBar().setElevation(0f);
         loadInstaFeed();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==android.R.id.home)
+            onBackPressed();
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
+    }
     public void loadInstaFeed() {
         setContentView(R.layout.activity_insta_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
@@ -118,4 +123,5 @@ public class InstaFeedActivity extends AppCompatActivity {
             }
         });
     }
+
 }

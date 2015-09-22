@@ -141,10 +141,12 @@ public class ImageActivity extends AppCompatActivity {
             sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
             sendIntent.setType("image/*");
             startActivity(Intent.createChooser(sendIntent, "Share Image"));
+        }else if(item.getItemId()==android.R.id.home){
+            onBackPressed();
         }
+
         return super.onOptionsItemSelected(item);
     }
-
     private File getImageBitmap() {
         mImageView.setDrawingCacheEnabled(true);
         Bitmap bitmap = mImageView.getDrawingCache();
@@ -185,6 +187,11 @@ public class ImageActivity extends AppCompatActivity {
         editor.clear();
         editor.putInt(preferenceName, val);
         editor.commit();
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 }

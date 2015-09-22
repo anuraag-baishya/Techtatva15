@@ -57,15 +57,14 @@ public class FavouritesActivity extends AppCompatActivity {
         switch(id){
             case R.id.action_insta:
                 startActivity(new Intent(getApplicationContext(), InstaFeedActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.action_results:
                 startActivity(new Intent(getApplicationContext(), ResultActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
             case R.id.action_developers:
                 Toast.makeText(getApplicationContext(), "Developers", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_contact:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.action_deleteFavs:
                 dbHelper.deleteAllFavorites();
@@ -76,8 +75,16 @@ public class FavouritesActivity extends AppCompatActivity {
                 mRecyclerView.setAdapter(mEventAdapter);
                 mProgressDialog.dismiss();
                 break;
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+     public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition( R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }
