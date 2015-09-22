@@ -23,7 +23,7 @@
         <ListView
             android:id="@+id/Result_ListView"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:divider="@android:color/transparent" />
     </LinearLayout>
 </chipset.techtatva.resources.SwipeDownRefreshLayout>

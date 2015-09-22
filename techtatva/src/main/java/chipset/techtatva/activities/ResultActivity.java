@@ -17,9 +17,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,11 +35,11 @@ import chipset.techtatva.resources.SwipeDownRefreshLayout;
 
 public class ResultActivity extends AppCompatActivity {
 
-    public static String URL_RESULTS = "http://results.techtatva.in/";
+    public static String URL_RESULTS = "http://api.techtatva.in/results";
     private ProgressDialog mProgressDialog;
-    private static final String TAG_CAT = "Category";
-    private static final String TAG_EVENT = "Event";
-    private static final String TAG_RES = "Result";
+    private static final String TAG_CAT = "categoryName";
+    private static final String TAG_EVENT = "eventName";
+    private static final String TAG_RES = "result";
     private ListView mResultView;
     ArrayList<HashMap<String, String>> resultList;
     private SwipeDownRefreshLayout mSwipeDownRefreshLayout;
@@ -54,7 +57,6 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 loadResults();
-
             }
         });
         mProgressDialog = new ProgressDialog(ResultActivity.this);
@@ -84,11 +86,13 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void loadResults() {
+        resultList.clear();
         mProgressDialog.show();
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, URL_RESULTS, (String) null, new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, URL_RESULTS, (String) null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(JSONArray jArr) {
+            public void onResponse(JSONObject response) {
                 try {
+                    JSONArray jArr = response.getJSONArray("data");
                     Log.e("jArr", String.valueOf(jArr));
                     if (jArr.length() == 0) {
                         HashMap<String, String> map = new HashMap<>();
@@ -113,10 +117,10 @@ public class ResultActivity extends AppCompatActivity {
                             getApplicationContext(), resultList);
                     mResultView.setAdapter(adapter);
                     mSwipeDownRefreshLayout.setRefreshing(false);
-                } catch (Exception e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(ResultActivity.this, "Error Connecting to Server", Toast.LENGTH_SHORT).show();
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -124,7 +128,7 @@ public class ResultActivity extends AppCompatActivity {
 
             }
         });
-        Volley.newRequestQueue(ResultActivity.this).add(jsonArrayRequest);
+        Volley.newRequestQueue(this).add(jsonObjectRequest);
     }
 
     @Override

@@ -61,9 +61,9 @@ public class ResultAdapter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder) arg1.getTag();
         }
-        mViewHolder.name.setText((String) map.get("Event"));
-        mViewHolder.category.setText((String) map.get("Category"));
-        mViewHolder.res.setText((String) map.get("Result"));
+        mViewHolder.name.setText((String) map.get("eventName"));
+        mViewHolder.category.setText((String) map.get("categoryName"));
+        mViewHolder.res.setText((String) map.get("result"));
         return arg1;
 
     }
