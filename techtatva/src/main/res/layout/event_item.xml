@@ -28,7 +28,9 @@
             android:id="@+id/eventInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginTop="4dp"
             android:src="@drawable/ic_action_about" />
 
@@ -48,6 +50,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:drawableLeft="@drawable/ic_location"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_location"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/black" />
 
@@ -61,6 +65,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:drawableLeft="@drawable/ic_time"
+                android:drawablePadding="5dp"
                 android:drawableStart="@drawable/ic_time"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/black" />
@@ -75,6 +80,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
                 android:drawableLeft="@drawable/ic_date"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_date"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/black" />
 
@@ -99,6 +106,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
                 android:drawableLeft="@drawable/ic_contact"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_contact"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/black" />
 
@@ -108,6 +117,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/eventContact"
                 android:layout_margin="5dp"
+                android:drawableLeft="@drawable/ic_participants"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_participants"
                 android:textColor="@color/black"
                 android:visibility="gone" />
 

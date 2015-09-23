@@ -30,7 +30,7 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
 
     public EventCardListAdapter(Context c, ArrayList<Event> events, int day) {
         this.mContext = c;
-        this.mEventList = new ArrayList<Event>();
+        this.mEventList = new ArrayList<>();
         if (day == 0)
             this.mEventList.addAll(events);
         else {
@@ -125,7 +125,7 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
     }
 
     public void filterData(String query) {
-        ArrayList<Event> allevents = new ArrayList<Event>();
+        ArrayList<Event> allevents = new ArrayList<>();
         allevents.addAll(allEvents);
         mEventList.clear();
         for (Event event : allEvents) {

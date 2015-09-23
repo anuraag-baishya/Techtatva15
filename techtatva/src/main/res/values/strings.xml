@@ -22,7 +22,7 @@
     <string name="title_activity_email">EmailActivity</string>
     <string name="title_activity_event_search">EventSearchActivity</string>
     <string name="title_activity_result">Results</string>
-    <string name="title_activity_image"></string>
+    <string name="title_activity_image" />
     <string name="title_activity_insta_feed">#techtatva15</string>
     <string name="title_activity_all_events">AllEvents</string>
     <string-array name="category">
