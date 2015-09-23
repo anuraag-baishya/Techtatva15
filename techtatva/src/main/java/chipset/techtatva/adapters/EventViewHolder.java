@@ -20,7 +20,6 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
     TextView textDate;
     TextView textMaxSize;
     TextView textContact;
-    TextView textCall;
     TextView textFav;
     ImageView eventInfoImageView;
     RelativeLayout descriptionLayout;
@@ -34,7 +33,6 @@ public class EventViewHolder extends RecyclerView.ViewHolder {
         textDate = (TextView) itemView.findViewById(R.id.eventDate);
         textMaxSize = (TextView) itemView.findViewById(R.id.maxSize);
         textContact = (TextView) itemView.findViewById(R.id.eventContact);
-        textCall = (TextView) itemView.findViewById(R.id.contactCall);
         textFav = (TextView) itemView.findViewById(R.id.favorite);
         eventInfoImageView = (ImageView) itemView.findViewById(R.id.eventInfo);
         descriptionLayout = (RelativeLayout) itemView.findViewById(R.id.description);

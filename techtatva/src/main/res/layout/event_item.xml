@@ -94,6 +94,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/ic_participants"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_participants"
                 android:textColor="@color/black" />
 
             <TextView
@@ -112,40 +115,20 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/contactCall"
+                android:id="@+id/favorite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/eventContact"
-                android:layout_margin="5dp"
-                android:drawableLeft="@drawable/ic_participants"
+                android:layout_below="@id/eventContact"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/ic_fav"
                 android:drawablePadding="5dp"
-                android:drawableStart="@drawable/ic_participants"
-                android:textColor="@color/black"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/contactCall">
-
-                <ImageView
-                    android:id="@+id/favoriteImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp" />
-
-                <TextView
-                    android:id="@+id/favorite"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="start|center_vertical"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/black" />
-            </LinearLayout>
+                android:drawableStart="@drawable/ic_fav"
+                android:gravity="start|center_vertical"
+                android:paddingLeft="5dp"
+                android:textColor="@color/black" />
         </RelativeLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

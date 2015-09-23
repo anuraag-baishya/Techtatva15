@@ -63,16 +63,15 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
         mHolder.textDate.setText(event.getDate());
         mHolder.textLocation.setText(event.getLocation());
         mHolder.textTime.setText(event.getStartTime() + " to " + event.getEndTime());
-        mHolder.textMaxSize.setText("Max Participants per Team: " + event.getEventMaxTeamNumber());
+        mHolder.textMaxSize.setText("Max participants per team: " + event.getEventMaxTeamNumber());
         mHolder.textContact.setText("Contact: " + event.getContactName());
-        mHolder.textFav.setText("Add to favourites");
+        mHolder.textFav.setText("Favourite Event");
         mHolder.textFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dbHelper.addToFavorites(event);
             }
         });
-        mHolder.textCall.setText("Call: " + event.getContactNumber());
         mHolder.eventInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,13 +97,8 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
         mHolder.textContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHolder.textCall.setVisibility(View.VISIBLE);
-            }
-        });
-        mHolder.textCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Potato.potate().Intents().callIntent(mContext, event.getContactNumber());
+
+                Potato.potate().Intents().callIntent(mContext, "+91" + event.getContactNumber());
             }
         });
         mHolder.eventCard.setOnClickListener(new View.OnClickListener() {
