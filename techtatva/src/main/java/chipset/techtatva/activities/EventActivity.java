@@ -219,10 +219,6 @@ public class EventActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ResultActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 break;
-            case R.id.action_developers:
-                startActivity(new Intent(getApplicationContext(), DeveloperActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                break;
             case R.id.action_about:
                 startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

@@ -134,7 +134,6 @@
                 android:drawableStart="@drawable/ic_fav"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="start|center_vertical"
-                android:paddingLeft="5dp"
                 android:textColor="@color/black" />
         </RelativeLayout>
     </RelativeLayout>

@@ -46,6 +46,6 @@
         <item>Gaming</item>
     </string-array>
     <string name="title_activity_favourites">Favourites</string>
-    <string name="title_activity_about_us">About Us</string>
+    <string name="title_activity_about_us">About TechTatva</string>
     <string name="title_activity_developer">DeveloperActivity</string>
 </resources>

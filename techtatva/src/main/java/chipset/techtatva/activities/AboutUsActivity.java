@@ -71,34 +71,10 @@ public class AboutUsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_about_us, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         switch (item.getItemId()) {
-            case R.id.action_results:
-                startActivity(new Intent(getApplicationContext(), ResultActivity.class));
-                break;
-            case R.id.action_developers:
-                Toast.makeText(getApplicationContext(), "Developers", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_contact:
-                Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_favourites:
-                startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
-                break;
             case android.R.id.home:
                 onBackPressed();
                 break;
