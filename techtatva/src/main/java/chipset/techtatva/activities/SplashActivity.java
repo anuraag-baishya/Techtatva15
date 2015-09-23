@@ -1,30 +1,15 @@
 package chipset.techtatva.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnErrorListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsoluteLayout;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.VideoView;
 
 import com.github.jorgecastillo.FillableLoader;
-import com.github.jorgecastillo.FillableLoaderBuilder;
 import com.github.jorgecastillo.State;
 import com.github.jorgecastillo.listener.OnStateChangeListener;
 
 import chipset.techtatva.R;
-import chipset.techtatva.model.events.Event;
 
 public class SplashActivity extends AppCompatActivity {
     private String path = "M 232.00,35.41\n" +
@@ -509,24 +494,23 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-            FillableLoader fillableLoader = (FillableLoader)findViewById(R.id.fillableLoader);
-            fillableLoader.setSvgPath(path);
-            fillableLoader.start();
+        FillableLoader fillableLoader = (FillableLoader) findViewById(R.id.fillableLoader);
+        fillableLoader.setSvgPath(path);
+        fillableLoader.start();
 
-            fillableLoader.setOnStateChangeListener(new OnStateChangeListener() {
-                    @Override
-                    public void onStateChange(int i) {
-                            if(i== State.FINISHED)
-                            {
-                             new Handler().postDelayed(new Runnable() {
-                                     @Override
-                                     public void run() {
-                                             startActivity(new Intent(SplashActivity.this, EventActivity.class)
-                                                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                                     }
-                             },1000);
-                            }
-                    }
-            });
+        fillableLoader.setOnStateChangeListener(new OnStateChangeListener() {
+            @Override
+            public void onStateChange(int i) {
+                if (i == State.FINISHED) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(SplashActivity.this, EventActivity.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        }
+                    }, 1000);
+                }
+            }
+        });
     }
 }

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <com.github.jorgecastillo.FillableLoader
@@ -9,13 +9,12 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
-        app:fl_originalWidth="512"
-        app:fl_originalHeight="512"
-        app:fl_strokeColor="@color/primary"
-        app:fl_fillColor="@color/primary"
-        app:fl_strokeWidth="2dp"
-        app:fl_strokeDrawingDuration="1500"
-        app:fl_fillDuration="1500"
         app:fl_clippingTransform="waves"
-        />
+        app:fl_fillColor="@color/primary"
+        app:fl_fillDuration="1500"
+        app:fl_originalHeight="512"
+        app:fl_originalWidth="512"
+        app:fl_strokeColor="@color/primary"
+        app:fl_strokeDrawingDuration="1500"
+        app:fl_strokeWidth="2dp" />
 </RelativeLayout>
