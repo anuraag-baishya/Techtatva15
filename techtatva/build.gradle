@@ -61,6 +61,8 @@ dependencies {
     compile 'ch.acra:acra:4.6.1'
     compile 'com.eftimoff:androidplayer:1.0.3@aar'
     compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.squareup:seismic:1.0.2'
+    compile 'com.github.jorgecastilloprz:fillableloaders:1.02@aar'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
         transitive = true;
     }

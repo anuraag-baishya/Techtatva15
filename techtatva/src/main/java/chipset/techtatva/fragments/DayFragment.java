@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -200,9 +201,11 @@ public class DayFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                EventActivity.mProgressDialog.dismiss();
             }
         });
+        catRequest.setRetryPolicy(new DefaultRetryPolicy(2000,0,0));
+        eventRequest.setRetryPolicy(new DefaultRetryPolicy(2000,0,0));
         Volley.newRequestQueue(getActivity()).add(catRequest);
         Volley.newRequestQueue(getActivity()).add(eventRequest);
     }
