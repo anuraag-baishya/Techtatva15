@@ -16,7 +16,21 @@
     <string name="drawer_closed">Close</string>
     <string name="drawer_open">Open</string>
     <string name="title_activity_event">EventActivity</string>
-
+    <string name="team_lead">Team Lead</string>
+    <string name="kartik">Kartik Arora</string>
+    <string name="anuraag">Anuraag Baishya</string>
+    <string name="saketh">Saketh Kaparthi</string>
+    <string name="yash">Yash Kumar Lal</string>
+    <string name="sushant">Sushant Gakhar</string>
+    <string name="manoj">Manoj Bhat</string>
+    <string name="samarth">Samarth Jain</string>
+    <string name="rohil">Rohil Vijaywargiya</string>
+    <string name="mayank">Mayank Bansak</string>
+    <string name="android">Android Developer</string>
+    <string name="ios">iOS Developer</string>
+    <string name="graphics">Graphics Designer</string>
+    <string name="coordinator">Co-ordinator</string>
+    <string name="windows">Windows Phone Developer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_email">EmailActivity</string>
@@ -48,4 +62,6 @@
     <string name="title_activity_favourites">Favourites</string>
     <string name="title_activity_about_us">About TechTatva</string>
     <string name="title_activity_developer">DeveloperActivity</string>
+    <string name="noevent">No Event Found!</string>
+    <string name="title_activity_developer_detail">TechTatva\'15 Developers</string>
 </resources>

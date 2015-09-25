@@ -21,4 +21,7 @@ public class Constants {
     public static String URL_ONLINE_EVENTS = "http://techtatva.in/onlineevents";
 
     public static String INSTA_DATA = "instaData";
+    public static String TITLE = "title";
+    public static String SUBTITLE = "subtitle";
+    public static String IMG = "img";
 }

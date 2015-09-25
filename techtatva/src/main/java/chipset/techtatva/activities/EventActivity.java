@@ -245,6 +245,9 @@ public class EventActivity extends AppCompatActivity {
                 CustomTabActivityHelper.openCustomTab(
                         this, customTabsIntent1, Uri.parse(Constants.URL_ONLINE_EVENTS), new WebViewFallback());
                 break;
+            case R.id.action_developers:
+                startActivity(new Intent(getApplicationContext(),DeveloperActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         }
         return super.onOptionsItemSelected(menuItem);

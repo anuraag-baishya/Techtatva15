@@ -17,22 +17,25 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/anuraag_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/anuraag" />
 
             <ImageView
+                android:id="@+id/yash_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/yash" />
 
             <ImageView
+                android:id="@+id/rohil_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/rohil" />
         </LinearLayout>
 
         <LinearLayout
@@ -42,22 +45,25 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/kartik_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/kartik" />
 
             <ImageView
+                android:id="@+id/samarth_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/samarth" />
 
             <ImageView
+                android:id="@+id/manoj_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/manoj" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,22 +73,25 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/saketh_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/saketh" />
 
             <ImageView
+                android:id="@+id/sushant_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/sushant" />
 
             <ImageView
+                android:id="@+id/mayank_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/devp" />
+                android:src="@drawable/mayank" />
         </LinearLayout>
     </LinearLayout>
 
