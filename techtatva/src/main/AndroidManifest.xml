@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.EventActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -29,7 +30,8 @@
         <activity
             android:name=".activities.ResultActivity"
             android:label="@string/title_activity_result"
-            android:parentActivityName=".activities.EventActivity">
+            android:parentActivityName=".activities.EventActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="chipset.techtatva.activities.EventActivity" />
@@ -38,6 +40,7 @@
             android:name=".activities.ImageActivity"
             android:label="@string/title_activity_image"
             android:parentActivityName=".activities.InstaFeedActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,7 +49,8 @@
         <activity
             android:name=".activities.InstaFeedActivity"
             android:label="@string/title_activity_insta_feed"
-            android:parentActivityName=".activities.EventActivity">
+            android:parentActivityName=".activities.EventActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="chipset.techtatva.activities.EventActivity" />
@@ -59,20 +63,24 @@
         <activity
             android:name=".activities.FavouritesActivity"
             android:label="@string/title_activity_favourites"
-            android:parentActivityName=".activities.EventActivity">
+            android:parentActivityName=".activities.EventActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="chipset.techtatva.activities.EventActivity" />
         </activity>
         <activity
             android:name=".activities.AboutUsActivity"
-            android:label="@string/title_activity_about_us" />
+            android:label="@string/title_activity_about_us"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.WebViewActivity"
-            android:label="" />
+            android:label=""
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SplashActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,15 +90,18 @@
         <activity
             android:name=".activities.DeveloperActivity"
             android:label="@string/title_activity_developer"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.DeveloperDetailActivity"
             android:label="@string/title_activity_developer_detail"
+            android:screenOrientation="portrait"
             android:theme="@style/DialogTheme" />
         <activity
             android:name=".activities.EasterEggActivity"
             android:label="@string/title_activity_easter_egg"
             android:parentActivityName=".activities.DeveloperActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
