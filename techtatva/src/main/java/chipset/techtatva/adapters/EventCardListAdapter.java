@@ -1,6 +1,7 @@
 package chipset.techtatva.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -97,8 +98,16 @@ public class EventCardListAdapter extends RecyclerView.Adapter<EventViewHolder> 
         mHolder.textContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Potato.potate().Intents().callIntent(mContext, "+91" + event.getContactNumber());
+                new AlertDialog.Builder(mContext)
+                        .setMessage("Call " + event.getContactName() + " ?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Potato.potate().Intents().callIntent(mContext, "+91" + event.getContactNumber());
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null)
+                        .create().show();
             }
         });
         mHolder.eventCard.setOnClickListener(new View.OnClickListener() {

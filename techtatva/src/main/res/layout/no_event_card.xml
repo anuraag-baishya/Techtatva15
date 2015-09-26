@@ -7,7 +7,7 @@
         android:layout_height="30dp"
         android:layout_margin="5dp"
         android:layout_gravity="center"
-        android:text="No events"
+        android:text="No Events"
         android:textAllCaps="true"
         android:fontFamily="sans-serif-condensed"
         android:textColor="@color/black"

@@ -1,30 +1,38 @@
 package chipset.techtatva.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.squareup.seismic.ShakeDetector;
 
 import chipset.techtatva.R;
 import chipset.techtatva.resources.Constants;
 
 public class DeveloperActivity extends Activity {
+    private Vibrator mVibrator;
+    private ShakeDetector mShakeDetector;
+    private SensorManager mSensorManager;
+    private ShakeDetector.Listener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_developer);
-        ImageView anuraagImageView=(ImageView)findViewById(R.id.anuraag_image_view);
-        ImageView kartikImageView=(ImageView)findViewById(R.id.kartik_image_view);
-        ImageView sakethImageView=(ImageView)findViewById(R.id.saketh_image_view);
-        ImageView yashImageView=(ImageView)findViewById(R.id.yash_image_view);
-        ImageView samarthImageView=(ImageView)findViewById(R.id.samarth_image_view);
-        ImageView sushantImageView=(ImageView)findViewById(R.id.sushant_image_view);
-        ImageView rohilImageView=(ImageView)findViewById(R.id.rohil_image_view);
-        ImageView manojImageView=(ImageView)findViewById(R.id.manoj_image_view);
-        ImageView mayankImageView=(ImageView)findViewById(R.id.mayank_image_view);
+        ImageView anuraagImageView = (ImageView) findViewById(R.id.anuraag_image_view);
+        ImageView kartikImageView = (ImageView) findViewById(R.id.kartik_image_view);
+        ImageView sakethImageView = (ImageView) findViewById(R.id.saketh_image_view);
+        ImageView yashImageView = (ImageView) findViewById(R.id.yash_image_view);
+        ImageView samarthImageView = (ImageView) findViewById(R.id.samarth_image_view);
+        ImageView sushantImageView = (ImageView) findViewById(R.id.sushant_image_view);
+        ImageView rohilImageView = (ImageView) findViewById(R.id.rohil_image_view);
+        ImageView manojImageView = (ImageView) findViewById(R.id.manoj_image_view);
+        ImageView mayankImageView = (ImageView) findViewById(R.id.mayank_image_view);
         anuraagImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,5 +88,29 @@ public class DeveloperActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        mListener = new ShakeDetector.Listener() {
+            @Override
+            public void hearShake() {
+                startActivity(new Intent(DeveloperActivity.this, EasterEggActivity.class));
+                mVibrator.vibrate(1000);
+
+            }
+        };
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mShakeDetector = new ShakeDetector(mListener);
+        mShakeDetector.start(mSensorManager);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mShakeDetector.stop();
     }
 }

@@ -38,6 +38,8 @@
     <string name="title_activity_result">Results</string>
     <string name="title_activity_image" />
     <string name="title_activity_insta_feed">#techtatva15</string>
+    <string name="shake">Shake to go back</string>
+    <string name="lug_manipal">LUG Manipal</string>
     <string name="title_activity_all_events">AllEvents</string>
     <string-array name="category">
         <item>All Events</item>
@@ -64,4 +66,5 @@
     <string name="title_activity_developer">DeveloperActivity</string>
     <string name="noevent">No Event Found!</string>
     <string name="title_activity_developer_detail">TechTatva\'15 Developers</string>
+    <string name="title_activity_easter_egg">Easter Egg</string>
 </resources>

@@ -1,13 +1,11 @@
 package chipset.techtatva.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import chipset.techtatva.R;
-
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import chipset.techtatva.R;
 import chipset.techtatva.resources.Constants;
 
 public class DeveloperDetailActivity extends AppCompatActivity {
