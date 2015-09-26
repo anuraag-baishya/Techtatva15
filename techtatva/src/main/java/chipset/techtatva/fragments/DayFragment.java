@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.PortUnreachableException;
 import java.util.ArrayList;
 
 import chipset.potato.Potato;
@@ -38,6 +39,7 @@ import chipset.techtatva.database.DBHelper;
 import chipset.techtatva.model.events.Category;
 import chipset.techtatva.model.events.Event;
 import chipset.techtatva.resources.Constants;
+import chipset.techtatva.resources.UpdateDatabase;
 
 public class DayFragment extends Fragment {
     private EventCardListAdapter mEventAdapter;
@@ -114,9 +116,6 @@ public class DayFragment extends Fragment {
             DataChange();
             if (EventActivity.drawerList.size() == 0)
                 EventActivity.setupDrawer();
-            if(Potato.potate().Utils().isInternetConnected(getActivity())) {
-                UpdateData();
-            }
         }else if(Potato.potate().Utils().isInternetConnected(getActivity())){
             prepareData();
         }else {
@@ -135,67 +134,6 @@ public class DayFragment extends Fragment {
         return rootView[0];
     }
 
-    private void UpdateData() {
-        JsonObjectRequest eventRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_SCHEDULE, (String) null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("Events", response.toString());
-                try {
-                    Log.d("JSON", "loading");
-                    JSONArray data = response.getJSONArray("data");
-                    for (int i = 0; i < data.length(); i++) {
-                        Event event = new Event();
-                        event.setCatId(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_CATEGORY_ID)));
-                        event.setDescription(data.getJSONObject(i).getString(Constants.EVENT_DETAIL));
-                        event.setEvent_id(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_ID)));
-                        event.setEvent_name(data.getJSONObject(i).getString(Constants.EVENT_NAME));
-                        event.setEventMaxTeamNumber(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_MAX_TEAM_SIZE)));
-                        event.setDay(Integer.parseInt(data.getJSONObject(i).getString(Constants.EVENT_DAY)));
-                        event.setContactName(data.getJSONObject(i).getString(Constants.EVENT_CONTACT_NAME));
-                        event.setContactNumber(data.getJSONObject(i).getString(Constants.EVENT_CONTACT_NUMBER));
-                        event.setDate(data.getJSONObject(i).getString(Constants.EVENT_DATE));
-                        event.setStartTime(data.getJSONObject(i).getString(Constants.EVENT_START_TIME));
-                        event.setEndTime(data.getJSONObject(i).getString(Constants.EVENT_END_TIME));
-                        event.setLocation(data.getJSONObject(i).getString(Constants.EVENT_LOCATION));
-                        dbHelper.insertEvent(event);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        JsonObjectRequest catRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_CATEGORIES, (String) null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                dbHelper.dropTables();
-                Log.d("Categories", response.toString());
-                try {
-                    JSONArray data = response.getJSONArray("data");
-                    for (int i = 0; i < data.length(); i++) {
-                        Category category = new Category();
-                        category.setCatName(data.getJSONObject(i).getString("categoryName"));
-                        category.setDescription(data.getJSONObject(i).getString("description"));
-                        category.setCatType(data.getJSONObject(i).getString("categoryType"));
-                        category.setCatId(Integer.parseInt(data.getJSONObject(i).getString("categoryID")));
-                        dbHelper.insertCategory(category);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        Volley.newRequestQueue(getActivity()).add(catRequest);
-        Volley.newRequestQueue(getActivity()).add(eventRequest);
-    }
 
     private void prepareData() {
         if(!EventActivity.mProgressDialog.isShowing()) {

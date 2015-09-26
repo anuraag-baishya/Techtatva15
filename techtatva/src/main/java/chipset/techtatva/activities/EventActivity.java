@@ -40,6 +40,7 @@ import chipset.techtatva.fragments.DayFragment;
 import chipset.techtatva.model.events.Category;
 import chipset.techtatva.model.events.DrawerItem;
 import chipset.techtatva.resources.Constants;
+import chipset.techtatva.resources.UpdateDatabase;
 
 
 public class EventActivity extends AppCompatActivity {
@@ -47,10 +48,10 @@ public class EventActivity extends AppCompatActivity {
     DayFragment day1, day2, day3, day4;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-    private static DBHelper dbHelper;
+    public static DBHelper dbHelper;
     public static ArrayList<DrawerItem> drawerList;
     private static ListView drawerListView;
-    private static Context mContext;
+    public static Context mContext;
     public static ProgressDialog mProgressDialog;
 
     @Override
@@ -74,6 +75,12 @@ public class EventActivity extends AppCompatActivity {
         day3.day = 3;
         day4 = new DayFragment();
         day4.day = 4;
+        if(dbHelper.getAllCategories().size()!=0 && dbHelper.getAllEvents().size()!=0) {
+            if (Potato.potate().Utils().isInternetConnected(this)) {
+                UpdateDatabase ud = new UpdateDatabase();
+                ud.execute((String) null);
+            }
+        }
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_closed);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
