@@ -8,7 +8,6 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.customtabs.CustomTabsIntent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -53,11 +52,12 @@ public class EventActivity extends AppCompatActivity {
     private static ListView drawerListView;
     private static Context mContext;
     public static ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        Potato.potate().Preferences().putSharedPreference(this,"access","internet");
+        Potato.potate().Preferences().putSharedPreference(this, "access", "internet");
         mContext = this;
         drawerListView = (ListView) findViewById(R.id.drawer_list_view);
         mProgressDialog = new ProgressDialog(this);
@@ -81,14 +81,14 @@ public class EventActivity extends AppCompatActivity {
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
         //animate(toolbar, tabLayout);
-        FloatingActionButton favoriteFloatingActionButton = (FloatingActionButton) findViewById(R.id.favorite_floating_action_button);
+        /*FloatingActionButton favoriteFloatingActionButton = (FloatingActionButton) findViewById(R.id.favorite_floating_action_button);
         favoriteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
-        });
+        });*/
         final String[] category = getResources().getStringArray(R.array.category);
         Potato.potate().Preferences().putSharedPreference(EventActivity.this, "cat", category[0]);
         drawerList = new ArrayList<>();
@@ -215,6 +215,10 @@ public class EventActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.action_favourites:
+                startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                break;
             case R.id.action_results:
                 startActivity(new Intent(getApplicationContext(), ResultActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -246,7 +250,7 @@ public class EventActivity extends AppCompatActivity {
                         this, customTabsIntent1, Uri.parse(Constants.URL_ONLINE_EVENTS), new WebViewFallback());
                 break;
             case R.id.action_developers:
-                startActivity(new Intent(getApplicationContext(),DeveloperActivity.class));
+                startActivity(new Intent(getApplicationContext(), DeveloperActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         }
@@ -273,9 +277,10 @@ public class EventActivity extends AppCompatActivity {
         mDayViewPagerAdapter.addFragment(day4, "DAY 4");
         viewPager.setAdapter(mDayViewPagerAdapter);
     }
+
     @Override
     public void onStop() {
         super.onStop();
-        Potato.potate().Preferences().putSharedPreference(this,"access","internet");
+        Potato.potate().Preferences().putSharedPreference(this, "access", "internet");
     }
 }
