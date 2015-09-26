@@ -57,7 +57,6 @@ public class EventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
-        Potato.potate().Preferences().putSharedPreference(this, "access", "internet");
         mContext = this;
         drawerListView = (ListView) findViewById(R.id.drawer_list_view);
         mProgressDialog = new ProgressDialog(this);
@@ -86,7 +85,7 @@ public class EventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                overridePendingTransition(R.anim.slid`e_in_right, R.anim.slide_out_left);
             }
         });*/
         final String[] category = getResources().getStringArray(R.array.category);
@@ -281,6 +280,5 @@ public class EventActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        Potato.potate().Preferences().putSharedPreference(this, "access", "internet");
     }
 }
