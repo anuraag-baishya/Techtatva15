@@ -3,22 +3,18 @@ package chipset.techtatva.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.squareup.seismic.ShakeDetector;
-
 import chipset.techtatva.R;
 import chipset.techtatva.resources.Constants;
+import io.kimo.konamicode.KonamiCode;
+import io.kimo.konamicode.KonamiCodeLayout;
 
 public class DeveloperActivity extends Activity {
     private Vibrator mVibrator;
-    private ShakeDetector mShakeDetector;
-    private SensorManager mSensorManager;
-    private ShakeDetector.Listener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,29 +84,22 @@ public class DeveloperActivity extends Activity {
             }
         });
 
+        new KonamiCode.Installer(DeveloperActivity.this)
+                .on(DeveloperActivity.this)
+                .callback(new KonamiCodeLayout.Callback() {
+                    @Override
+                    public void onFinish() {
+                        startActivity(new Intent(DeveloperActivity.this, EasterEggActivity.class));
+                        mVibrator.vibrate(1000);
+                    }
+                })
+                .install();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-
-        mListener = new ShakeDetector.Listener() {
-            @Override
-            public void hearShake() {
-                startActivity(new Intent(DeveloperActivity.this, EasterEggActivity.class));
-                mVibrator.vibrate(1000);
-
-            }
-        };
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mShakeDetector = new ShakeDetector(mListener);
-        mShakeDetector.start(mSensorManager);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mShakeDetector.stop();
     }
 }

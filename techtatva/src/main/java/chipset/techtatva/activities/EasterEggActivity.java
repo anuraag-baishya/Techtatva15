@@ -18,7 +18,7 @@ import chipset.techtatva.resources.Constants;
 
 public class EasterEggActivity extends AppCompatActivity {
 
-    private MediaPlayer mMediaPlayer;
+        private MediaPlayer mMediaPlayer;
     private Vibrator mVibrator;
     private ShakeDetector mShakeDetector;
     private SensorManager mSensorManager;
@@ -33,7 +33,6 @@ public class EasterEggActivity extends AppCompatActivity {
 
         mMediaPlayer = MediaPlayer.create(EasterEggActivity.this, R.raw.dance);
         mMediaPlayer.setLooping(true);
-
         lugFbImageView = (ImageView) findViewById(R.id.lug_fb_image_view);
         lugGitHubImageView = (ImageView) findViewById(R.id.lug_github_image_view);
 
