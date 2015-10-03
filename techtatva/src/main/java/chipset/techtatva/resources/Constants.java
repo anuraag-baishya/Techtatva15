@@ -15,7 +15,6 @@ public class Constants {
     public static String EVENT_CONTACT_NUMBER = "contact_number";
 
     public static String URL_CATEGORIES = "http://api.techtatva.in/categories";
-    public static String URL_EVENTS = "http://api.techtatva.in/events";
     public static String URL_SCHEDULE = "http://schedule.techtatva.in";
     public static String URL_REGISTRATION = "http://onlinereg.mitregistrations.in";
     public static String URL_ONLINE_EVENTS = "http://techtatva.in/onlineevents";
@@ -26,5 +25,4 @@ public class Constants {
     public static String TITLE = "title";
     public static String SUBTITLE = "subtitle";
     public static String IMG = "img";
-    public static String FOOD_IMG = "food_image";
 }
