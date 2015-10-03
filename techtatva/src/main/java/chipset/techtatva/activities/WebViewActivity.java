@@ -4,6 +4,7 @@ package chipset.techtatva.activities;
  * Created by saketh on 20/9/15.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -26,6 +27,7 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
+        startActivity(new Intent(getApplicationContext(), FoodStallActivity.class));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         String url = getIntent().getStringExtra(EXTRA_URL);

@@ -18,7 +18,7 @@ import chipset.techtatva.resources.Constants;
 
 public class EasterEggActivity extends AppCompatActivity {
 
-        private MediaPlayer mMediaPlayer;
+    private MediaPlayer mMediaPlayer;
     private Vibrator mVibrator;
     private ShakeDetector mShakeDetector;
     private SensorManager mSensorManager;

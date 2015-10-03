@@ -1,5 +1,6 @@
 package chipset.techtatva.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,7 @@ public class InstaFeedActivity extends AppCompatActivity {
 
     public void loadInstaFeed() {
         setContentView(R.layout.activity_insta_feed);
+        startActivity(new Intent(getApplicationContext(), FoodStallActivity.class));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
