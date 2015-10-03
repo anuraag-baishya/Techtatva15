@@ -75,7 +75,7 @@ public class EventActivity extends AppCompatActivity {
         day3.day = 3;
         day4 = new DayFragment();
         day4.day = 4;
-        if(dbHelper.getAllCategories().size()!=0 && dbHelper.getAllEvents().size()!=0) {
+        if (dbHelper.getAllCategories().size() != 0 && dbHelper.getAllEvents().size() != 0) {
             if (Potato.potate().Utils().isInternetConnected(this)) {
                 UpdateDatabase ud = new UpdateDatabase();
                 ud.execute((String) null);

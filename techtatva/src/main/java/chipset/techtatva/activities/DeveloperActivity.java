@@ -20,6 +20,7 @@ public class DeveloperActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_developer);
+        startActivity(new Intent(getApplicationContext(), FoodStallActivity.class));
         ImageView anuraagImageView = (ImageView) findViewById(R.id.anuraag_image_view);
         ImageView kartikImageView = (ImageView) findViewById(R.id.kartik_image_view);
         ImageView sakethImageView = (ImageView) findViewById(R.id.saketh_image_view);

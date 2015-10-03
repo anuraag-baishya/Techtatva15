@@ -26,4 +26,5 @@ public class Constants {
     public static String TITLE = "title";
     public static String SUBTITLE = "subtitle";
     public static String IMG = "img";
+    public static String FOOD_IMG = "food_image";
 }

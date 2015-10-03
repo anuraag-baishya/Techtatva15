@@ -29,7 +29,7 @@
     <string name="android">Android Developer</string>
     <string name="ios">iOS Developer</string>
     <string name="graphics">Graphics Designer</string>
-    <string name="coordinator">Co-ordinator</string>
+    <string name="coordinator">Co-Ordinator</string>
     <string name="windows">Windows Phone Developer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

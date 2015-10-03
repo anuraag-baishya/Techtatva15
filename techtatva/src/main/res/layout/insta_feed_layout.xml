@@ -46,9 +46,9 @@
         <ProgressBar
             android:id="@+id/insta_feed_progress_bar"
             android:layout_width="wrap_content"
-            android:fontFamily="sans-serif-condensed"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed"
             android:gravity="center" />
 
         <ImageView
@@ -56,8 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
             android:padding="16dp"
             android:src="@drawable/default_ic"
             android:visibility="gone" />
@@ -67,9 +67,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed"
             android:gravity="start|left|center_vertical"
             android:padding="10dp"
-            android:fontFamily="sans-serif-condensed"
             android:textColor="@color/black"
             android:textSize="17sp"
             android:textStyle="italic"
@@ -79,9 +79,9 @@
             android:id="@+id/insta_feed_likes_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
             android:drawableLeft="@drawable/ic_likes"
             android:drawableStart="@drawable/ic_likes"
+            android:fontFamily="sans-serif-condensed"
             android:gravity="start|left|center_vertical"
             android:padding="6dp"
             android:textColor="#7f8c8d"
@@ -92,9 +92,9 @@
             android:id="@+id/insta_feed_comments_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
             android:drawableLeft="@drawable/ic_comments"
             android:drawableStart="@drawable/ic_comments"
+            android:fontFamily="sans-serif-condensed"
             android:gravity="start|left|center_vertical"
             android:padding="6dp"
             android:textColor="#7f8c8d"

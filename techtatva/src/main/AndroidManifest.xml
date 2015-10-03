@@ -94,7 +94,6 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.DeveloperDetailActivity"
-            android:label="@string/title_activity_developer_detail"
             android:screenOrientation="portrait"
             android:theme="@style/DialogTheme" />
         <activity
@@ -107,6 +106,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="chipset.techtatva.activities.DeveloperActivity" />
         </activity>
+        <activity
+            android:name=".activities.FoodStallActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DialogTheme" />
     </application>
 
 </manifest>
