@@ -17,7 +17,7 @@ public class Constants {
     public static String URL_CATEGORIES = "http://api.techtatva.in/categories";
     public static String URL_EVENTS = "http://api.techtatva.in/events";
     public static String URL_SCHEDULE = "http://schedule.techtatva.in";
-    public static String URL_REGISTRATION = "http://prett.mitregistrations.in";
+    public static String URL_REGISTRATION = "http://onlinereg.mitregistrations.in";
     public static String URL_ONLINE_EVENTS = "http://techtatva.in/onlineevents";
     public static String URL_LUG_FB = "https://www.facebook.com/LUGManipal";
     public static String URL_LUG_GITHUB = "https://github.com/LUGM/";

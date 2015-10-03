@@ -11,15 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -125,7 +122,15 @@ public class ResultActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+                HashMap<String, String> map = new HashMap<>();
+                map.put(TAG_EVENT, "Sorry");
+                map.put(TAG_CAT, "No results out yet!");
+                resultList.add(map);
+                ResultAdapter adapter = new ResultAdapter(
+                        getApplicationContext(), resultList);
+                mResultView.setAdapter(adapter);
             }
         });
         Volley.newRequestQueue(this).add(jsonObjectRequest);
