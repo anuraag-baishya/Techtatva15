@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.eftimoff.androidplayer.Player;
 import com.eftimoff.androidplayer.actions.property.PropertyAction;
+import com.parse.ParseConfig;
 
 import java.util.ArrayList;
 
@@ -53,12 +54,14 @@ public class EventActivity extends AppCompatActivity {
     private static ListView drawerListView;
     public static Context mContext;
     public static ProgressDialog mProgressDialog;
+    private boolean nana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
         startActivity(new Intent(getApplicationContext(), FoodStallActivity.class));
+        nana = Potato.potate().Preferences().getSharedPreferenceBoolean(getApplicationContext(), "nana");
         mContext = this;
         drawerListView = (ListView) findViewById(R.id.drawer_list_view);
         mProgressDialog = new ProgressDialog(this);
@@ -78,7 +81,7 @@ public class EventActivity extends AppCompatActivity {
         day4.day = 4;
         if (dbHelper.getAllCategories().size() != 0 && dbHelper.getAllEvents().size() != 0) {
             if (Potato.potate().Utils().isInternetConnected(this)) {
-                UpdateDatabase ud = new UpdateDatabase();
+                UpdateDatabase ud = new UpdateDatabase(getApplicationContext());
                 ud.execute((String) null);
             }
         }
@@ -141,7 +144,7 @@ public class EventActivity extends AppCompatActivity {
     public static void setupDrawer() {
         Log.d("drawer", "adding");
         ArrayList<Category> categories = dbHelper.getAllCategories();
-        drawerList.add(new DrawerItem("All events", R.mipmap.ic_launcher));
+        drawerList.add(new DrawerItem("All Events", R.mipmap.ic_launcher));
         for (Category category : categories) {
             prepareDrawer(category.getCatName());
             Log.d("drawer", "added " + category.getCatName());
@@ -242,8 +245,9 @@ public class EventActivity extends AppCompatActivity {
                 // vice versa
                 builder.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
                 CustomTabsIntent customTabsIntent = builder.build();
+                String regURL = nana ? Constants.URL_REGISTRATION : ParseConfig.getCurrentConfig().getString("register");
                 CustomTabActivityHelper.openCustomTab(
-                        this, customTabsIntent, Uri.parse(Constants.URL_REGISTRATION), new WebViewFallback());
+                        this, customTabsIntent, Uri.parse(regURL), new WebViewFallback());
                 break;
             case R.id.action_online_events:
                 CustomTabsIntent.Builder builder1 = new CustomTabsIntent.Builder();
@@ -253,8 +257,9 @@ public class EventActivity extends AppCompatActivity {
                 // vice versa
                 builder1.setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right);
                 CustomTabsIntent customTabsIntent1 = builder1.build();
+                String ooURL = nana ? Constants.URL_ONLINE_EVENTS : ParseConfig.getCurrentConfig().getString("online");
                 CustomTabActivityHelper.openCustomTab(
-                        this, customTabsIntent1, Uri.parse(Constants.URL_ONLINE_EVENTS), new WebViewFallback());
+                        this, customTabsIntent1, Uri.parse(ooURL), new WebViewFallback());
                 break;
             case R.id.action_developers:
                 startActivity(new Intent(getApplicationContext(), DeveloperActivity.class));

@@ -17,9 +17,9 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     def versionMajor = 2
-    def versionMinor = 2
+    def versionMinor = 3
     def versionPatch = 0
-    def versionBuild = 151004
+    def versionBuild = 151006
     def versionId = ((versionMajor * 40) + (versionMinor * 20) + (versionPatch * 10) + (versionBuild * 5))
 
     defaultConfig {
@@ -68,4 +68,5 @@ dependencies {
         transitive = true;
     }
     compile 'com.mcxiaoke.volley:library:1.0.17'
+    compile 'com.parse:parse-android:1.10.2'
 }

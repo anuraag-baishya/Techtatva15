@@ -13,6 +13,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.parse.ParseConfig;
+
+import chipset.potato.Potato;
 import chipset.techtatva.R;
 import chipset.techtatva.resources.Constants;
 
@@ -35,7 +38,9 @@ public class WebViewActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        if (url.equals(Constants.URL_REGISTRATION)) {
+        boolean nana = Potato.potate().Preferences().getSharedPreferenceBoolean(getApplicationContext(), "nana");
+        String regURL = nana ? Constants.URL_REGISTRATION : ParseConfig.getCurrentConfig().getString("register");
+        if (url.equals(regURL)) {
             setTitle("Register Online");
         } else {
             setTitle("Online Events");

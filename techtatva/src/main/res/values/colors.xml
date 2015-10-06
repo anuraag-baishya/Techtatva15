@@ -11,4 +11,6 @@
     <color name="tabScrollColor">#ffffff</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="green">#2ecc71</color>
+    <color name="red">#e74c3c</color>
 </resources>

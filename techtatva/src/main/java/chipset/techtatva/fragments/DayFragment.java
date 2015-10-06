@@ -22,12 +22,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.parse.ParseConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.PortUnreachableException;
 import java.util.ArrayList;
 
 import chipset.potato.Potato;
@@ -39,7 +39,6 @@ import chipset.techtatva.database.DBHelper;
 import chipset.techtatva.model.events.Category;
 import chipset.techtatva.model.events.Event;
 import chipset.techtatva.resources.Constants;
-import chipset.techtatva.resources.UpdateDatabase;
 
 public class DayFragment extends Fragment {
     private EventCardListAdapter mEventAdapter;
@@ -48,6 +47,7 @@ public class DayFragment extends Fragment {
     ArrayList<Event> mEventList;
     ArrayList<Category> mCategoryList;
     RecyclerView mRecyclerView;
+    private boolean nana;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,6 +104,7 @@ public class DayFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
+        nana = Potato.potate().Preferences().getSharedPreferenceBoolean(getContext(), "nana");
         final View[] rootView = {inflater.inflate(R.layout.fragment_day, container, false)};
         mRecyclerView = (RecyclerView) rootView[0].findViewById(R.id.event_list_view);
         mRecyclerView.setHasFixedSize(true);
@@ -111,14 +112,14 @@ public class DayFragment extends Fragment {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mCategoryList = new ArrayList<Category>();
         mCategoryList.addAll(dbHelper.getAllCategories());
-        if(dbHelper.getAllCategories().size()!=0 && dbHelper.getAllEvents().size()!=0){
+        if (dbHelper.getAllCategories().size() != 0 && dbHelper.getAllEvents().size() != 0) {
             mCategoryList.addAll(dbHelper.getAllCategories());
             DataChange();
             if (EventActivity.drawerList.size() == 0)
                 EventActivity.setupDrawer();
-        }else if(Potato.potate().Utils().isInternetConnected(getActivity())){
+        } else if (Potato.potate().Utils().isInternetConnected(getActivity())) {
             prepareData();
-        }else {
+        } else {
             rootView[0] = inflater.inflate(R.layout.no_connection_layout, container, false);
             Button retryButton = (Button) rootView[0].findViewById(R.id.retry_button);
             retryButton.setOnClickListener(new View.OnClickListener() {
@@ -136,11 +137,12 @@ public class DayFragment extends Fragment {
 
 
     private void prepareData() {
-        if(!EventActivity.mProgressDialog.isShowing()) {
-            Log.d("progress","showing");
+        if (!EventActivity.mProgressDialog.isShowing()) {
+            Log.d("progress", "showing");
             EventActivity.mProgressDialog.show();
         }
-        JsonObjectRequest eventRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_SCHEDULE, (String) null, new Response.Listener<JSONObject>() {
+        String scheduleURL = nana ? Constants.URL_SCHEDULE : ParseConfig.getCurrentConfig().getString("schedule");
+        JsonObjectRequest eventRequest = new JsonObjectRequest(Request.Method.GET, scheduleURL, (String) null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 mEventList.clear();
@@ -176,7 +178,8 @@ public class DayFragment extends Fragment {
 
             }
         });
-        JsonObjectRequest catRequest = new JsonObjectRequest(Request.Method.GET, Constants.URL_CATEGORIES, (String) null, new Response.Listener<JSONObject>() {
+        String categoriesURL = nana ? Constants.URL_CATEGORIES : ParseConfig.getCurrentConfig().getString("categories");
+        JsonObjectRequest catRequest = new JsonObjectRequest(Request.Method.GET, categoriesURL, (String) null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 mCategoryList.clear();

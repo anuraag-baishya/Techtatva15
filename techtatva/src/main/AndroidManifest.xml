@@ -37,6 +37,15 @@
                 android:value="chipset.techtatva.activities.EventActivity" />
         </activity>
         <activity
+            android:name=".activities.RobowarsResultActivity"
+            android:label="@string/title_activity_robo_result"
+            android:parentActivityName=".activities.ResultActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="chipset.techtatva.activities.ResultActivity" />
+        </activity>
+        <activity
             android:name=".activities.ImageActivity"
             android:label="@string/title_activity_image"
             android:parentActivityName=".activities.InstaFeedActivity"

@@ -12,7 +12,7 @@
     <string name="instafeed">InstaFeed</string>
     <string name="developers">Developers</string>
     <string name="contact">Contact Us</string>
-    <string name="result">Result</string>
+    <string name="result">Results</string>
     <string name="drawer_closed">Close</string>
     <string name="drawer_open">Open</string>
     <string name="title_activity_event">EventActivity</string>
@@ -36,6 +36,7 @@
     <string name="title_activity_email">EmailActivity</string>
     <string name="title_activity_event_search">EventSearchActivity</string>
     <string name="title_activity_result">Results</string>
+    <string name="title_activity_robo_result">Robowars Results</string>
     <string name="title_activity_image" />
     <string name="title_activity_insta_feed">#techtatva15</string>
     <string name="shake">Shake to go back</string>

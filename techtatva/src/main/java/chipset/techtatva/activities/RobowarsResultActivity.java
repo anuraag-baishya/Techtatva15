@@ -7,13 +7,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,12 +30,12 @@ import java.util.HashMap;
 
 import chipset.potato.Potato;
 import chipset.techtatva.R;
-import chipset.techtatva.adapters.ResultAdapter;
+import chipset.techtatva.adapters.RobowarsResultAdapter;
 import chipset.techtatva.resources.Constants;
 import chipset.techtatva.resources.SwipeDownRefreshLayout;
 
 
-public class ResultActivity extends AppCompatActivity {
+public class RobowarsResultActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
     private static final String TAG_CAT = "categoryName";
@@ -49,15 +48,49 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadActivity();
+        loadActivty();
+    }
+
+    private void loadActivty() {
+        setContentView(R.layout.activity_result);
+        startActivity(new Intent(getApplicationContext(), FoodStallActivity.class));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mSwipeDownRefreshLayout = (SwipeDownRefreshLayout) findViewById(R.id.result_swipe_refresh);
+        mSwipeDownRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadResults();
+            }
+        });
+        mProgressDialog = new ProgressDialog(RobowarsResultActivity.this);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(true);
+        resultList = new ArrayList<>();
+        loadResults();
+        mResultView = (ListView) findViewById(R.id.Result_ListView);
+
+        mResultView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LinearLayout detailLayout = (LinearLayout) view.findViewById(R.id.detailsLayout);
+                if (detailLayout.getVisibility() == View.VISIBLE) {
+                    detailLayout.setVisibility(View.GONE);
+                } else {
+                    detailLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void loadResults() {
         resultList.clear();
         mProgressDialog.show();
         boolean nana = Potato.potate().Preferences().getSharedPreferenceBoolean(getApplicationContext(), "nana");
-        String resultsURL = nana ? Constants.URL_RESULTS : ParseConfig.getCurrentConfig().getString("results");
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, resultsURL, (String) null, new Response.Listener<JSONObject>() {
+        String roboResultsURL = nana ? Constants.URL_ROBO_RESULTS : ParseConfig.getCurrentConfig().getString("robowars");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, roboResultsURL, (String) null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -65,25 +98,37 @@ public class ResultActivity extends AppCompatActivity {
                     Log.e("jArr", String.valueOf(jArr));
                     if (jArr.length() == 0) {
                         HashMap<String, String> map = new HashMap<>();
-                        map.put(TAG_EVENT, "Sorry");
-                        map.put(TAG_CAT, "No results out yet!");
+                        map.put("name", "Sorry");
+                        map.put("college", "No results out yet!");
                         resultList.add(map);
                     } else {
                         for (int i = 0; i < jArr.length(); i++) {
                             JSONObject jObj = jArr.getJSONObject(i);
-                            String name = jObj.getString(TAG_EVENT);
-                            String categ = jObj.getString(TAG_CAT);
+                            String name = jObj.getString("name");
+                            int rank = jObj.getInt("rank");
+                            String college = jObj.getString("college");
+                            String points = jObj.getString("points");
+                            String won = jObj.getString("won");
+                            String lost = jObj.getString("lost");
+                            String weight = jObj.getString("weight");
+                            String dimension = jObj.getString("dimension");
+                            String status = jObj.getString("status");
                             HashMap<String, String> map = new HashMap<>();
-                            map.put(TAG_EVENT, name);
-                            map.put(TAG_CAT, categ);
-                            map.put(TAG_RES, jObj.getString(TAG_RES));
+                            map.put("name", name);
+                            map.put("college", college);
+                            map.put("rank", String.valueOf(rank));
+                            map.put("won", won);
+                            map.put("lost", lost);
+                            map.put("weight", weight);
+                            map.put("dimension", dimension);
+                            map.put("points", points);
+                            map.put("status", status);
                             resultList.add(map);
                         }
                     }
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
-                    ResultAdapter adapter = new ResultAdapter(
-                            getApplicationContext(), resultList);
+                    RobowarsResultAdapter adapter = new RobowarsResultAdapter(getApplicationContext(), resultList);
                     mResultView.setAdapter(adapter);
                     mSwipeDownRefreshLayout.setRefreshing(false);
                 } catch (JSONException e) {
@@ -102,7 +147,7 @@ public class ResultActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (Potato.potate().Utils().isInternetConnected(getApplicationContext())) {
-                            loadActivity();
+                            loadActivty();
                         }
                     }
                 });
@@ -112,17 +157,9 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_result, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
             onBackPressed();
-        else if (item.getItemId() == R.id.action_robowars)
-            startActivity(new Intent(ResultActivity.this, RobowarsResultActivity.class));
         return super.onOptionsItemSelected(item);
     }
 
@@ -130,45 +167,5 @@ public class ResultActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }
-
-    private void loadActivity() {
-        setContentView(R.layout.activity_result);
-        startActivity(new Intent(getApplicationContext(), FoodStallActivity.class));
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_r);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mSwipeDownRefreshLayout = (SwipeDownRefreshLayout) findViewById(R.id.result_swipe_refresh);
-        mSwipeDownRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadResults();
-            }
-        });
-        mProgressDialog = new ProgressDialog(ResultActivity.this);
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(true);
-        resultList = new ArrayList<>();
-        loadResults();
-        mResultView = (ListView) findViewById(R.id.Result_ListView);
-        try {
-            mResultView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> arg0, View arg1,
-                                        int arg2, long arg3) {
-
-                    TextView resView = (TextView) arg1.findViewById(R.id.resultRes);
-                    if (resView.getVisibility() == View.GONE)
-                        resView.setVisibility(View.VISIBLE);
-                    else
-                        resView.setVisibility(View.GONE);
-                }
-
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

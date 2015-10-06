@@ -25,7 +25,7 @@
     <item
         android:id="@+id/action_online_events"
         android:orderInCategory="3"
-        android:title="Online events"
+        android:title="Online Events"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_results"
