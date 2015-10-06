@@ -3,6 +3,7 @@ package chipset.techtatva.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,6 +43,14 @@ public class RobowarsResultActivity extends AppCompatActivity {
     private static final String TAG_EVENT = "eventName";
     private static final String TAG_RES = "result";
     private ListView mResultView;
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            loadResults();
+            handler.postDelayed(this, 10000);
+        }
+    };
     ArrayList<HashMap<String, String>> resultList;
     private SwipeDownRefreshLayout mSwipeDownRefreshLayout;
 
@@ -66,10 +75,11 @@ public class RobowarsResultActivity extends AppCompatActivity {
             }
         });
         mProgressDialog = new ProgressDialog(RobowarsResultActivity.this);
-        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setMessage("Refreshing...");
         mProgressDialog.setCancelable(true);
         resultList = new ArrayList<>();
         loadResults();
+        handler.postDelayed(runnable, 10000);
         mResultView = (ListView) findViewById(R.id.Result_ListView);
 
         mResultView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
