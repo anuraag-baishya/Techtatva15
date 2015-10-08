@@ -2,14 +2,13 @@ package chipset.techtatva.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.github.jorgecastillo.FillableLoader;
 import com.github.jorgecastillo.State;
 import com.github.jorgecastillo.listener.OnStateChangeListener;
-import com.parse.ConfigCallback;
 import com.parse.ParseConfig;
-import com.parse.ParseException;
 
 import chipset.potato.Potato;
 import chipset.techtatva.R;
@@ -491,7 +490,6 @@ public class SplashActivity extends AppCompatActivity {
             "           C 306.00,470.00 307.00,471.00 307.00,471.00\n" +
             "             307.00,471.00 307.00,470.00 307.00,470.00\n" +
             "             307.00,470.00 306.00,470.00 306.00,470.00 Z";
-    private boolean finishedSplash = false, finishedFetching = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -502,38 +500,24 @@ public class SplashActivity extends AppCompatActivity {
         fillableLoader.setSvgPath(path);
         fillableLoader.start();
 
-        if (Potato.potate().Utils().isInternetConnected(getApplicationContext()))
-            ParseConfig.getInBackground(new ConfigCallback() {
-                @Override
-                public void done(ParseConfig config, ParseException e) {
-                    finishedFetching = true;
-                    complete(finishedFetching, finishedSplash);
-                    Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "nana", false);
-                }
-            });
-        else {
-            if (ParseConfig.getCurrentConfig() == null)
-                Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "nana", true);
-            else
-                Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "nana", false);
-            finishedFetching = true;
-            complete(finishedFetching, finishedSplash);
-        }
-
         fillableLoader.setOnStateChangeListener(new OnStateChangeListener() {
             @Override
             public void onStateChange(int i) {
                 if (i == State.FINISHED) {
-                    finishedSplash = true;
-                    complete(finishedFetching, finishedSplash);
+                    if (ParseConfig.getCurrentConfig() == null)
+                        Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "nana", true);
+                    else
+                        Potato.potate().Preferences().putSharedPreference(getApplicationContext(), "nana", false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(SplashActivity.this, EventActivity.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        }
+                    }, 1000);
+
                 }
             }
         });
-    }
-
-    private void complete(boolean a, boolean b) {
-        if (a && b)
-            startActivity(new Intent(SplashActivity.this, EventActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 }

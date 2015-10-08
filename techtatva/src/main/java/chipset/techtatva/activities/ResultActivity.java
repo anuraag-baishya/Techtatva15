@@ -1,6 +1,5 @@
 package chipset.techtatva.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -38,7 +37,6 @@ import chipset.techtatva.resources.SwipeDownRefreshLayout;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private ProgressDialog mProgressDialog;
     private static final String TAG_CAT = "categoryName";
     private static final String TAG_EVENT = "eventName";
     private static final String TAG_RES = "result";
@@ -54,7 +52,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private void loadResults() {
         resultList.clear();
-        mProgressDialog.show();
+        mSwipeDownRefreshLayout.setRefreshing(true);
         boolean nana = Potato.potate().Preferences().getSharedPreferenceBoolean(getApplicationContext(), "nana");
         String resultsURL = nana ? Constants.URL_RESULTS : ParseConfig.getCurrentConfig().getString("results");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, resultsURL, (String) null, new Response.Listener<JSONObject>() {
@@ -80,8 +78,6 @@ public class ResultActivity extends AppCompatActivity {
                             resultList.add(map);
                         }
                     }
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
                     ResultAdapter adapter = new ResultAdapter(
                             getApplicationContext(), resultList);
                     mResultView.setAdapter(adapter);
@@ -94,8 +90,7 @@ public class ResultActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (mProgressDialog.isShowing())
-                    mProgressDialog.dismiss();
+                mSwipeDownRefreshLayout.setRefreshing(false);
                 setContentView(R.layout.no_connection_layout);
                 Button retryButton = (Button) findViewById(R.id.retry_button);
                 retryButton.setOnClickListener(new View.OnClickListener() {
@@ -146,9 +141,6 @@ public class ResultActivity extends AppCompatActivity {
                 loadResults();
             }
         });
-        mProgressDialog = new ProgressDialog(ResultActivity.this);
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(true);
         resultList = new ArrayList<>();
         loadResults();
         mResultView = (ListView) findViewById(R.id.Result_ListView);

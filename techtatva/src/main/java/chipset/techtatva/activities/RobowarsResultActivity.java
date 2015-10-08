@@ -1,6 +1,5 @@
 package chipset.techtatva.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,7 +37,6 @@ import chipset.techtatva.resources.SwipeDownRefreshLayout;
 
 public class RobowarsResultActivity extends AppCompatActivity {
 
-    private ProgressDialog mProgressDialog;
     private static final String TAG_CAT = "categoryName";
     private static final String TAG_EVENT = "eventName";
     private static final String TAG_RES = "result";
@@ -74,12 +72,8 @@ public class RobowarsResultActivity extends AppCompatActivity {
                 loadResults();
             }
         });
-        mProgressDialog = new ProgressDialog(RobowarsResultActivity.this);
-        mProgressDialog.setMessage("Refreshing...");
-        mProgressDialog.setCancelable(true);
         resultList = new ArrayList<>();
         loadResults();
-        handler.postDelayed(runnable, 10000);
         mResultView = (ListView) findViewById(R.id.Result_ListView);
 
         mResultView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,7 +91,7 @@ public class RobowarsResultActivity extends AppCompatActivity {
 
     private void loadResults() {
         resultList.clear();
-        mProgressDialog.show();
+        mSwipeDownRefreshLayout.setRefreshing(true);
         boolean nana = Potato.potate().Preferences().getSharedPreferenceBoolean(getApplicationContext(), "nana");
         String roboResultsURL = nana ? Constants.URL_ROBO_RESULTS : ParseConfig.getCurrentConfig().getString("robowars");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, roboResultsURL, (String) null, new Response.Listener<JSONObject>() {
@@ -136,9 +130,8 @@ public class RobowarsResultActivity extends AppCompatActivity {
                             resultList.add(map);
                         }
                     }
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
                     RobowarsResultAdapter adapter = new RobowarsResultAdapter(getApplicationContext(), resultList);
+                    adapter.notifyDataSetChanged();
                     mResultView.setAdapter(adapter);
                     mSwipeDownRefreshLayout.setRefreshing(false);
                 } catch (JSONException e) {
@@ -149,8 +142,7 @@ public class RobowarsResultActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (mProgressDialog.isShowing())
-                    mProgressDialog.dismiss();
+                mSwipeDownRefreshLayout.setRefreshing(false);
                 setContentView(R.layout.no_connection_layout);
                 Button retryButton = (Button) findViewById(R.id.retry_button);
                 retryButton.setOnClickListener(new View.OnClickListener() {
@@ -177,5 +169,17 @@ public class RobowarsResultActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.postDelayed(runnable, 10000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
     }
 }

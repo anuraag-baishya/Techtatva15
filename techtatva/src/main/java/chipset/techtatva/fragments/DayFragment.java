@@ -209,6 +209,8 @@ public class DayFragment extends Fragment {
         });
         Volley.newRequestQueue(getActivity()).add(catRequest);
         Volley.newRequestQueue(getActivity()).add(eventRequest);
+        if (nana)
+            ParseConfig.getInBackground();
     }
 
     private void Display() {

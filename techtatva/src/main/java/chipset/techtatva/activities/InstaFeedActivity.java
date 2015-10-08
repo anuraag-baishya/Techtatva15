@@ -10,12 +10,12 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import chipset.techtatva.R;
 import chipset.techtatva.adapters.InstaFeedListAdapter;
 import chipset.techtatva.model.instagram.InstaFeed;
 import chipset.techtatva.network.APIClient;
+import chipset.techtatva.resources.SwipeDownRefreshLayout;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -25,8 +25,7 @@ public class InstaFeedActivity extends AppCompatActivity {
 
     private static final String TAG = InstaFeedActivity.class.getSimpleName();
     private ListView mInstaFeedListView;
-    private ProgressBar mProgressBar;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SwipeDownRefreshLayout mSwipeDownRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,22 +54,19 @@ public class InstaFeedActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mInstaFeedListView = (ListView) findViewById(R.id.insta_feed_list_view);
-        mProgressBar = (ProgressBar) findViewById(R.id.insta_feed_progress_bar);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.insta_feed_swipe_refresh);
+        mSwipeDownRefreshLayout = (SwipeDownRefreshLayout) findViewById(R.id.insta_feed_swipe_refresh);
 
-        mSwipeRefreshLayout.setColorSchemeResources(R.color.primary, R.color.primary_dark);
+        mSwipeDownRefreshLayout.setColorSchemeResources(R.color.primary, R.color.primary_dark);
 
         APIClient.getInstagram().getFeed(new Callback<InstaFeed>() {
             @Override
             public void success(InstaFeed instaFeed, Response response) {
                 mInstaFeedListView.setAdapter(new InstaFeedListAdapter(getApplicationContext(), instaFeed));
                 mInstaFeedListView.setVisibility(View.VISIBLE);
-                mProgressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                mProgressBar.setVisibility(View.GONE);
                 setContentView(R.layout.no_connection_layout);
                 Button retryButton = (Button) findViewById(R.id.retry_button);
                 retryButton.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +78,10 @@ public class InstaFeedActivity extends AppCompatActivity {
             }
         });
 
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeDownRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mSwipeRefreshLayout.setRefreshing(true);
+                mSwipeDownRefreshLayout.setRefreshing(true);
                 APIClient.getInstagram().getFeed(new Callback<InstaFeed>() {
                     @Override
                     public void success(InstaFeed instaFeed, Response response) {
@@ -93,13 +89,12 @@ public class InstaFeedActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                         mInstaFeedListView.setAdapter(adapter);
                         mInstaFeedListView.setVisibility(View.VISIBLE);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        mSwipeDownRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
-                        mProgressBar.setVisibility(View.GONE);
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        mSwipeDownRefreshLayout.setRefreshing(false);
                         setContentView(R.layout.no_connection_layout);
                         Button retryButton = (Button) findViewById(R.id.retry_button);
                         retryButton.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +117,8 @@ public class InstaFeedActivity extends AppCompatActivity {
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (firstVisibleItem == 0 && visibleItemCount > 0 && mInstaFeedListView.getChildAt(0).getTop() >= 0)
-                    mSwipeRefreshLayout.setEnabled(true);
-                else mSwipeRefreshLayout.setEnabled(false);
+                    mSwipeDownRefreshLayout.setEnabled(true);
+                else mSwipeDownRefreshLayout.setEnabled(false);
             }
         });
     }

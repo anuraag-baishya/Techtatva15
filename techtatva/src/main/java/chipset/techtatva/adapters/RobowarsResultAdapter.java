@@ -76,16 +76,18 @@ public class RobowarsResultAdapter extends BaseAdapter {
         }
         mViewHolder.name.setText("Team name: " + map.get("name"));
         mViewHolder.college.setText("College name: " + map.get("college"));
-        mViewHolder.rank.setText("Rank: " + map.get("rank"));
-        mViewHolder.wonLost.setText("Won: " + map.get("won") + " Lost: " + map.get("lost"));
-        mViewHolder.weight.setText("Weight: " + map.get("weight"));
-        mViewHolder.dimension.setText("Dimensions: " + map.get("dimension"));
-        mViewHolder.points.setText("Points: " + map.get("points"));
-        String color = map.get("status");
-        if (color.equalsIgnoreCase("green"))
-            mViewHolder.roboResCard.setBackgroundColor(mContext.getResources().getColor(R.color.green));
-        else
-            mViewHolder.roboResCard.setBackgroundColor(mContext.getResources().getColor(R.color.red));
+        if (!map.get("name").equalsIgnoreCase("sorry")) {
+            mViewHolder.rank.setText("Rank: " + map.get("rank"));
+            mViewHolder.wonLost.setText("Won: " + map.get("won") + " Lost: " + map.get("lost"));
+            mViewHolder.weight.setText("Weight: " + map.get("weight"));
+            mViewHolder.dimension.setText("Dimensions: " + map.get("dimension"));
+            mViewHolder.points.setText("Points: " + map.get("points"));
+            String color = map.get("status");
+            if (color.equalsIgnoreCase("green"))
+                mViewHolder.roboResCard.setBackgroundColor(mContext.getResources().getColor(R.color.green));
+            else
+                mViewHolder.roboResCard.setBackgroundColor(mContext.getResources().getColor(R.color.red));
+        }
         return arg1;
 
     }

@@ -19,13 +19,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.eftimoff.androidplayer.Player;
-import com.eftimoff.androidplayer.actions.property.PropertyAction;
 import com.parse.ParseConfig;
 
 import java.util.ArrayList;
@@ -90,15 +87,6 @@ public class EventActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
-        //animate(toolbar, tabLayout);
-        /*FloatingActionButton favoriteFloatingActionButton = (FloatingActionButton) findViewById(R.id.favorite_floating_action_button);
-        favoriteFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), FavouritesActivity.class));
-                overridePendingTransition(R.anim.slid`e_in_right, R.anim.slide_out_left);
-            }
-        });*/
         final String[] category = getResources().getStringArray(R.array.category);
         Potato.potate().Preferences().putSharedPreference(EventActivity.this, "cat", category[0]);
         drawerList = new ArrayList<>();
@@ -215,13 +203,6 @@ public class EventActivity extends AppCompatActivity {
         }
     }
 
-    protected void animate(View toolbar, View slidingTabLayout) {
-        final PropertyAction headerAction = PropertyAction.newPropertyAction(toolbar).interpolator(new DecelerateInterpolator()).translationY(-200).duration(250).alpha(0.4f).build();
-        final PropertyAction tabAction = PropertyAction.newPropertyAction(slidingTabLayout).translationY(200).duration(250).alpha(0f).build();
-        final PropertyAction bottomAction = PropertyAction.newPropertyAction(viewPager).translationY(500).duration(250).alpha(0f).build();
-        Player.init().animate(headerAction).animate(tabAction).animate(bottomAction).play();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
@@ -288,10 +269,5 @@ public class EventActivity extends AppCompatActivity {
         mDayViewPagerAdapter.addFragment(day3, "DAY 3");
         mDayViewPagerAdapter.addFragment(day4, "DAY 4");
         viewPager.setAdapter(mDayViewPagerAdapter);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 }
