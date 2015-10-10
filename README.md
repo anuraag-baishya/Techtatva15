@@ -1,6 +1,6 @@
 # Techtatva'15
 
-Official android app for the annual cultural fest "Techtatva'15" of Manipal Institute of Technology, Manipal, India.
+Official android app for the annual technical fest "Techtatva'15" of Manipal Institute of Technology, Manipal, India.
 
 Features:
 ==
